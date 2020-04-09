@@ -1,7 +1,6 @@
-package com.controlroom.Application.model;
+package com.controlroom.Application.model.reportModel;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

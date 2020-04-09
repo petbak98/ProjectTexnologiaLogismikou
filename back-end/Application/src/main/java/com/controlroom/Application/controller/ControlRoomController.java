@@ -1,6 +1,6 @@
 package com.controlroom.Application.controller;
 
-import com.controlroom.Application.model.Report;
+import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.repository.ReportRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
