@@ -1,4 +1,4 @@
-package com.controlroom.Application.controller;
+package com.controlroom.Application.controller.samplesAssociatedWithSecurity;
 
 import com.controlroom.Application.model.userModel.User;
 import com.controlroom.Application.repository.UserRepository;

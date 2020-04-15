@@ -1,14 +1,15 @@
-package com.controlroom.Application.controller;
+package com.controlroom.Application.controller.samplesAssociatedWithSecurity;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("profile")
+public class ProfileController {
+
     @GetMapping("index")
     public String index(){
-        return "index";
+        return "profile/index";
     }
 }
