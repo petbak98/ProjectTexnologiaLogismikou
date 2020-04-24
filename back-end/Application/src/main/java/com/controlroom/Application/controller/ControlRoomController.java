@@ -6,11 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -37,12 +39,12 @@ public class ControlRoomController {
 //        return reportRepository.exampleTitleMethod(searchTerm);
 //    }
 
-    @PostMapping("/report")
+   /* @PostMapping("/report")
     public Report create(@RequestBody Map<String, String> body){
         String title = body.get("title");
         String content = body.get("content");
         return reportRepository.save(new Report(title, content));
-    }
+    }*/
 
     @GetMapping(value = "sendvalue/{example}")
     public ResponseEntity<String> sendGetName(@PathVariable String example) throws IOException {
