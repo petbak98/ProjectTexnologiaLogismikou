@@ -30,11 +30,12 @@ public class User {
 
     private String permissions = "";
 
-   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
     @JsonIgnore
     private List<Incident> incidents;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Report> reports;
 
     public User(String username, String password, String roles, String permissions){
@@ -83,5 +84,13 @@ public class User {
             return Arrays.asList(this.permissions.split(","));
         }
         return new ArrayList<>();
+    }
+
+    public List<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public List<Report> getReports() {
+        return reports;
     }
 }

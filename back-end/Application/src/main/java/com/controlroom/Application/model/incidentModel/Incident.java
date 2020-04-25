@@ -25,6 +25,7 @@ public class Incident {
 
     private String title;
     private String authority;
+    private int importance;
 
     private String city;
     private String region;
@@ -35,7 +36,10 @@ public class Incident {
     private String caller_nationalId;
     private String caller_phone;
 
+    private String notes;
+
     private String status;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable (
@@ -44,8 +48,28 @@ public class Incident {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> receivers;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY)
     private List<Report> reports;
+
+    public Incident(String coordinator_username, String title, String authority, int importance, String city, String region,
+                    String street, String caller_firstName, String caller_lastName, String caller_nationalId,
+                    String caller_phone, String notes) {
+
+        this.coordinator_username = coordinator_username;
+        this.title = title;
+        this.authority = authority;
+        this.importance = importance;
+        this.city = city;
+        this.region = region;
+        this.street = street;
+        this.caller_firstName = caller_firstName;
+        this.caller_lastName = caller_lastName;
+        this.caller_nationalId = caller_nationalId;
+        this.caller_phone = caller_phone;
+        this.notes = notes;
+
+        this.status = "Waiting for response";
+    }
 
     public Incident() {
     }
