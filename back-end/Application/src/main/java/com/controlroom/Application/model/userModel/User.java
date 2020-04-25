@@ -30,7 +30,7 @@ public class User {
 
     private String permissions = "";
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
+   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
     @JsonIgnore
     private List<Incident> incidents;
 
