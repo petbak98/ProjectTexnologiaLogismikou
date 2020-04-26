@@ -31,9 +31,9 @@ public class IncidentsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> findById(@PathVariable("id") Long incidentId) throws Exception {
+    public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
 //    public ResponseEntity<IncidentDto> findById(@PathVariable("id") Long incidentId) throws Exception {
-        IncidentDto incidentDto = incidentService.findById(incidentId);
+        IncidentDto incidentDto = incidentService.findById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(incidentDto));
     }
 

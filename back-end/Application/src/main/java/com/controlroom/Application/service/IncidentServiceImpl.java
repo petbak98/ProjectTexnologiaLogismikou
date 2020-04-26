@@ -21,7 +21,7 @@ public class IncidentServiceImpl implements IncidentService{
     public IncidentDto findById(Long id) throws Exception {
         Incident incident;
         try {
-            incident = incidentRepository.findById(Math.toIntExact(id)).get();
+            incident = incidentRepository.findById(id).get();
         } catch (NoSuchElementException nsee) {
             throw new Exception("Incident not found", nsee.getCause());
         }

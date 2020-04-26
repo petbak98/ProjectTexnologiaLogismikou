@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface IncidentRepository extends JpaRepository<Incident, Integer> {
+public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
     List<Incident> findAll();
 
