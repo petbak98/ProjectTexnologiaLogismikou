@@ -21,7 +21,7 @@ public class Incident {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long incident_id;
 
-    private String coordinator_username;
+    private long coordinator_id;
 
     private String title;
     private String authority;
@@ -48,11 +48,11 @@ public class Incident {
     @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY)
     private List<Report> reports;
 
-    public Incident(String coordinator_username, String title, String authority, int importance, String city, String region,
+    public Incident(int coordinator_id, String title, String authority, int importance, String city, String region,
                     String street, String caller_firstName, String caller_lastName, String caller_nationalId,
                     String caller_phone, String notes) {
 
-        this.coordinator_username = coordinator_username;
+        this.coordinator_id = coordinator_id;
         this.title = title;
         this.authority = authority;
         this.importance = importance;

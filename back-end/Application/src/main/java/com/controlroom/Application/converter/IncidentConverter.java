@@ -15,6 +15,8 @@ public class IncidentConverter {
         incidentDto.setRegion(incident.getRegion());
         incidentDto.setStatus(incident.getStatus());
         incidentDto.setStreet(incident.getStreet());
+        incidentDto.setReports(incident.getReports());
+        incidentDto.setUserId(incident.getCoordinator_id());
 
         incidentDto.setCallerFirstName(incident.getCaller_firstName());
         incidentDto.setCallerLastName(incident.getCaller_lastName());
@@ -34,6 +36,8 @@ public class IncidentConverter {
         incident.setRegion(incidentDto.getRegion());
         incident.setStatus(incidentDto.getStatus());
         incident.setStreet(incidentDto.getStreet());
+        incident.setReports(incidentDto.getReports());
+        incident.setCoordinator_id(incidentDto.getUserId());
 
         incident.setCaller_firstName(incidentDto.getCallerFirstName());
         incident.setCaller_lastName(incidentDto.getCallerLastName());
