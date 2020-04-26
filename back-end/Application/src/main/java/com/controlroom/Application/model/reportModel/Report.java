@@ -19,10 +19,9 @@ public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int report_id;
+    private long report_Id;
 
     private String content;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore()

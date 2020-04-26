@@ -19,7 +19,7 @@ public class Incident {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int incident_id;
+    private long incident_id;
 
     private String coordinator_username;
 
@@ -30,16 +30,13 @@ public class Incident {
     private String city;
     private String region;
     private String street;
+    private String notes;
+    private String status;
 
     private String caller_firstName;
     private String caller_lastName;
     private String caller_nationalId;
     private String caller_phone;
-
-    private String notes;
-
-    private String status;
-
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable (

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.controlroom.Application.util.Helpers.convertToJson;
+
 @RestController
 @RequestMapping(value = "/api")
 public class ControlRoomController {
@@ -50,9 +52,6 @@ public class ControlRoomController {
 
     @GetMapping(value = "sendvalue/{example}")
     public ResponseEntity<String> sendGetName(@PathVariable String example) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(example);
-        return ResponseEntity.ok().body(json);
+        return ResponseEntity.ok().body(convertToJson(example));
     }
 }
