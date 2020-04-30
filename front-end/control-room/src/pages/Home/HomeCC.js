@@ -1,8 +1,9 @@
 import React from 'react';
 import { useRouteMatch, Route, Switch } from 'react-router-dom';
-import FeedCC from '../../components/CommandCenter/FeeedCC/FeedCC';
+import FeedCC from '../../components/CommandCenter/FeedCC/FeedCC';
 import NavbarCC from '../../components/CommandCenter/NavbarCC/NavbarCC';
 import { Layout } from '../../components/Layout/Layout';
+import FormCC from '../../components/CommandCenter/FormCC/FormCC';
 export default function HomeCC() {
   let match = useRouteMatch();
   return (
@@ -10,11 +11,11 @@ export default function HomeCC() {
       <NavbarCC />
       <Layout>
         <Switch>
-          <Route path={`${match.path}/feed`}>
-            <FeedCC />
+          <Route exact path={`${match.path}/form`}>
+            <FormCC />
           </Route>
-          <Route path={`${match.path}`}>
-            <div>error</div>
+          <Route path={`${match.path}/`}>
+            <FeedCC />
           </Route>
         </Switch>
       </Layout>

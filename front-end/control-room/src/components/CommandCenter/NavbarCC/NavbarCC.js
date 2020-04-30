@@ -3,16 +3,15 @@ import { useRouteMatch, useLocation } from 'react-router-dom';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import AddIcon from '@material-ui/icons/Add';
 import { Navbar, NavLink, LinkButton } from '../../Navbar/Navbar';
-import { Layout } from '../../Layout/Layout';
 
 export default function NavbarCC() {
   let match = useRouteMatch();
   let location = useLocation();
   return (
     <Navbar>
-      <NavLink to={`${match.path}/feed`} activeclassname='activeLink'>
+      <NavLink to={`${match.path}`} activeclassname='activeLink'>
         <LinkButton
-          active={location.pathname === `${match.path}/feed` ? 'active' : ''}
+          active={location.pathname === `${match.path}` ? 'active' : ''}
           endIcon={<RssFeedIcon />}
           color='secondary'
         >
