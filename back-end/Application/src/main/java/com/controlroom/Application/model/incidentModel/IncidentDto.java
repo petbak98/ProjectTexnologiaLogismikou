@@ -16,7 +16,9 @@ public class IncidentDto {
     private long userId;
 
     private String title;
+    private String authority;
     private int importance;
+
     private String city;
     private String region;
     private String street;
