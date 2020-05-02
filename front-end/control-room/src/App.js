@@ -7,21 +7,19 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from './config/theme';
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Switch>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <Route path='/command'>
-              <HomeCC />
-            </Route>
-          </Switch>
-          <GlobalStyle />
-        </Router>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/command'>
+            <HomeCC />
+          </Route>
+        </Switch>
+        <GlobalStyle />
+      </Router>
+    </ThemeProvider>
   );
 }
 

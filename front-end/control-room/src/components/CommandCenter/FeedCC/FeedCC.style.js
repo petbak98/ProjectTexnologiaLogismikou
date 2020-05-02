@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const feedCCStyle = makeStyles((theme) => {
-  console.log(`${theme.spacing(5)} auto`);
   return {
     container: {
       marginLeft: theme.spacing(10),

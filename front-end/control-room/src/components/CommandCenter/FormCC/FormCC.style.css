@@ -1,0 +1,36 @@
+.enter {
+  animation-name: enteringAnimation;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.4s;
+}
+.exit {
+  animation-name: exitAnimation;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-duration: 0.2s;
+}
+
+@keyframes enteringAnimation {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translate(0, 30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+}
+
+@keyframes exitAnimation {
+  from {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(0, 0px);
+  }
+}
