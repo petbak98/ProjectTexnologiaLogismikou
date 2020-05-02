@@ -1,13 +1,14 @@
 import React from 'react';
-import { feedItemStyles } from './FeedItem.style';
-import { Typography, Box, Button, Chip } from '@material-ui/core';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
+import { Typography, Button, Chip } from '@material-ui/core';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import TodayIcon from '@material-ui/icons/Today';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import { ReactComponent as Firetrack } from '../../assets/icons/firetruck.svg';
+
+import { feedItemStyles } from './FeedItem.style';
 import { ReactComponent as Policeman } from '../../assets/icons/patrol.svg';
+import { ReactComponent as Firetrack } from '../../assets/icons/firetruck.svg';
+
 export default function FeedItem({ incident }) {
   const { type, date, adress, title, id, related } = incident;
   const classes = feedItemStyles();

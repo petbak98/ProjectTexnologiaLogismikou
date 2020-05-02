@@ -3,8 +3,6 @@ import FeedItem from '../FeedItem/FeedItem';
 import { FeedContainer } from './Feed.style';
 
 export default function Feed({ incidents }) {
-  {
-  }
   return (
     <FeedContainer>
       {incidents.map((incident) => (

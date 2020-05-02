@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const feedCCStyle = makeStyles((theme) => {
   return {
     container: {
-      marginLeft: theme.spacing(10),
-      marginRight: theme.spacing(10)
+      margin: '0 auto'
     },
     search: {
       minWidth: 300,

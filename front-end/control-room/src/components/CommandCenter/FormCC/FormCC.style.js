@@ -10,9 +10,8 @@ export const FormStyles = makeStyles((theme) => {
       margin: '0 auto',
       borderTop: `4px solid ${theme.palette.primary.main}`,
       marginTop: theme.spacing(5),
-      maxWidth: '100%',
+      width: 800,
       color: theme.palette.primary.main,
-      width: 1000,
       padding: theme.spacing(5),
       boxShadow: theme.shadows[10]
     }

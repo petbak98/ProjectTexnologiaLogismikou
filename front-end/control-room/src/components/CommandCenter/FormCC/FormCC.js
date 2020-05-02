@@ -6,6 +6,7 @@ import { Typography } from '@material-ui/core';
 import { FormStyles } from './FormCC.style';
 import IncidentStep from './IncidentStep/IncidentStep';
 import StepsNav from '../../StepsNav/StepNav';
+
 export default function FormCC() {
   const classes = FormStyles();
   return (
@@ -26,32 +27,8 @@ export default function FormCC() {
           }}
         >
           <IncidentStep />
-          <Location />
-          <CallerData />
-          <FinalScreen />
         </StepWizard>
       </div>
     </>
   );
-}
-
-function Incident({ goToStep }) {
-  return (
-    <div>
-      <div>form</div>
-      <div>buttons</div>
-    </div>
-  );
-}
-
-function Location() {
-  return <div>Location</div>;
-}
-
-function CallerData() {
-  return <div>CallerData</div>;
-}
-
-function FinalScreen() {
-  return <div>Final Scren</div>;
 }
