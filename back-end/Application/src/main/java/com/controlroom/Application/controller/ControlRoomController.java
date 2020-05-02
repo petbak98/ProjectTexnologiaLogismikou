@@ -1,17 +1,21 @@
 package com.controlroom.Application.controller;
 
-import com.controlroom.Application.model.reportModel.Report;
-import com.controlroom.Application.repository.ReportRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+
+import com.controlroom.Application.model.reportModel.ReportDto;
+
+import com.controlroom.Application.service.ReportService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
@@ -20,17 +24,19 @@ import static com.controlroom.Application.util.Helpers.convertToJson;
 public class ControlRoomController {
 
     @Autowired
-    ReportRepository reportRepository;
+    private ReportService reportService;
+
 
     @GetMapping("/report")
-    public List<Report> index(){
-        return reportRepository.findAll();
+    public List<ReportDto> index(){
+        return reportService.findAll();
     }
 
     @GetMapping("/report/{id}")
-    public Optional<Report> show(@PathVariable String id){
-        int blogId = Integer.parseInt(id);
-        return reportRepository.findById(blogId);
+    public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
+
+        ReportDto reportDto = reportService.findById(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(reportDto));
     }
 
 //    @PostMapping("/report/search")
@@ -40,14 +46,8 @@ public class ControlRoomController {
 //    }
 
     @PostMapping("/report")
-    public Report create(@RequestBody Map<String, String> body) {
-        String content = body.get("content");
-        // Find Incident from id
-        String incidentId = body.get("incidentId");
-        // Find User from username
-        String username = body.get("username");
-
-        return reportRepository.save(new Report()); // create Report with other constructor
+    public String create(@RequestBody ReportDto reportDto) throws JsonProcessingException {
+        return convertToJson(reportService.save(reportDto));
     }
 
     @GetMapping(value = "sendvalue/{example}")

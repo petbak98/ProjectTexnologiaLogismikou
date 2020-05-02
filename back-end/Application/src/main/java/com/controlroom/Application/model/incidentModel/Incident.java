@@ -48,26 +48,6 @@ public class Incident {
     @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY)
     private List<Report> reports;
 
-    public Incident(int coordinator_id, String title, String authority, int importance, String city, String region,
-                    String street, String caller_firstName, String caller_lastName, String caller_nationalId,
-                    String caller_phone, String notes) {
-
-        this.coordinator_id = coordinator_id;
-        this.title = title;
-        this.authority = authority;
-        this.importance = importance;
-        this.city = city;
-        this.region = region;
-        this.street = street;
-        this.caller_firstName = caller_firstName;
-        this.caller_lastName = caller_lastName;
-        this.caller_nationalId = caller_nationalId;
-        this.caller_phone = caller_phone;
-        this.notes = notes;
-
-        this.status = "Waiting for response";
-    }
-
     public Incident() {
     }
 }

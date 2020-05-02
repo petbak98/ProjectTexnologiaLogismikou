@@ -10,4 +10,6 @@ import lombok.ToString;
 public class ReportDto {
     private long reportId;
     private String content;
+    private long userId;
+    private long incidentId;
 }
