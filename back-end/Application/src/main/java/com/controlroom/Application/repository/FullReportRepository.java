@@ -4,13 +4,10 @@ import com.controlroom.Application.model.reportModel.Report;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-
 @Repository
-public interface ReportRepository extends JpaRepository<Report, Long> {
+public interface FullReportRepository extends JpaRepository<Report, Integer> {
 
-    Optional<Report> findById(Long id);
-    List<Report> findAll();
+    // custom queries
+    // List<Report> exampleTitleMethod(String text);
 
 }
