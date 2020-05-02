@@ -5,22 +5,21 @@ import AddIcon from '@material-ui/icons/Add';
 import { Navbar, NavLink, LinkButton } from '../../Navbar/Navbar';
 
 export default function NavbarCC() {
-  let match = useRouteMatch();
   let location = useLocation();
   return (
     <Navbar>
-      <NavLink to={`${match.path}`} activeclassname='activeLink'>
+      <NavLink to='/' activeclassname='activeLink'>
         <LinkButton
-          active={location.pathname === `${match.path}` ? 'active' : ''}
+          active={location.pathname === '/' ? 'active' : ''}
           endIcon={<RssFeedIcon />}
           color='secondary'
         >
           Συμβάντα
         </LinkButton>
       </NavLink>
-      <NavLink to={`${match.path}/form`}>
+      <NavLink to='/form'>
         <LinkButton
-          active={location.pathname === `${match.path}/form` ? 'active' : ''}
+          active={location.pathname === '/form' ? 'active' : ''}
           color='secondary'
           endIcon={<AddIcon />}
         >
