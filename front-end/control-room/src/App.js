@@ -5,18 +5,15 @@ import Login from './pages/Login/Login';
 import HomeCC from './pages/Home/HomeCC';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './config/theme';
+import { useAuth } from './hooks/useAuth';
+import AuthApp from './components/AuthApp/AuthApp';
 function App() {
+  const { value } = useAuth();
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Switch>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/command'>
-            <HomeCC />
-          </Route>
-        </Switch>
+        {value === 'authorized' ? <AuthApp /> : <Login />}
+
         <GlobalStyle />
       </Router>
     </ThemeProvider>

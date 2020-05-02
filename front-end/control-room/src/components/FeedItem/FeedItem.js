@@ -11,11 +11,9 @@ import { ReactComponent as Policeman } from '../../assets/icons/patrol.svg';
 export default function FeedItem({ incident }) {
   const { type, date, adress, title, id, related } = incident;
   const classes = feedItemStyles();
-  console.log(related);
   const renderAvatar = () => {
     if (type === 'police') return <Policeman className={classes.avatar} />;
-    if (type === 'firefighting')
-      return <Firetrack className={classes.avatar} />;
+    if (type === 'firefighting') return <Firetrack className={classes.avatar} />;
     return <Policeman className={classes.avatar} />;
   };
   return (
@@ -42,12 +40,7 @@ export default function FeedItem({ incident }) {
         <div className={classes.chipsContainer}>
           <li className={classes.chips}>
             {related.map((relation) => (
-              <Chip
-                key={relation}
-                className={classes.chip}
-                size='small'
-                label={relation}
-              />
+              <Chip key={relation} className={classes.chip} size='small' label={relation} />
             ))}
           </li>
         </div>
