@@ -1,6 +1,7 @@
 package com.controlroom.Application.service;
 
 import com.controlroom.Application.model.incidentModel.IncidentDto;
+import com.controlroom.Application.model.reportModel.ReportDto;
 
 import java.util.List;
 

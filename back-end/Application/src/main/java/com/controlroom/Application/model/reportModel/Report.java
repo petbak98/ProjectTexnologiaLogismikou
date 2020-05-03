@@ -30,7 +30,6 @@ public class Report {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-
     public Report() {
     }
 }
