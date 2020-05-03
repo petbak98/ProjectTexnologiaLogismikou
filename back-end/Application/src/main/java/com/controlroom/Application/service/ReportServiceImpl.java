@@ -1,7 +1,7 @@
 package com.controlroom.Application.service;
 
 import com.controlroom.Application.converter.ReportConverter;
-import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.model.reportModel.FullReport;
 import com.controlroom.Application.model.reportModel.ReportDto;
 import com.controlroom.Application.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public ReportDto findById(Long id) throws Exception {
-        Report report;
+        FullReport report;
         try {
             report = reportRepository.findById(id).get();
         } catch (NoSuchElementException nsee) {
@@ -40,7 +40,7 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public ReportDto save(ReportDto reportDto) {
-        Report report = ReportConverter.convert(reportDto);
+        FullReport report = ReportConverter.convert(reportDto);
 
         reportRepository.save(report);
 

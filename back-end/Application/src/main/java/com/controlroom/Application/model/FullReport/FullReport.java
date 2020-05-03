@@ -26,7 +26,8 @@ public class FullReport {
     private long deaths;
     @OneToOne(fetch = FetchType.LAZY)
     private User adder;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    private Incident incident;
     public FullReport(int deaths, int injuries, User user) {
         this.deaths = deaths;
         this.injuries = injuries;

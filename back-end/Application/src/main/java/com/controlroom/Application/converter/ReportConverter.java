@@ -1,15 +1,7 @@
 package com.controlroom.Application.converter;
 
-import com.controlroom.Application.model.incidentModel.Incident;
-import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.model.reportModel.FullReport;
 import com.controlroom.Application.model.reportModel.ReportDto;
-import com.controlroom.Application.model.userModel.User;
-import com.controlroom.Application.repository.IncidentRepository;
-import com.controlroom.Application.repository.ReportRepository;
-import com.controlroom.Application.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.NoSuchElementException;
 
 public class ReportConverter {
 
@@ -19,7 +11,7 @@ public class ReportConverter {
     @Autowired
     private static IncidentRepository incidentRepository;*/
 
-    public static ReportDto convertToDto(Report report) {
+    public static ReportDto convertToDto(FullReport report) {
         ReportDto reportDto = new ReportDto();
         reportDto.setReportId(report.getReport_Id());
         reportDto.setContent(report.getContent());
@@ -27,8 +19,8 @@ public class ReportConverter {
         return reportDto;
     }
 
-    public static Report convert(ReportDto reportDto) {
-        Report report = new Report();
+    public static FullReport convert(ReportDto reportDto) {
+        FullReport report = new FullReport();
         report.setReport_Id(reportDto.getReportId());
         report.setContent(reportDto.getContent());
 

@@ -15,7 +15,7 @@ import javax.persistence.*;
 @ToString
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Report {
+public class FullReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +31,6 @@ public class Report {
     private User user;
 
 
-    public Report() {
+    public FullReport() {
     }
 }

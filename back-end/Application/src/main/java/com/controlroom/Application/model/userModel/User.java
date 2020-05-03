@@ -1,7 +1,7 @@
 package com.controlroom.Application.model.userModel;
 
 import com.controlroom.Application.model.incidentModel.Incident;
-import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.model.reportModel.FullReport;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -36,7 +36,7 @@ public class User {
 
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Report> reports;
+    private List<FullReport> reports;
 
     public User(String username, String password, String roles, String permissions){
         this.username = username;
@@ -90,7 +90,7 @@ public class User {
         return incidents;
     }
 
-    public List<Report> getReports() {
+    public List<FullReport> getReports() {
         return reports;
     }
 }

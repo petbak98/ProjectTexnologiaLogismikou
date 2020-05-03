@@ -1,6 +1,6 @@
 package com.controlroom.Application.repository;
 
-import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.model.reportModel.FullReport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ReportRepository extends JpaRepository<Report, Long> {
+public interface ReportRepository extends JpaRepository<FullReport, Long> {
 
-    Optional<Report> findById(Long id);
-    List<Report> findAll();
+    Optional<FullReport> findById(Long id);
+    List<FullReport> findAll();
 
 }

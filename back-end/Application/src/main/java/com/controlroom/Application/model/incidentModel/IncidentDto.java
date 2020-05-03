@@ -1,6 +1,6 @@
 package com.controlroom.Application.model.incidentModel;
 
-import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.model.reportModel.FullReport;
 import com.controlroom.Application.model.userModel.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +30,6 @@ public class IncidentDto {
     private String callerNationalId;
     private String callerPhone;
 
-    private List<Report> reports;
+    private List<FullReport> reports;
     private List<User> receivers;
 }
