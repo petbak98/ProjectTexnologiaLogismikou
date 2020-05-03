@@ -46,4 +46,13 @@ public class ReportServiceImpl implements ReportService{
 
         return ReportConverter.convertToDto(report);
     }
+
+//    @Override
+//    public List<ReportDto> findReportsByIncidentId(Long id)
+//    {
+//        return reportRepository.findAllByIncident_Id(id)
+//                .stream()
+//                .map(ReportConverter::convertToDto)
+//                .collect(Collectors.toList());
+//    }
 }

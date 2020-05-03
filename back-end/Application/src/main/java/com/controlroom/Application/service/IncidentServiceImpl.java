@@ -3,6 +3,7 @@ package com.controlroom.Application.service;
 import com.controlroom.Application.converter.IncidentConverter;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.incidentModel.IncidentDto;
+import com.controlroom.Application.model.reportModel.ReportDto;
 import com.controlroom.Application.repository.IncidentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,6 @@ public class IncidentServiceImpl implements IncidentService{
                 .map(IncidentConverter::convertToDto)
                 .collect(Collectors.toList());
     }
-
 
     @Override
     public IncidentDto save(IncidentDto incidentDto) {
