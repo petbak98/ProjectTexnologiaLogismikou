@@ -13,4 +13,5 @@ public interface ReportRepository extends JpaRepository<FullReport, Long> {
     Optional<FullReport> findById(Long id);
     List<FullReport> findAll();
 
+//    List<Report> findAllByIncident_Id(Long id);
 }

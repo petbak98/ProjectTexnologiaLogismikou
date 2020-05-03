@@ -35,6 +35,5 @@ public class FullReport {
     }
 
     public FullReport(){
-
     }
 }

@@ -21,13 +21,13 @@ import static com.controlroom.Application.util.Helpers.convertToJson;
 
 @RestController
 @RequestMapping(value = "/api")
-public class ControlRoomController {
+public class ReportController {
 
     @Autowired
     private ReportService reportService;
 
 
-    @GetMapping("/report")
+    @GetMapping("/reports")
     public List<ReportDto> index(){
         return reportService.findAll();
     }
@@ -54,4 +54,11 @@ public class ControlRoomController {
     public ResponseEntity<String> sendGetName(@PathVariable String example) throws IOException {
         return ResponseEntity.ok().body(convertToJson(example));
     }
+
+//
+//    @GetMapping("incident/{incidentId}/reports")
+//    public ResponseEntity<String> findReportsByIncidentId(@PathVariable("incidentId") Long incidentId) throws Exception {
+//        List<ReportDto> incidentDto = reportService.findReportsByIncidentId(incidentId);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(incidentDto));
+//    }
 }
