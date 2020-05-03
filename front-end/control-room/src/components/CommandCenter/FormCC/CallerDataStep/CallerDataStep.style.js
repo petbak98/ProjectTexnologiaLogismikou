@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const IncidentStepStyles = makeStyles((theme) => {
+export const CallerDataStyles = makeStyles((theme) => {
   return {
     container: {
       flexDirection: 'column',
       display: 'flex'
     },
     input: {
-      marginBottom: theme.spacing(8),
+      marginBottom: theme.spacing(4),
       width: 400
     },
     selectLabel: {

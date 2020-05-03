@@ -1,11 +1,13 @@
 import React from 'react';
-import { FormLabel, TextField, Button } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import { FormLabel, TextField, Button } from '@material-ui/core';
 
-import { LocationStepStyles } from './LocationStep.style';
+import { CallerDataStyles } from './CallerDataStep.style';
 
-function LocationStep({ nextStep, previousStep }) {
+function CallerDataStep({ previousStep, nextStep }) {
+  const classes = CallerDataStyles();
+
   function handleNext() {
     nextStep();
   }
@@ -13,36 +15,34 @@ function LocationStep({ nextStep, previousStep }) {
     previousStep();
   }
 
-  const classes = LocationStepStyles();
-
   return (
     <div className={classes.container}>
       <FormLabel className={classes.selectLabel} component='legend'>
-        Πόλη
+        Όνομα
       </FormLabel>
       <TextField
         size='small'
         className={classes.input}
         variant='outlined'
-        placeholder='π.χ. Αθήνα'
+        placeholder='π.χ. Παναγιώτης'
       />
       <FormLabel className={classes.selectLabel} component='legend'>
-        Περιοχή
+        Επώνυμο
       </FormLabel>
       <TextField
         size='small'
         className={classes.input}
         variant='outlined'
-        placeholder='π.χ. Αγία Παρασκευή'
+        placeholder='π.χ. Τσίπρας'
       />
       <FormLabel className={classes.selectLabel} component='legend'>
-        Οδός
+        Ταυτότητα
       </FormLabel>
       <TextField
         size='small'
         className={classes.input}
         variant='outlined'
-        placeholder='π.χ. Πανεπιστημίου 45'
+        placeholder='π.χ. ΑΕ10440'
       />
       <div style={{ marginLeft: 'auto' }}>
         <Button
@@ -71,4 +71,4 @@ function LocationStep({ nextStep, previousStep }) {
   );
 }
 
-export default LocationStep;
+export default CallerDataStep;

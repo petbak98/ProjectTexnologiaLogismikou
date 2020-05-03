@@ -2,34 +2,43 @@ import styled from 'styled-components/macro';
 
 export const BubbleItem = styled.div`
   position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-right: 3rem;
-  overflow: hidden;
-  cursor: pointer;
+  @media screen and (max-width: 620px) {
+    font-size: 13px;
+  }
+  .step {
+    display: flex;
+    width: 100%;
+  }
+
   &:after {
     content: '';
+    transform: translate(5em, 2.5em);
+    /* transform: translateY(2.5em); */
     position: absolute;
-    top: 30%;
-    left: 3.5rem;
-    width: 100%;
-    border-top: 0.1rem solid ${(props) => (props.active ? `#3F3C56` : '#737373')};
+    width: calc(-4.9em + 100%);
+    border-top: 2px solid ${(props) => (props.active ? `#3F3C56` : '#737373')};
   }
-  :last-child::after {
-    content: none;
+  :last-child :after {
+    content: '';
+    top: 30%;
+    transform: translateX(5em);
+    position: absolute;
+    width: calc(-5em + 100%);
+    border-top: 0.1em solid transparent;
   }
 `;
 export const BubbleIcon = styled.div`
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 5em;
+  width: 5em;
   display: flex;
-  padding: 0.3rem;
   justify-content: center;
   align-items: center;
   svg {
-    width: 70%;
-    height: 70%;
+    width: 2em;
+    height: 2em;
     fill: ${(props) => (props.active ? 'white' : '#737373')};
   }
   border: 2px solid ${(props) => (props.active ? `#3F3C56` : '#737373')};
@@ -37,7 +46,11 @@ export const BubbleIcon = styled.div`
   background-color: ${(props) => (props.active ? `#3F3C56` : 'inherit')};
 `;
 export const BubbleTitle = styled.div`
-  padding-top: 1rem;
-  font-size: 1rem;
+  margin-right: 0.5em;
+  margin-top: 0.5em;
+  font-size: 1em;
   color: ${(props) => (props.active ? `#3F3C56` : '#737373')};
+  @media screen and (max-width: 620px) {
+    display: none;
+  }
 `;
