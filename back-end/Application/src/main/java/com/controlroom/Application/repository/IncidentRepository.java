@@ -1,6 +1,7 @@
 package com.controlroom.Application.repository;
 
 import com.controlroom.Application.model.incidentModel.Incident;
+import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.model.reportModel.ReportDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

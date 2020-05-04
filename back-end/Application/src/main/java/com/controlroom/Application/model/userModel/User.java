@@ -15,7 +15,8 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
     private long id;
 
     @Column(nullable = false)
@@ -35,7 +36,7 @@ public class User {
     private List<Incident> incidents;
 
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @JsonIgnore
     private List<Report> reports;
 
     public User(String username, String password, String roles, String permissions){
