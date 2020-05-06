@@ -13,7 +13,7 @@ public class IncidentDto {
 
     private String title;
 
-    private Authority authority;
+    private IncidentAuthority incidentAuthority;
 
     private Importance importance;
 
@@ -21,7 +21,7 @@ public class IncidentDto {
     private String region;
     private String street;
     private String notes;
-    private String status;
+    private Status status;
 
     private String callerFirstName;
     private String callerLastName;

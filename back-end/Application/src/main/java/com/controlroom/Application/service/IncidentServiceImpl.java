@@ -50,9 +50,6 @@ public class IncidentServiceImpl implements IncidentService{
     @Override
     public IncidentDto save(IncidentDto incidentDto) {
         Incident incident = IncidentConverter.convert(incidentDto);
-        if(incident.getStatus() == null) {
-            incident.setStatus("Waiting for response");
-        }
         incidentRepository.save(incident);
         return IncidentConverter.convertToDto(incident);
     }

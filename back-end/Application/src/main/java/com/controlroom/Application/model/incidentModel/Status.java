@@ -1,6 +1,5 @@
 package com.controlroom.Application.model.incidentModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,17 +11,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="incident_importance")
-public class Importance {
+@Table(name="incident_status")
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "importance_id", nullable = false)
+    @Column(name = "status_id", nullable = false)
     private long id;
 
-    @Column(name = "importance_name", nullable = false)
-    private String importanceName;
+    @Column(name = "status_name", nullable = false)
+    private String statusName;
 
-    @OneToMany(mappedBy="importance", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="status", fetch = FetchType.LAZY)
     private List<Incident> incidents;
 
 }

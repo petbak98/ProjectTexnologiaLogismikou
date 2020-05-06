@@ -3,15 +3,21 @@ package com.controlroom.Application.model.incidentModel;
 import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.model.userModel.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 import static java.util.prefs.Preferences.MAX_NAME_LENGTH;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name="incidents")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -28,13 +34,17 @@ public class Incident {
     private String title;
 
     @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name ="importance_id", nullable = false)
     private Importance importance;
 
     private String city;
     private String region;
     private String street;
     private String notes;
-    private String status;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name ="status_id", nullable = false)
+    private Status status;
 
     @Column(name = "caller_firstName", length = MAX_NAME_LENGTH)
     private String callerFirstName;
@@ -59,5 +69,11 @@ public class Incident {
     private List<Report> reports;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    private Authority authority;
+    @JoinColumn(name ="authority_id", nullable = false)
+    private IncidentAuthority incidentAuthority;
+
+    @Column(name = "last_updated")
+    @UpdateTimestamp
+    private Date lastUpdate;
+
 }

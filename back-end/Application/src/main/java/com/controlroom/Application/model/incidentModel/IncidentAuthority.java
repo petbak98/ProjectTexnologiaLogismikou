@@ -1,16 +1,20 @@
 package com.controlroom.Application.model.incidentModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
-@Table(name="authorities")
+@Table(name="incident_authority")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Authority {
+public class IncidentAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "authority_id", nullable = false)
@@ -19,6 +23,6 @@ public class Authority {
     @Column(name = "authority_name", nullable = false)
     private String authorityName;
 
-    @OneToMany(mappedBy="authority", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="incidentAuthority", fetch = FetchType.LAZY)
     private List<Incident> incidents;
 }

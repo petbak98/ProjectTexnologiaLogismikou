@@ -1,13 +1,18 @@
 package com.controlroom.Application.model.incidentModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
+@Table(name="incident_statistics")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Statistics {
     @Id
