@@ -68,9 +68,9 @@ public class Incident {
     @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY)
     private List<Report> reports;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name ="authority_id", nullable = false)
-    private IncidentAuthority incidentAuthority;
+    private Authority authority;
 
     @Column(name = "last_updated")
     @UpdateTimestamp

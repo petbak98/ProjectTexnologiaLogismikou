@@ -13,7 +13,7 @@ public class IncidentDto {
 
     private String title;
 
-    private IncidentAuthority incidentAuthority;
+    private Authority authority;
 
     private Importance importance;
 

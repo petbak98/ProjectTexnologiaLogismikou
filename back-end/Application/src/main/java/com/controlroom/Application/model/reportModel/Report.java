@@ -28,10 +28,11 @@ public class Report {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JsonIgnore()
+    @JoinColumn(name ="incident_id", nullable = false)
     private Incident incident;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="user_id", nullable = false)
     private User user;
 
     @Column(name = "last_updated")

@@ -11,7 +11,7 @@ public class IncidentConverter {
         incidentDto.setUserId(incident.getCoordinatorId());
 
         incidentDto.setTitle(incident.getTitle());
-        incidentDto.setIncidentAuthority(incident.getIncidentAuthority());
+        incidentDto.setAuthority(incident.getAuthority());
         incidentDto.setImportance(incident.getImportance());
 
         incidentDto.setCity(incident.getCity());
@@ -38,7 +38,7 @@ public class IncidentConverter {
         incident.setCoordinatorId(incidentDto.getUserId());
 
         incident.setTitle(incidentDto.getTitle());
-        incident.setIncidentAuthority(incidentDto.getIncidentAuthority());
+        incident.setAuthority(incidentDto.getAuthority());
         incident.setImportance(incidentDto.getImportance());
 
         incident.setCity(incidentDto.getCity());

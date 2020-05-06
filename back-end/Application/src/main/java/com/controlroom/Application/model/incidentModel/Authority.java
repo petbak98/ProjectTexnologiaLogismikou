@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name="incident_authority")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class IncidentAuthority {
+public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "authority_id", nullable = false)
@@ -23,6 +23,6 @@ public class IncidentAuthority {
     @Column(name = "authority_name", nullable = false)
     private String authorityName;
 
-    @OneToMany(mappedBy="incidentAuthority", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="authority", cascade = CascadeType.ALL)
     private List<Incident> incidents;
 }
