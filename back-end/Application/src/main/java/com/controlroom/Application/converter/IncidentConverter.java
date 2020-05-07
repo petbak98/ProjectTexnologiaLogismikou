@@ -7,8 +7,8 @@ public class IncidentConverter {
     public static IncidentDto convertToDto(Incident incident) {
         IncidentDto incidentDto = new IncidentDto();
 
-        incidentDto.setIncidentId(incident.getIncident_id());
-        incidentDto.setUserId(incident.getCoordinator_id());
+        incidentDto.setIncidentId(incident.getId());
+        incidentDto.setUserId(incident.getCoordinatorId());
 
         incidentDto.setTitle(incident.getTitle());
         incidentDto.setAuthority(incident.getAuthority());
@@ -20,10 +20,10 @@ public class IncidentConverter {
         incidentDto.setNotes(incident.getNotes());
         incidentDto.setStatus(incident.getStatus());
 
-        incidentDto.setCallerFirstName(incident.getCaller_firstName());
-        incidentDto.setCallerLastName(incident.getCaller_lastName());
-        incidentDto.setCallerNationalId(incident.getCaller_nationalId());
-        incidentDto.setCallerPhone(incident.getCaller_phone());
+        incidentDto.setCallerFirstName(incident.getCallerFirstName());
+        incidentDto.setCallerLastName(incident.getCallerLastName());
+        incidentDto.setCallerNationalId(incident.getCallerNationalId());
+        incidentDto.setCallerPhone(incident.getCallerPhone());
 
 
         incidentDto.setReceivers(incident.getReceivers());
@@ -34,8 +34,8 @@ public class IncidentConverter {
     public static Incident convert(IncidentDto incidentDto) {
         Incident incident = new Incident();
 
-        incident.setIncident_id(incidentDto.getIncidentId());
-        incident.setCoordinator_id(incidentDto.getUserId());
+        incident.setId(incidentDto.getIncidentId());
+        incident.setCoordinatorId(incidentDto.getUserId());
 
         incident.setTitle(incidentDto.getTitle());
         incident.setAuthority(incidentDto.getAuthority());
@@ -47,10 +47,10 @@ public class IncidentConverter {
         incident.setNotes(incidentDto.getNotes());
         incident.setStatus(incidentDto.getStatus());
 
-        incident.setCaller_firstName(incidentDto.getCallerFirstName());
-        incident.setCaller_lastName(incidentDto.getCallerLastName());
-        incident.setCaller_nationalId(incidentDto.getCallerNationalId());
-        incident.setCaller_phone(incidentDto.getCallerPhone());
+        incident.setCallerFirstName(incidentDto.getCallerFirstName());
+        incident.setCallerLastName(incidentDto.getCallerLastName());
+        incident.setCallerNationalId(incidentDto.getCallerNationalId());
+        incident.setCallerPhone(incidentDto.getCallerPhone());
 
 
         incident.setReceivers(incidentDto.getReceivers());

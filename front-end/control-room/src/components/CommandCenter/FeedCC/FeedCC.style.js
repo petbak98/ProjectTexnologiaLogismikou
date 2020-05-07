@@ -3,17 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 export const feedCCStyle = makeStyles((theme) => {
   return {
     container: {
-      margin: '0 auto'
+      paddingRight: theme.spacing(8),
+      paddingLeft: theme.spacing(8)
     },
     search: {
-      minWidth: 300,
-      maxWidth: '100%',
-      margin: `${theme.spacing(6)}px 0 `
+      marginTop: theme.spacing(8),
+      width: '100%'
     },
     button: {
-      display: 'block',
-      textTransform: 'none',
-      margin: `${theme.spacing(10)}px 0 `
+      // display: 'block',
+      textTransform: 'none'
+      // margin: `${theme.spacing(10)}px 0 `
     }
   };
 });

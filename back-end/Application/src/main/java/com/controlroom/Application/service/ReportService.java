@@ -8,7 +8,7 @@ public interface ReportService {
     ReportDto findById(Long id) throws Exception;
     List<ReportDto> findAll();
 
-//    List<ReportDto> findReportsByIncidentId(Long id) throws Exception;
+    List<ReportDto> findAllByIncidentId(Long id) throws Exception;
 
     ReportDto save(ReportDto reportDto);
 }

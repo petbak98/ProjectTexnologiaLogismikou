@@ -44,16 +44,15 @@ export default function FeedCC() {
           )
         }}
         placeholder='π.χ 12325'
-        size='small'
         variant='outlined'
         id='input-with-icon-textfield'
         label='Ανάζητηση'
         className={classes.search}
       />
       <Feed incidents={incidents} />
-      <Button className={classes.button} variant='contained' color='primary'>
+      {/* <Button className={classes.button} variant='contained' color='primary'>
         Περισσότερα
-      </Button>
+      </Button> */}
     </div>
   );
 }

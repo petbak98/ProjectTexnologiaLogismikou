@@ -30,7 +30,7 @@ export default function NavbarCC() {
         <LinkButton
           active={location.pathname === '/form' ? 'active' : ''}
           color='secondary'
-          endIcon={<AddIcon />}
+          endIcon={<AddIcon style={{ display: 'block' }} />}
         >
           Προσθήκη
         </LinkButton>

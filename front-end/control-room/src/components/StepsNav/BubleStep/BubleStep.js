@@ -5,9 +5,12 @@ function BubleStep({ active, label, icon: Icon }) {
   function handleClick() {}
   return (
     <BubbleItem onClick={handleClick} active={active}>
-      <BubbleIcon active={active}>
-        <Icon styles={{ marginTop: 1000 }} />
-      </BubbleIcon>
+      <div className='step'>
+        <BubbleIcon active={active}>
+          <Icon />
+        </BubbleIcon>
+        <div className='line' />
+      </div>
       <BubbleTitle active={active}>{label}</BubbleTitle>
     </BubbleItem>
   );

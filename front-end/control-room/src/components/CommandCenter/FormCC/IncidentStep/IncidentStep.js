@@ -12,8 +12,12 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 import { IncidentStepStyles } from './IncidentStep.style';
 
-function IncidentStep({ nextStep }) {
+function IncidentStep({ nextStep, send }) {
   function handleChange() {}
+  function handleNext() {
+    console.log('next');
+    send({ type: 'EVENT', nextStep });
+  }
   const classes = IncidentStepStyles();
 
   return (
@@ -66,16 +70,17 @@ function IncidentStep({ nextStep }) {
             label='Λιμενικό'
           />
         </FormGroup>
-        <Button
-          className={classes.button}
-          size='large'
-          color='primary'
-          variant='contained'
-          endIcon={<NavigateNextIcon />}
-        >
-          ΕΠΟΜΕΝΟ
-        </Button>
       </FormControl>
+      <Button
+        onClick={handleNext}
+        className={classes.button}
+        size='large'
+        color='primary'
+        variant='contained'
+        endIcon={<NavigateNextIcon />}
+      >
+        ΕΠΟΜΕΝΟ
+      </Button>
     </div>
   );
 }

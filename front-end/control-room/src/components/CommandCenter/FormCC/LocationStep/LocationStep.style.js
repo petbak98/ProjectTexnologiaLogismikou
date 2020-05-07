@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const IncidentStepStyles = makeStyles((theme) => {
+export const LocationStepStyles = makeStyles((theme) => {
   return {
     container: {
       flexDirection: 'column',
       display: 'flex'
     },
     input: {
-      marginBottom: theme.spacing(8),
+      marginBottom: theme.spacing(4),
       width: 400
     },
     selectLabel: {
@@ -19,7 +19,7 @@ export const IncidentStepStyles = makeStyles((theme) => {
       paddingBottom: theme.spacing(2)
     },
     button: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(5),
       marginLeft: 'auto'
     }
   };

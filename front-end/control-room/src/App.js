@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/core';
 import theme from './config/theme';
 import { useAuth } from './hooks/useAuth';
 import AuthApp from './components/AuthApp/AuthApp';
+
 function App() {
   const { value: authStatus } = useAuth();
   return (

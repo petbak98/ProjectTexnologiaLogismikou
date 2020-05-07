@@ -26,8 +26,10 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.2.6.RELEASE'
-	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.2.6.RELEASE'
+//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.2.6.RELEASE'
+//	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.2.6.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: '2.2.6.RELEASE'
+	compile group: 'org.springframework.data', name: 'spring-data-rest-core', version: '3.2.7.RELEASE'
 
 //	compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.3.1.RELEASE'
 //	compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.1.RELEASE'

@@ -6,8 +6,14 @@ import { Typography } from '@material-ui/core';
 import { FormStyles } from './FormCC.style';
 import IncidentStep from './IncidentStep/IncidentStep';
 import StepsNav from '../../StepsNav/StepNav';
+import LocationStep from './LocationStep/LocationStep';
+import { Machine } from 'xstate';
+import { useMachine } from '@xstate/react';
+import CallerDataStep from './CallerDataStep/CallerDataStep';
+import FinalScreen from './FinalScreen/FinalScreen';
 
 export default function FormCC() {
+  const [state, send] = useMachine(StepsMachine());
   const classes = FormStyles();
   return (
     <>
@@ -26,9 +32,31 @@ export default function FormCC() {
             exitLeft: 'exit'
           }}
         >
-          <IncidentStep />
+          <IncidentStep send={send} />
+          <LocationStep />
+          <CallerDataStep />
+          <FinalScreen />
         </StepWizard>
       </div>
     </>
   );
 }
+
+const StepsMachine = () => {
+  return Machine({
+    id: 'stepsMachine',
+    initial: 'idle',
+    states: {
+      idle: {
+        on: {
+          EVENT: {
+            actions: (_, event) => {
+              // console.log(event);
+              event.nextStep();
+            }
+          }
+        }
+      }
+    }
+  });
+};

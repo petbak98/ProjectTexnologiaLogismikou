@@ -1,37 +1,23 @@
 package com.controlroom.Application.converter;
 
-import com.controlroom.Application.model.reportModel.FullReport;
+import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.model.reportModel.ReportDto;
 
 public class ReportConverter {
 
-
-   /* @Autowired
-    private static UserRepository userRepository;
-    @Autowired
-    private static IncidentRepository incidentRepository;*/
-
-    public static ReportDto convertToDto(FullReport report) {
+    public static ReportDto convertToDto(Report report) {
         ReportDto reportDto = new ReportDto();
-        reportDto.setReportId(report.getReport_Id());
+        reportDto.setReportId(report.getId());
         reportDto.setContent(report.getContent());
 
         return reportDto;
     }
 
-    public static FullReport convert(ReportDto reportDto) {
-        FullReport report = new FullReport();
-        report.setReport_Id(reportDto.getReportId());
+    public static Report convert(ReportDto reportDto) {
+        Report report = new Report();
+        report.setId(reportDto.getReportId());
         report.setContent(reportDto.getContent());
 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
-        /*User user = userRepository.findById(reportDto.getUserId()).get();
-        report.setUser(user);*/
-
-
-        /*Incident incident = incidentRepository.findById(reportDto.getIncidentId()).get();
-        report.setIncident(incident);*/
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! //
         return report;
     }
 

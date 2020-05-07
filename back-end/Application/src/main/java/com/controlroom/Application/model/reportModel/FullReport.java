@@ -5,31 +5,37 @@ import com.controlroom.Application.model.userModel.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
-@ToString
+@NoArgsConstructor
 @Entity
+@Table(name="reports")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Report {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long report_Id;
+    @Column(name = "report_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore()
+    @JoinColumn(name ="incident_id", nullable = false)
     private Incident incident;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="user_id", nullable = false)
     private User user;
 
-    public Report() {
-    }
+    @Column(name = "last_updated")
+    @UpdateTimestamp
+    private Date lastUpdate;
 }

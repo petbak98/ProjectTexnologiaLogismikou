@@ -1,7 +1,7 @@
 package com.controlroom.Application.model.userModel;
 
 import com.controlroom.Application.model.incidentModel.Incident;
-import com.controlroom.Application.model.reportModel.FullReport;
+import com.controlroom.Application.model.reportModel.Report;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,7 +15,8 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
     private long id;
 
     @Column(nullable = false)
@@ -31,12 +32,12 @@ public class User {
     private String permissions = "";
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
-    @JsonIgnore
+//    @JsonIgnore
     private List<Incident> incidents;
 
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<FullReport> reports;
+//    @JsonIgnore
+    private List<Report> reports;
 
     public User(String username, String password, String roles, String permissions){
         this.username = username;
@@ -90,7 +91,7 @@ public class User {
         return incidents;
     }
 
-    public List<FullReport> getReports() {
+    public List<Report> getReports() {
         return reports;
     }
 }
