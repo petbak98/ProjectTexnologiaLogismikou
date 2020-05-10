@@ -19,7 +19,7 @@ public class HealthController {
 
 
     @GetMapping
-    public String HealthCheck() throws ResponseStatusException {
+    public String healthCheck() throws ResponseStatusException {
 
         try {
             healthCheck.healthCheck();
