@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class IncidentServiceImpl implements IncidentService{
 
+    IncidentConverter incidentConverter = new IncidentConverter();
+
     @Autowired
     private IncidentRepository incidentRepository;
 
@@ -27,7 +29,7 @@ public class IncidentServiceImpl implements IncidentService{
             throw new Exception("Incident not found", nsee.getCause());
         }
 
-        return IncidentConverter.convertToDto(incident);
+        return incidentConverter.convertToDto(incident);
     }
 
     @Override
@@ -35,7 +37,7 @@ public class IncidentServiceImpl implements IncidentService{
         // TODO: Add null check
         return incidentRepository.findAll()
                 .stream()
-                .map(IncidentConverter::convertToDto)
+                .map(incidentConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -43,7 +45,7 @@ public class IncidentServiceImpl implements IncidentService{
     public List<IncidentDto> findByTitle(String title) {
         return incidentRepository.findByTitleContaining(title)
                 .stream()
-                .map(IncidentConverter::convertToDto)
+                .map(incidentConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -51,7 +53,7 @@ public class IncidentServiceImpl implements IncidentService{
     public List<IncidentDto> findByAuthorityId(Long id) {
         return incidentRepository.findByAuthorityId(id)
                 .stream()
-                .map(IncidentConverter::convertToDto)
+                .map(incidentConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -59,7 +61,7 @@ public class IncidentServiceImpl implements IncidentService{
     public IncidentDto save(IncidentDto incidentDto) throws Exception {
         Incident incident = IncidentConverter.convert(incidentDto);
         incidentRepository.save(incident);
-        return IncidentConverter.convertToDto(incident);
+        return incidentConverter.convertToDto(incident);
     }
 
     @Override

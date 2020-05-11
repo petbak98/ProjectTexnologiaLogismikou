@@ -23,7 +23,6 @@ public class ReportConverter {
         reportDto.setIncidentId(report.getIncident().getId());
         reportDto.setUserId(report.getUser().getId());
         reportDto.setUserName(report.getUser().getUsername());
-
         return reportDto;
     }
 
@@ -34,7 +33,6 @@ public class ReportConverter {
         report.setContent(reportDto.getContent());
         report.setIncident(incidentService.findById(reportDto.getIncidentId()));
         report.setUser(userService.findById(reportDto.getUserId()));
-
         return report;
     }
 

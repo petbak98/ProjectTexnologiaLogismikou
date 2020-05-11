@@ -1,11 +1,21 @@
 package com.controlroom.Application.converter;
 
 import com.controlroom.Application.model.dto.IncidentDto;
+import com.controlroom.Application.model.dto.ReportDto;
+import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.incidentModel.Incident;
+import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.repository.ReportRepository;
+import com.controlroom.Application.service.IncidentService;
+import com.controlroom.Application.service.ReportService;
 import com.controlroom.Application.service.StatusService;
 import com.controlroom.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class IncidentConverter {
@@ -13,8 +23,12 @@ public class IncidentConverter {
     private static StatusService statusService;
     @Autowired
     private static UserService userService;
+    @Autowired
+    private ReportService reportService;
+    @Autowired
+    private ReportConverter reportConverter;
 
-    public static IncidentDto convertToDto(Incident incident){
+    public IncidentDto convertToDto(Incident incident) {
 
         IncidentDto incidentDto = new IncidentDto();
 
@@ -26,6 +40,8 @@ public class IncidentConverter {
 //        incidentDto.setUserName(user.getUsername());
 
         incidentDto.setTitle(incident.getTitle());
+        incidentDto.setLastUpdate(incident.getLastUpdate());
+
         //incidentDto.setLocation(incident.getLocation());
         incidentDto.setAuthorityId(incident.getAuthority().getId());
         incidentDto.setImportanceId(incident.getImportance().getId());
@@ -41,8 +57,12 @@ public class IncidentConverter {
         incidentDto.setCallerNationalId(incident.getCallerNationalId());
         incidentDto.setCallerPhone(incident.getCallerPhone());
 
-//        incidentDto.setReceivers(incident.getReceivers());
-//        incidentDto.setReports(incident.getReports());
+        List<ReportDto> reportDtoList = incident.getReports().stream().map(ReportConverter::convertToDto).collect(Collectors.toList());
+        List<UserDto> userDtoList = incident.getReceivers().stream().map(UserConverter::convertToDto).collect(Collectors.toList());
+
+        incidentDto.setReceivers(userDtoList);
+        incidentDto.setReports(reportDtoList);
+
         return incidentDto;
     }
 
@@ -52,6 +72,7 @@ public class IncidentConverter {
         incident.setCoordinator(userService.findById(incidentDto.getCoordinatorId()));
         incident.setId(incidentDto.getIncidentId());
         incident.setTitle(incidentDto.getTitle());
+        incident.setLastUpdate(incidentDto.getLastUpdate());
         //incident.setLocation(incidentDto.getLocation());
 //        incident.setAuthority(incidentDto.getAuthorityId());
 //        incident.setImportance(incidentDto.getImportance());
