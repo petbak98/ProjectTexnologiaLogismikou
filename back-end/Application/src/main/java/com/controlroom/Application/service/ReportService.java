@@ -1,6 +1,6 @@
 package com.controlroom.Application.service;
 
-import com.controlroom.Application.model.reportModel.ReportDto;
+import com.controlroom.Application.model.dto.ReportDto;
 
 import java.util.List;
 

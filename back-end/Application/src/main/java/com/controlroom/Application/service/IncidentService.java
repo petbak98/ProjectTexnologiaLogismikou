@@ -1,7 +1,6 @@
 package com.controlroom.Application.service;
 
-import com.controlroom.Application.model.incidentModel.IncidentDto;
-import com.controlroom.Application.model.reportModel.ReportDto;
+import com.controlroom.Application.model.dto.IncidentDto;
 
 import java.util.List;
 
@@ -10,5 +9,5 @@ public interface IncidentService {
     List<IncidentDto> findAll();
     List<IncidentDto> findByTitle(String title);
 
-    IncidentDto save(IncidentDto incidentDto);
+    IncidentDto save(IncidentDto incidentDto) throws Exception;
 }

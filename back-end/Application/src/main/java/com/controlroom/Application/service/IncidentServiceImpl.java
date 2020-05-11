@@ -1,9 +1,9 @@
 package com.controlroom.Application.service;
 
 import com.controlroom.Application.converter.IncidentConverter;
+import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.incidentModel.Incident;
-import com.controlroom.Application.model.incidentModel.IncidentDto;
-import com.controlroom.Application.model.reportModel.ReportDto;
+
 import com.controlroom.Application.repository.IncidentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class IncidentServiceImpl implements IncidentService{
     }
 
     @Override
-    public IncidentDto save(IncidentDto incidentDto) {
+    public IncidentDto save(IncidentDto incidentDto) throws Exception {
         Incident incident = IncidentConverter.convert(incidentDto);
         incidentRepository.save(incident);
         return IncidentConverter.convertToDto(incident);

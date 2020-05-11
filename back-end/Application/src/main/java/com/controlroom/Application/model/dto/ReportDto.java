@@ -1,4 +1,4 @@
-package com.controlroom.Application.model.reportModel;
+package com.controlroom.Application.model.dto;
 
 import lombok.Data;
 

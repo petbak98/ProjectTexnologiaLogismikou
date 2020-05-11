@@ -1,8 +1,8 @@
 package com.controlroom.Application.service;
 
 import com.controlroom.Application.converter.ReportConverter;
+import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.reportModel.Report;
-import com.controlroom.Application.model.reportModel.ReportDto;
 import com.controlroom.Application.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

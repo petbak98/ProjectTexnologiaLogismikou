@@ -1,7 +1,7 @@
 package com.controlroom.Application.converter;
 
+import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.reportModel.Report;
-import com.controlroom.Application.model.reportModel.ReportDto;
 
 public class ReportConverter {
 
