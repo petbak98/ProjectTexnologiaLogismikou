@@ -2,7 +2,10 @@ package com.controlroom.Application.converter;
 
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.incidentModel.Incident;
+import com.controlroom.Application.model.userModel.User;
+import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.StatusService;
+import com.controlroom.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Component;
 public class IncidentConverter {
     @Autowired
     private static StatusService statusService;
+    @Autowired
+    private static UserService userService;
 
     public static IncidentDto convertToDto(Incident incident){
 
@@ -17,6 +22,8 @@ public class IncidentConverter {
 
         incidentDto.setIncidentId(incident.getId());
         incidentDto.setUserId(incident.getCoordinatorId());
+        /*User user = userService.findById(incidentDto.getUserId());
+        incidentDto.setUserName(user.getUsername());*/
 
         incidentDto.setTitle(incident.getTitle());
         //incidentDto.setLocation(incident.getLocation());

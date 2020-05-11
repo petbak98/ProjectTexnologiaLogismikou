@@ -2,7 +2,6 @@ package com.controlroom.Application.converter;
 
 import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.reportModel.Report;
-import com.controlroom.Application.repository.IncidentRepository;
 import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ public class ReportConverter {
         reportDto.setContent(report.getContent());
         reportDto.setIncidentId(report.getIncident().getId());
         reportDto.setUserId(report.getUser().getId());
+        reportDto.setUserName(report.getUser().getUsername());
 
         return reportDto;
     }

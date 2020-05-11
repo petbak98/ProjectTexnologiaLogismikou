@@ -16,6 +16,7 @@ import java.util.List;
 public class IncidentDto {
     private long incidentId;
     private long userId;
+    //private String userName;
 
     private String title;
     //private Point location;
