@@ -18,6 +18,7 @@ public class ReportConverter {
     public static ReportDto convertToDto(Report report) {
         ReportDto reportDto = new ReportDto();
         reportDto.setReportId(report.getId());
+        reportDto.setLastUpdate(report.getLastUpdate());
         reportDto.setContent(report.getContent());
         reportDto.setIncidentId(report.getIncident().getId());
         reportDto.setUserId(report.getUser().getId());
@@ -29,6 +30,7 @@ public class ReportConverter {
     public static Report convert(ReportDto reportDto) {
         Report report = new Report();
         report.setId(reportDto.getReportId());
+        report.setLastUpdate(reportDto.getLastUpdate());
         report.setContent(reportDto.getContent());
         report.setIncident(incidentService.findById(reportDto.getIncidentId()));
         report.setUser(userService.findById(reportDto.getUserId()));

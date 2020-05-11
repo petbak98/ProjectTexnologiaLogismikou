@@ -19,6 +19,9 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private long id;
 
+    @OneToMany(mappedBy = "coordinator", fetch = FetchType.LAZY)
+    private List<Incident> myIncidents;
+
     @Column(nullable = false)
     private String username;
 

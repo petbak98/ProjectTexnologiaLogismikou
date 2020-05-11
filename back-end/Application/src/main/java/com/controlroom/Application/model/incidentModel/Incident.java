@@ -29,8 +29,9 @@ public class Incident {
     @Column(name = "incident_id", nullable = false)
     private long id;
 
-    @Column(name = "coordinator_id", nullable = false)
-    private long coordinatorId;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name ="user_id", nullable = false)
+    private User coordinator;
 
     private String title;
 

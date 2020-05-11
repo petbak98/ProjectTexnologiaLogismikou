@@ -2,8 +2,6 @@ package com.controlroom.Application.converter;
 
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.incidentModel.Incident;
-import com.controlroom.Application.model.userModel.User;
-import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.StatusService;
 import com.controlroom.Application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +19,11 @@ public class IncidentConverter {
         IncidentDto incidentDto = new IncidentDto();
 
         incidentDto.setIncidentId(incident.getId());
-        incidentDto.setUserId(incident.getCoordinatorId());
-        /*User user = userService.findById(incidentDto.getUserId());
-        incidentDto.setUserName(user.getUsername());*/
+        incidentDto.setCoordinatorId(incident.getCoordinator().getId());
+        incidentDto.setCoordinatorName(incident.getCoordinator().getUsername());
+
+//        User user = userService.findById(incidentDto.getUserId());
+//        incidentDto.setUserName(user.getUsername());
 
         incidentDto.setTitle(incident.getTitle());
         //incidentDto.setLocation(incident.getLocation());
@@ -49,9 +49,8 @@ public class IncidentConverter {
     public static Incident convert(IncidentDto incidentDto)  {
 
         Incident incident = new Incident();
-
+        incident.setCoordinator(userService.findById(incidentDto.getCoordinatorId()));
         incident.setId(incidentDto.getIncidentId());
-        incident.setCoordinatorId(incidentDto.getUserId());
         incident.setTitle(incidentDto.getTitle());
         //incident.setLocation(incidentDto.getLocation());
 //        incident.setAuthority(incidentDto.getAuthorityId());

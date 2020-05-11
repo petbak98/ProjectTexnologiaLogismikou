@@ -15,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 public class IncidentDto {
     private long incidentId;
-    private long userId;
-    //private String userName;
+    private long coordinatorId;
+    private String coordinatorName;
 
     private String title;
     //private Point location;
