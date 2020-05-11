@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.geo.Point;
 
 
 import javax.persistence.*;
@@ -32,6 +33,9 @@ public class Incident {
     private long coordinatorId;
 
     private String title;
+
+    //@Column(columnDefinition = "POINT")
+    //private Point location;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name ="importance_id", nullable = false)

@@ -6,6 +6,7 @@ import com.controlroom.Application.model.userModel.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.geo.Point;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class IncidentDto {
     private long userId;
 
     private String title;
+    //private Point location;
 
     private long authorityId;
     private long importanceId;
@@ -31,6 +33,7 @@ public class IncidentDto {
     private String callerLastName;
     private String callerNationalId;
     private String callerPhone;
+
 
 //    private List<Report> reports;
 //    private List<User> receivers;

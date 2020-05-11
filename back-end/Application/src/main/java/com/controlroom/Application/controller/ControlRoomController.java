@@ -26,6 +26,11 @@ public class ControlRoomController {
         return incidentService.findAll();
     }
 
+    @GetMapping("/incidents/authority/{id}")
+    public List<IncidentDto> findbyAuthorityId(@PathVariable("id") Long id) {
+        return incidentService.findByAuthorityId(id);
+    }
+
     @GetMapping("/incident/{title}")
     public String findByTitle(@PathVariable("title") String incidentTitle) throws JsonProcessingException {
         List<IncidentDto> incidentDtos = incidentService.findByTitle(incidentTitle);
@@ -34,7 +39,7 @@ public class ControlRoomController {
 
     @GetMapping("/incident/{id}")
     public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
-        IncidentDto incidentDto = incidentService.findById(id);
+        IncidentDto incidentDto = incidentService.findDtoById(id);
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(incidentDto));
     }
 

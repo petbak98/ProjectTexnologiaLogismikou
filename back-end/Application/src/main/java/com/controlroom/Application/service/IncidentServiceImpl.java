@@ -19,7 +19,7 @@ public class IncidentServiceImpl implements IncidentService{
     private IncidentRepository incidentRepository;
 
     @Override
-    public IncidentDto findById(Long id) throws Exception {
+    public IncidentDto findDtoById(Long id) throws Exception {
         Incident incident;
         try {
             incident = incidentRepository.findById(id).get();
@@ -48,10 +48,24 @@ public class IncidentServiceImpl implements IncidentService{
     }
 
     @Override
+    public List<IncidentDto> findByAuthorityId(Long id) {
+        return incidentRepository.findByAuthorityId(id)
+                .stream()
+                .map(IncidentConverter::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public IncidentDto save(IncidentDto incidentDto) throws Exception {
         Incident incident = IncidentConverter.convert(incidentDto);
         incidentRepository.save(incident);
         return IncidentConverter.convertToDto(incident);
     }
 
+    @Override
+    public Incident findById(Long id) {
+        Incident incident;
+        incident = incidentRepository.findById(id).get();
+        return incident;
+    }
 }
