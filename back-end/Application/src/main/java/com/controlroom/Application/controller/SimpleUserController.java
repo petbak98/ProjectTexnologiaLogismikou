@@ -26,9 +26,9 @@ public class SimpleUserController {
     }
 
     @GetMapping("/report/{id}")
-    public ResponseEntity<ReportDto> findById(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
         ReportDto reportDto = reportService.findById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(reportDto);
+        return ResponseEntity.ok().body(convertToJson(reportDto));
     }
 
 //    @PostMapping("/report/search")
@@ -38,8 +38,8 @@ public class SimpleUserController {
 //    }
 
     @PostMapping("/report")
-    public ReportDto create(@RequestBody ReportDto reportDto) throws Exception {
-        return reportService.save(reportDto);
+    public ResponseEntity<String> create(@RequestBody ReportDto reportDto) throws Exception {
+        return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
     }
 
     @GetMapping(value = "sendvalue/{example}")
@@ -47,16 +47,15 @@ public class SimpleUserController {
         return ResponseEntity.ok().body(convertToJson(example));
     }
 
-
     @GetMapping("incident/{incidentId}/reports")
     public ResponseEntity<String> findReportsByIncidentId(@PathVariable("incidentId") Long incidentId) throws Exception {
         List<ReportDto> incidentDto = reportService.findAllByIncidentId(incidentId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(incidentDto));
+        return ResponseEntity.ok().body(convertToJson(incidentDto));
     }
     @GetMapping("/{id}/reports")
-    public List<ReportDto> findByUserId(@PathVariable("id") Long id) {
+    public ResponseEntity<String> findByUserId(@PathVariable("id") Long id) throws JsonProcessingException {
 
-        return reportService.findByUserId(id);
+        return ResponseEntity.ok().body(convertToJson(reportService.findByUserId(id)));
     }
 
 }
