@@ -31,11 +31,11 @@ public class ControlRoomController {
         return incidentService.findByAuthorityId(id);
     }
 
-    @GetMapping("/incident/{title}")
+    /*@GetMapping("/incident/{title}")
     public String findByTitle(@PathVariable("title") String incidentTitle) throws JsonProcessingException {
         List<IncidentDto> incidentDtos = incidentService.findByTitle(incidentTitle);
         return convertToJson(incidentDtos);
-    }
+    }*/
 
     @GetMapping("/incident/{id}")
     public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {

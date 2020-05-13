@@ -53,4 +53,10 @@ public class SimpleUserController {
         List<ReportDto> incidentDto = reportService.findAllByIncidentId(incidentId);
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(incidentDto));
     }
+    @GetMapping("/{id}/reports")
+    public List<ReportDto> findByUserId(@PathVariable("id") Long id) {
+
+        return reportService.findByUserId(id);
+    }
+
 }

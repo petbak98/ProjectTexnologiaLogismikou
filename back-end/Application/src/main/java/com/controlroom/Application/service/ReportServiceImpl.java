@@ -55,4 +55,13 @@ public class ReportServiceImpl implements ReportService{
                 .map(ReportConverter::convertToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ReportDto> findByUserId(Long id) {
+
+        return reportRepository.findByUserId(id)
+                .stream()
+                .map(ReportConverter::convertToDto)
+                .collect(Collectors.toList());
+    }
 }

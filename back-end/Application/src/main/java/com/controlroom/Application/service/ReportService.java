@@ -11,4 +11,5 @@ public interface ReportService {
     List<ReportDto> findAllByIncidentId(Long id);
 
     ReportDto save(ReportDto reportDto);
+    List<ReportDto> findByUserId(Long id);
 }
