@@ -44,7 +44,7 @@ public class ControlRoomController {
     }
 
     @PostMapping("/incident")
-    public String create(@RequestBody IncidentDto incidentDto) throws Exception {
-        return convertToJson(incidentService.save(incidentDto));
+    public IncidentDto create(@RequestBody IncidentDto incidentDto) throws Exception {
+        return incidentService.save(incidentDto);
     }
 }

@@ -38,8 +38,8 @@ public class SimpleUserController {
 //    }
 
     @PostMapping("/report")
-    public String create(@RequestBody ReportDto reportDto) throws JsonProcessingException {
-        return convertToJson(reportService.save(reportDto));
+    public ReportDto create(@RequestBody ReportDto reportDto) throws Exception {
+        return reportService.save(reportDto);
     }
 
     @GetMapping(value = "sendvalue/{example}")

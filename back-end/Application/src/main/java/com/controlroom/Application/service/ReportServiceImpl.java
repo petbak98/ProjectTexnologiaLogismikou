@@ -42,7 +42,7 @@ public class ReportServiceImpl implements ReportService{
     public ReportDto save(ReportDto reportDto) {
         Report report = ReportConverter.convert(reportDto);
 
-        reportRepository.save(report);
+        report = reportRepository.save(report);
 
         return ReportConverter.convertToDto(report);
     }

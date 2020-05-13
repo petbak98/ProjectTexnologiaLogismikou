@@ -11,9 +11,17 @@ import org.springframework.stereotype.Component;
 public class ReportConverter {
 
     @Autowired
-    private static IncidentService incidentService;
+    private IncidentService incidentService;
+    private static IncidentService incidentServiceStatic;
     @Autowired
-    private static UserService userService;
+    private UserService userService;
+    private static UserService userServiceStatic;
+
+    @Autowired
+    public void setStatic() {
+        this.incidentServiceStatic = incidentService;
+        this.userServiceStatic = userService;
+    }
 
     public static ReportDto convertToDto(Report report) {
         ReportDto reportDto = new ReportDto();
@@ -31,8 +39,8 @@ public class ReportConverter {
         report.setId(reportDto.getReportId());
         report.setLastUpdate(reportDto.getLastUpdate());
         report.setContent(reportDto.getContent());
-        report.setIncident(incidentService.findById(reportDto.getIncidentId()));
-        report.setUser(userService.findById(reportDto.getUserId()));
+        report.setIncident(incidentServiceStatic.findById(reportDto.getIncidentId()));
+        report.setUser(userServiceStatic.findById(reportDto.getUserId()));
         return report;
     }
 
