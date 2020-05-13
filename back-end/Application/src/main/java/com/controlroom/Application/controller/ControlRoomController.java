@@ -1,6 +1,7 @@
 package com.controlroom.Application.controller;
 
 import com.controlroom.Application.model.dto.IncidentDto;
+import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.service.IncidentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,9 +39,9 @@ public class ControlRoomController {
     }*/
 
     @GetMapping("/incident/{id}")
-    public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<IncidentDto> findById(@PathVariable("id") Long id) throws Exception {
         IncidentDto incidentDto = incidentService.findDtoById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(incidentDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(incidentDto);
     }
 
     @PostMapping("/incident")

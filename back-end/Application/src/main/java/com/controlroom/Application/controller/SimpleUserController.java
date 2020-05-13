@@ -26,9 +26,9 @@ public class SimpleUserController {
     }
 
     @GetMapping("/report/{id}")
-    public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<ReportDto> findById(@PathVariable("id") Long id) throws Exception {
         ReportDto reportDto = reportService.findById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(reportDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(reportDto);
     }
 
 //    @PostMapping("/report/search")
