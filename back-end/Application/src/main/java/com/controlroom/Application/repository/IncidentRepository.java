@@ -24,6 +24,8 @@ public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
     List<Incident> findByTitleContaining(String title);
 
+    Incident save(Incident incident);
+
     @Query("select 1 from Incident incident")
     void healthCheck();
 

@@ -3,26 +3,51 @@ package com.controlroom.Application.converter;
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.dto.UserDto;
+import com.controlroom.Application.model.incidentModel.Authority;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.model.userModel.User;
 import com.controlroom.Application.repository.ReportRepository;
-import com.controlroom.Application.service.IncidentService;
-import com.controlroom.Application.service.ReportService;
-import com.controlroom.Application.service.StatusService;
-import com.controlroom.Application.service.UserService;
+import com.controlroom.Application.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class IncidentConverter {
+
+
+    // =================================================== \\
     @Autowired
-    private static StatusService statusService;
+    private StatusService statusService;
+    private static StatusService statusServiceStatic;
+
     @Autowired
-    private static UserService userService;
+    private UserService userService;
+    private static UserService userServiceStatic;
+
+    @Autowired
+    private AuthorityService authorityService;
+    private static AuthorityService authorityServiceStatic;
+
+
+    @Autowired ImportanceService importanceService;
+    private static ImportanceService importanceServiceStatic;
+
+
+    @Autowired
+    public void setStatic() {
+        this.statusServiceStatic = statusService;
+        this.userServiceStatic = userService;
+        this.authorityServiceStatic = authorityService;
+        this.importanceServiceStatic = importanceService;
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \\
+
     @Autowired
     private ReportService reportService;
     @Autowired
@@ -35,9 +60,6 @@ public class IncidentConverter {
         incidentDto.setIncidentId(incident.getId());
         incidentDto.setCoordinatorId(incident.getCoordinator().getId());
         incidentDto.setCoordinatorName(incident.getCoordinator().getUsername());
-
-//        User user = userService.findById(incidentDto.getUserId());
-//        incidentDto.setUserName(user.getUsername());
 
         incidentDto.setTitle(incident.getTitle());
         incidentDto.setLastUpdate(incident.getLastUpdate());
@@ -69,27 +91,27 @@ public class IncidentConverter {
     public static Incident convert(IncidentDto incidentDto)  {
 
         Incident incident = new Incident();
-        incident.setCoordinator(userService.findById(incidentDto.getCoordinatorId()));
+        incident.setCoordinator(userServiceStatic.findById(incidentDto.getCoordinatorId()));
         incident.setId(incidentDto.getIncidentId());
         incident.setTitle(incidentDto.getTitle());
         incident.setLastUpdate(incidentDto.getLastUpdate());
         //incident.setLocation(incidentDto.getLocation());
-//        incident.setAuthority(incidentDto.getAuthorityId());
-//        incident.setImportance(incidentDto.getImportance());
+        incident.setAuthority(authorityServiceStatic.findById(incidentDto.getAuthorityId()));
+        incident.setImportance(importanceServiceStatic.findById(incidentDto.getImportanceId()));
 
         incident.setCity(incidentDto.getCity());
         incident.setRegion(incidentDto.getRegion());
         incident.setStreet(incidentDto.getStreet());
         incident.setNotes(incidentDto.getNotes());
-        incident.setStatus(statusService.findById(incidentDto.getStatusId()));
+        incident.setStatus(statusServiceStatic.findById(incidentDto.getStatusId()));
 
         incident.setCallerFirstName(incidentDto.getCallerFirstName());
         incident.setCallerLastName(incidentDto.getCallerLastName());
         incident.setCallerNationalId(incidentDto.getCallerNationalId());
         incident.setCallerPhone(incidentDto.getCallerPhone());
 
-//        incident.setReceivers(incidentDto.getReceivers());
-//        incident.setReports(incidentDto.getReports());
+        incident.setReceivers(new ArrayList<User>()); // Maybe will be changed, check it again. Without it NullPointerException at Post Incident
+        incident.setReports(new ArrayList<Report>()); // Maybe will be changed, check it again. Without it NullPointerException at Post Incident
         return incident;
     }
 

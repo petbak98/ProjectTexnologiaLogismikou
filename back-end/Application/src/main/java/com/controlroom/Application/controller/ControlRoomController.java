@@ -43,7 +43,7 @@ public class ControlRoomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToJson(incidentDto));
     }
 
-    @PostMapping
+    @PostMapping("/incident")
     public String create(@RequestBody IncidentDto incidentDto) throws Exception {
         return convertToJson(incidentService.save(incidentDto));
     }

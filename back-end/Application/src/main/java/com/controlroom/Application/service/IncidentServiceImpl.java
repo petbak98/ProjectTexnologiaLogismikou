@@ -60,7 +60,7 @@ public class IncidentServiceImpl implements IncidentService{
     @Override
     public IncidentDto save(IncidentDto incidentDto) throws Exception {
         Incident incident = IncidentConverter.convert(incidentDto);
-        incidentRepository.save(incident);
+        incident = incidentRepository.save(incident);
         return incidentConverter.convertToDto(incident);
     }
 
