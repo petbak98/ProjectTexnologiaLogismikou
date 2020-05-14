@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 @RepositoryRestResource(collectionResourceRel = "statistics", path="incident-statistics")
-public interface StatisticsRepository extends JpaRepository<Statistics, Integer> {
+public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
 
     // custom queries
     // List<Report> exampleTitleMethod(String text);

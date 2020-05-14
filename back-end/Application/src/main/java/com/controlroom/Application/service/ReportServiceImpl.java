@@ -1,8 +1,8 @@
 package com.controlroom.Application.service;
 
 import com.controlroom.Application.converter.ReportConverter;
-import com.controlroom.Application.model.reportModel.FullReport;
-import com.controlroom.Application.model.reportModel.ReportDto;
+import com.controlroom.Application.model.dto.ReportDto;
+import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public ReportDto findById(Long id) throws Exception {
-        FullReport report;
+        Report report;
         try {
             report = reportRepository.findById(id).get();
         } catch (NoSuchElementException nsee) {
@@ -40,9 +40,9 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public ReportDto save(ReportDto reportDto) {
-        FullReport report = ReportConverter.convert(reportDto);
+        Report report = ReportConverter.convert(reportDto);
 
-        reportRepository.save(report);
+        report = reportRepository.save(report);
 
         return ReportConverter.convertToDto(report);
     }
@@ -51,6 +51,15 @@ public class ReportServiceImpl implements ReportService{
     public List<ReportDto> findAllByIncidentId(Long id)
     {
         return reportRepository.findAllByIncidentId(id)
+                .stream()
+                .map(ReportConverter::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReportDto> findByUserId(Long id) {
+
+        return reportRepository.findByUserId(id)
                 .stream()
                 .map(ReportConverter::convertToDto)
                 .collect(Collectors.toList());

@@ -4,6 +4,7 @@ import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private long id;
 
+    @OneToMany(mappedBy = "coordinator", fetch = FetchType.LAZY)
+    private List<Incident> myIncidents;
+
     @Column(nullable = false)
     private String username;
 
@@ -32,11 +36,9 @@ public class User {
     private String permissions = "";
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
-//    @JsonIgnore
     private List<Incident> incidents;
 
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
-//    @JsonIgnore
     private List<Report> reports;
 
     public User(String username, String password, String roles, String permissions){
@@ -47,7 +49,7 @@ public class User {
         this.active = 1;
     }
 
-    protected User(){}
+    public User(){}
 
     public long getId() {
         return id;
