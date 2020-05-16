@@ -1,14 +1,20 @@
 package com.controlroom.Application.service;
 
-import com.controlroom.Application.model.incidentModel.IncidentDto;
-import com.controlroom.Application.model.reportModel.ReportDto;
+import com.controlroom.Application.model.dto.IncidentDto;
+import com.controlroom.Application.model.incidentModel.Incident;
+import com.controlroom.Application.model.userModel.UserLocationIncident;
 
 import java.util.List;
 
 public interface IncidentService {
-    IncidentDto findById(Long id) throws Exception;
+    IncidentDto findDtoById(Long id) throws Exception;
     List<IncidentDto> findAll();
     List<IncidentDto> findByTitle(String title);
+    List<IncidentDto> findByAuthorityId(Long id);
 
-    IncidentDto save(IncidentDto incidentDto);
+    Incident findById(Long id);
+
+    IncidentDto save(IncidentDto incidentDto) throws Exception;
+
+    List<IncidentDto> findAllByDistance(UserLocationIncident userLocationIncident);
 }
