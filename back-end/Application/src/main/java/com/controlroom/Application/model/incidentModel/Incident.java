@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.geo.Point;
 
@@ -77,8 +78,14 @@ public class Incident {
     @JoinColumn(name ="authority_id", nullable = false)
     private Authority authority;
 
+    @Column(name = "created_timestamp")
+    @CreationTimestamp
+    private Date creationTimestamp;
+
     @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdate;
 
+    private double latitude;
+    private double longitude;
 }

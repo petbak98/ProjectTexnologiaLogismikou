@@ -35,18 +35,23 @@ public class User {
 
     private String permissions = "";
 
+    private double latitude;
+    private double longitude;
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
     private List<Incident> incidents;
 
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
     private List<Report> reports;
 
-    public User(String username, String password, String roles, String permissions){
+    public User(String username, String password, String roles, String permissions, double latitude, double longitude){
         this.username = username;
         this.password = password;
         this.roles = roles;
         this.permissions = permissions;
         this.active = 1;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public User(){}
@@ -95,5 +100,21 @@ public class User {
 
     public List<Report> getReports() {
         return reports;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

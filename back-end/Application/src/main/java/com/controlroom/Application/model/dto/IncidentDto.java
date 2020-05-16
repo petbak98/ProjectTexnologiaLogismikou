@@ -39,8 +39,12 @@ public class IncidentDto {
     private String callerNationalId;
     private String callerPhone;
 
+    private Date creationTimestamp;
     private Date lastUpdate;
 
     private List<ReportDto> reports;
     private List<UserDto> receivers;
+
+    private double latitude;
+    private double longitude;
 }

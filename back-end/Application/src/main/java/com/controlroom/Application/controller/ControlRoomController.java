@@ -23,7 +23,7 @@ public class ControlRoomController {
     }
 
     @GetMapping("/incidents/authority/{id}")
-    public ResponseEntity<String> findbyAuthorityId(@PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<String> findByAuthorityId(@PathVariable("id") Long id) throws JsonProcessingException {
         return ResponseEntity.ok().body(convertToJson(incidentService.findByAuthorityId(id)));
     }
 

@@ -2,6 +2,7 @@ package com.controlroom.Application.service;
 
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.incidentModel.Incident;
+import com.controlroom.Application.model.userModel.UserLocationIncident;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface IncidentService {
     Incident findById(Long id);
 
     IncidentDto save(IncidentDto incidentDto) throws Exception;
+
+    List<IncidentDto> findAllByDistance(UserLocationIncident userLocationIncident);
 }

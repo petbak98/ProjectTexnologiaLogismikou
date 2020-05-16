@@ -4,12 +4,18 @@ import com.controlroom.Application.converter.IncidentConverter;
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.incidentModel.Incident;
 
+import com.controlroom.Application.model.userModel.User;
+import com.controlroom.Application.model.userModel.UserLocationIncident;
 import com.controlroom.Application.repository.IncidentRepository;
+import com.controlroom.Application.repository.UserRepository;
+import com.controlroom.Application.util.Helpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +25,8 @@ public class IncidentServiceImpl implements IncidentService{
 
     @Autowired
     private IncidentRepository incidentRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public IncidentDto findDtoById(Long id) throws Exception {
@@ -39,6 +47,46 @@ public class IncidentServiceImpl implements IncidentService{
                 .stream()
                 .map(incidentConverter::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<IncidentDto>findAllByDistance(UserLocationIncident userLocationIncident){
+        Optional<User> currentUser = userRepository.findById(userLocationIncident.getUserId());
+
+        if(currentUser.isEmpty()){
+            return Collections.emptyList();
+        }
+        else {
+            double distanceBetweenUserIncident = Helpers.distance(userLocationIncident.getLatitude(),userLocationIncident.getLongitude(), currentUser.get().getLatitude(), currentUser.get().getLongitude(), "K");
+            if(distanceBetweenUserIncident < userLocationIncident.getMaxDistance())
+            {
+                List<Incident> filteredIncidents =  incidentRepository.findAll()
+                        .stream()
+                        .map(incident -> {
+                            double distanceFromEachIncident = Helpers.distance(incident.getLatitude(),incident.getLongitude(), currentUser.get().getLatitude(), currentUser.get().getLongitude(), "K");
+                            if(distanceFromEachIncident < userLocationIncident.getMaxDistance())
+                                return incident;
+                            else
+                                return null;
+                        })
+                        .collect(Collectors.toList());
+
+                 while (filteredIncidents.remove(null));
+
+                if(filteredIncidents.isEmpty() || filteredIncidents==null)
+                    return Collections.emptyList();
+                else
+                    return filteredIncidents
+                        .stream()
+                        .map(incidentConverter::convertToDto)
+                        .collect(Collectors.toList());
+            }
+            else
+            {
+                return Collections.emptyList();
+            }
+        }
+
     }
 
     @Override

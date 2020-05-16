@@ -62,9 +62,10 @@ public class IncidentConverter {
         incidentDto.setCoordinatorName(incident.getCoordinator().getUsername());
 
         incidentDto.setTitle(incident.getTitle());
-        incidentDto.setLastUpdate(incident.getLastUpdate());
 
-        //incidentDto.setLocation(incident.getLocation());
+        incidentDto.setLastUpdate(incident.getLastUpdate());
+        incidentDto.setCreationTimestamp(incident.getCreationTimestamp());
+
         incidentDto.setAuthorityId(incident.getAuthority().getId());
         incidentDto.setImportanceId(incident.getImportance().getId());
 
@@ -84,6 +85,9 @@ public class IncidentConverter {
 
         incidentDto.setReceivers(userDtoList);
         incidentDto.setReports(reportDtoList);
+
+        incidentDto.setLatitude(incident.getLatitude());
+        incidentDto.setLongitude(incident.getLongitude());
 
         return incidentDto;
     }
@@ -110,6 +114,10 @@ public class IncidentConverter {
         incident.setCallerNationalId(incidentDto.getCallerNationalId());
         incident.setCallerPhone(incidentDto.getCallerPhone());
 
+        incident.setLatitude(incidentDto.getLatitude());
+        incident.setLongitude(incidentDto.getLongitude());
+
+        // Den ta exw dei akoma, asta etsi pros to paron
         incident.setReceivers(new ArrayList<User>()); // Maybe will be changed, check it again. Without it NullPointerException at Post Incident
         incident.setReports(new ArrayList<Report>()); // Maybe will be changed, check it again. Without it NullPointerException at Post Incident
         return incident;
