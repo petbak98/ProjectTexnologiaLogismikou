@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const feedItemStyles = makeStyles((theme) => {
-  console.log(theme);
   return {
     root: {
       position: 'relative',

@@ -12,10 +12,21 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 import { IncidentStepStyles } from './IncidentStep.style';
 
-function IncidentStep({ nextStep, send }) {
-  function handleChange() {}
+function IncidentStep({ nextStep, send, updateForm }) {
+  const [title, setTitle] = React.useState('');
+  const [authority, setAuthority] = React.useState({ port: false, police: false, fire: false });
+
+  function handleChange(e) {
+    setTitle(e.target.value);
+  }
+
+  function handleSelectChange(e) {
+    const { name, checked } = e.target;
+    setAuthority({ ...authority, [name]: checked });
+  }
+
   function handleNext() {
-    console.log('next');
+    updateForm({ title, authority });
     send({ type: 'EVENT', nextStep });
   }
   const classes = IncidentStepStyles();
@@ -26,9 +37,12 @@ function IncidentStep({ nextStep, send }) {
         Τίτλος
       </FormLabel>
       <TextField
+        name='title'
         size='small'
+        value={title}
         className={classes.input}
         variant='outlined'
+        onChange={handleChange}
         placeholder='Δώσε τίτλο'
       />
       <FormControl component='fieldset'>
@@ -39,10 +53,11 @@ function IncidentStep({ nextStep, send }) {
           <FormControlLabel
             control={
               <Checkbox
+                checked={authority.police}
                 className={classes.select}
-                onChange={handleChange}
-                name='gilad'
+                name='police'
                 color='primary'
+                onChange={handleSelectChange}
               />
             }
             label='Αστυνομία'
@@ -51,8 +66,9 @@ function IncidentStep({ nextStep, send }) {
             control={
               <Checkbox
                 className={classes.select}
-                onChange={handleChange}
-                name='jason'
+                onChange={handleSelectChange}
+                name='fire'
+                checked={authority.fire}
                 color='primary'
               />
             }
@@ -62,8 +78,9 @@ function IncidentStep({ nextStep, send }) {
             control={
               <Checkbox
                 className={classes.select}
-                onChange={handleChange}
-                name='antoine'
+                onChange={handleSelectChange}
+                name='port'
+                checked={authority.port}
                 color='primary'
               />
             }

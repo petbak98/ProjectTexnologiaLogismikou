@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const FormStyles = makeStyles((theme) => {
-  console.log(theme.breakpoints.down(700));
   return {
     title: {
       color: theme.palette.primary.main,

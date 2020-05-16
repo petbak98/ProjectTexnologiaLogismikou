@@ -18,11 +18,13 @@ const NavLink = styled(Link)`
 const LinkButton = styled(Button)`
   color: ${(props) => (props.active ? '#FAFAFB' : null)};
 
-  span {
-    display: hidden;
+  h5 {
     text-transform: none;
     margin-left: 0;
     margin: 1px;
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 `;
 const Navbar = ({ children }) => {

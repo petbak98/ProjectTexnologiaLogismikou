@@ -23,7 +23,7 @@ export default function NavbarCC() {
           endIcon={<RssFeedIcon />}
           color='secondary'
         >
-          Συμβάντα
+          <h5>Συμβάντα</h5>
         </LinkButton>
       </NavLink>
       <NavLink to='/form'>
@@ -32,7 +32,7 @@ export default function NavbarCC() {
           color='secondary'
           endIcon={<AddIcon style={{ display: 'block' }} />}
         >
-          Προσθήκη
+          <h5>Προσθήκη</h5>
         </LinkButton>
       </NavLink>
       <LinkButton
@@ -42,7 +42,7 @@ export default function NavbarCC() {
         color='secondary'
         endIcon={<ExitToAppIcon />}
       >
-        Αποσύνδεση
+        <h5>Αποσύνδεση</h5>
       </LinkButton>
     </Navbar>
   );

@@ -8,7 +8,10 @@ export const IncidentStepStyles = makeStyles((theme) => {
     },
     input: {
       marginBottom: theme.spacing(8),
-      width: 400
+      [theme.breakpoints.down('sm')]: {
+        width: '95%'
+      },
+      width: 500
     },
     selectLabel: {
       marginBottom: theme.spacing(1),

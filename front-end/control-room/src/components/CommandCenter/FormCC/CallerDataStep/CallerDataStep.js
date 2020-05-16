@@ -2,16 +2,28 @@ import React from 'react';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import { FormLabel, TextField, Button } from '@material-ui/core';
-
 import { CallerDataStyles } from './CallerDataStep.style';
 
-function CallerDataStep({ previousStep, nextStep }) {
+function CallerDataStep({ previousStep, nextStep, updateForm }) {
   const classes = CallerDataStyles();
+  const [formState, setFormState] = React.useState({
+    callerFirstName: '',
+    callerLastName: '',
+    callerPhone: '',
+    callerNationalId: ''
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  }
 
   function handleNext() {
+    updateForm(formState);
     nextStep();
   }
   function handlePrevious() {
+    updateForm(formState);
     previousStep();
   }
 
@@ -22,15 +34,21 @@ function CallerDataStep({ previousStep, nextStep }) {
       </FormLabel>
       <TextField
         size='small'
+        name='callerFirstName'
         className={classes.input}
         variant='outlined'
+        value={formState.callerFirstName}
+        onChange={handleChange}
         placeholder='π.χ. Παναγιώτης'
       />
       <FormLabel className={classes.selectLabel} component='legend'>
         Επώνυμο
       </FormLabel>
       <TextField
+        onChange={handleChange}
+        value={formState.callerLastName}
         size='small'
+        name='callerLastName'
         className={classes.input}
         variant='outlined'
         placeholder='π.χ. Τσίπρας'
@@ -39,10 +57,25 @@ function CallerDataStep({ previousStep, nextStep }) {
         Ταυτότητα
       </FormLabel>
       <TextField
+        onChange={handleChange}
+        name='callerNationalId'
+        value={formState.callerNationalId}
         size='small'
         className={classes.input}
         variant='outlined'
         placeholder='π.χ. ΑΕ10440'
+      />
+      <FormLabel className={classes.selectLabel} component='legend'>
+        Τηλέφωνο
+      </FormLabel>
+      <TextField
+        name='callerPhone'
+        onChange={handleChange}
+        value={formState.callerPhone}
+        size='small'
+        className={classes.input}
+        variant='outlined'
+        placeholder='π.χ. 2102596392'
       />
       <div style={{ marginLeft: 'auto' }}>
         <Button
