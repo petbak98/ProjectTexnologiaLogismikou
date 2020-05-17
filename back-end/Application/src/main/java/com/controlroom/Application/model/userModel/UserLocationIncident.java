@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class UserLocationIncident {
     private long userId;
-    private double latitude;
-    private double longitude;
-    private int maxDistance;
+//    private double latitude;
+//    private double longitude;
 }
