@@ -1,5 +1,6 @@
 package com.controlroom.Application.model.incidentModel;
 
+import com.controlroom.Application.model.userModel.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +26,7 @@ public class Authority {
 
     @OneToMany(mappedBy="authority", cascade = CascadeType.ALL)
     private List<Incident> incidents;
+
+    @OneToMany(mappedBy="authority", cascade = CascadeType.ALL)
+    private List<User> users;
 }

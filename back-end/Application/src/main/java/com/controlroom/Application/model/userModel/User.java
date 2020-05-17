@@ -1,5 +1,6 @@
 package com.controlroom.Application.model.userModel;
 
+import com.controlroom.Application.model.incidentModel.Authority;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,11 +39,16 @@ public class User {
     private double latitude;
     private double longitude;
 
+    @ManyToOne
+    @JoinColumn(name ="authority_id", nullable = false)
+    private Authority authority;
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
     private List<Incident> incidents;
 
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
     private List<Report> reports;
+
 
     public User(String username, String password, String roles, String permissions, double latitude, double longitude){
         this.username = username;
@@ -55,6 +61,26 @@ public class User {
     }
 
     public User(){}
+
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public long getId() {
         return id;
