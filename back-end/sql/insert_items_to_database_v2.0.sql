@@ -3,13 +3,17 @@ INSERT INTO `controlroom`.`user`
 `password`,
 `permissions`,
 `roles`,
-`username`)
+`username`,
+`latitude`,
+`longitude`)
 VALUES
 (1,
 12345,
 "",
 "USER",
-"john");
+"john",
+0.0,
+0.0);
 
 
 INSERT INTO controlroom.incident_importance (importance_name) VALUES ('SIMANTIKO');
@@ -35,7 +39,9 @@ INSERT INTO `controlroom`.`incidents`
 `street`,
 `title`,
 `importance_id`,
-`authority_id`)
+`authority_id`,
+`latitude`,
+`longitude`)
 VALUES
 ('nick',
 'pap',
@@ -50,7 +56,9 @@ NOW(),
 "Sapfous",
 'Listeia',
 1,
-1);
+1,
+0.0,
+0.0);
 
 
 INSERT INTO `controlroom`.`reports`
@@ -80,7 +88,9 @@ INSERT INTO `controlroom`.`incidents`
 `street`,
 `title`,
 `importance_id`,
-`authority_id`)
+`authority_id`,
+`latitude`,
+`longitude`)
 VALUES
 ('kostas',
 'mix',
@@ -95,7 +105,9 @@ NOW(),
 "Sapfous",
 'FWTIA',
 1,
-2);
+2,
+0.0,
+0.0);
 
 INSERT INTO `controlroom`.`reports`
 (`user_id`,
