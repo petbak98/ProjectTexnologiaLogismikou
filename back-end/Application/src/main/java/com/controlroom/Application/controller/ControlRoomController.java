@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
 
@@ -40,7 +42,16 @@ public class ControlRoomController {
     }
 
     @PostMapping("/incident")
-    public ResponseEntity<String> create(@RequestBody IncidentDto incidentDto) throws Exception {
+    public ResponseEntity<String> createIncident(@RequestBody IncidentDto incidentDto) throws Exception {
         return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
+    }
+
+    @PutMapping("/incident")
+    public ResponseEntity<String> updateIncident(@RequestBody IncidentDto incidentDto) throws Exception {
+        if(incidentDto!=null) {
+            return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
+        }
+        else
+            return ResponseEntity.ok().body(convertToJson("{\"Status\": \"incident not found\"}"));
     }
 }
