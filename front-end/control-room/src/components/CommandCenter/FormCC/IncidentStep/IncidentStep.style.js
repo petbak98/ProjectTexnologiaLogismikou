@@ -24,6 +24,15 @@ export const IncidentStepStyles = makeStyles((theme) => {
     button: {
       marginTop: theme.spacing(8),
       marginLeft: 'auto'
+    },
+    formGroup: {
+      position: 'relative'
+    },
+    formGroupError: {
+      position: 'absolute',
+      color: theme.palette.purple.main,
+      left: theme.spacing(0),
+      bottom: -20
     }
   };
 });

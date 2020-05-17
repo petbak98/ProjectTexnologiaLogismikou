@@ -64,7 +64,7 @@ export const LocationStepStyles = makeStyles((theme) => {
       top: '10',
       width: 20,
       height: 20,
-      fill: theme.palette.third.main
+      fill: theme.palette.primary.main
     }
   };
 });

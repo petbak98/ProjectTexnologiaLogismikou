@@ -7,11 +7,12 @@ import { ReactComponent as LocationIcon } from '../../../../assets/icons/locatio
 
 import { LocationStepStyles } from './LocationStep.style';
 import LocationStepInfo from './LocationStepInfo';
+import { toast } from 'react-toastify';
 
 function LocationStep({ nextStep, previousStep, updateForm }) {
   const [formState, setFormState] = React.useState(undefined);
   const [address, setAddress] = React.useState('');
-  console.log(formState);
+  const [error, setError] = React.useState(false);
   function fillAdress(address, latLng) {
     const state = {
       street: `${getStreet(address)}`,
@@ -38,6 +39,8 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
   }
 
   function handleGeoChange(address) {
+    setFormState(undefined);
+    setError(false);
     setAddress(address);
   }
 
@@ -56,14 +59,30 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
   }
 
   function handleNext() {
-    nextStep();
-    updateForm(formState);
+    const valid = isValid();
+    if (valid) {
+      updateForm(formState);
+      nextStep();
+    } else {
+      toast.error('Συμπλήρωσε όλα τα πεδία');
+    }
   }
   function handlePrevious() {
     updateForm(formState);
     previousStep();
   }
 
+  function isValid() {
+    if (!formState) {
+      setError(true);
+      return false;
+    }
+    if (Object.keys(formState).filter((key) => !formState[key]).length) {
+      setError(true);
+      return false;
+    }
+    return true;
+  }
   const classes = LocationStepStyles();
 
   return (
@@ -81,10 +100,11 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
             </FormLabel>
             <TextField
               {...getInputProps({
-                placeholder: 'πχ Αγίου Πελάγους 25',
+                placeholder: 'Οδός Νούμερο, Περιοχή',
                 size: 'small',
                 variant: 'outlined',
-                className: classes.input
+                className: classes.input,
+                error: error
               })}
             />
             <div className={classes.dropdown}>

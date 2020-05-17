@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -18,10 +19,19 @@ body{
   box-sizing: border-box;
 }
 
+.Toastify__toast--success {
+  background:${theme.palette.green.main};
+  box-shadow:${theme.shadows[5]}
+}
+.Toastify__toast--error {
+  background:${theme.palette.purple.main};
+  box-shadow:${theme.shadows[5]}
+}
 
 html::-webkit-scrollbar {
     width: 0.5rem;
     height:0.5rem;
+
 }
 html::-webkit-scrollbar-track {
   background: #fafafa;

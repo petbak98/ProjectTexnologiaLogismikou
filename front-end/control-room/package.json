@@ -16,6 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-step-wizard": "^5.3.2",
+    "react-toastify": "^6.0.4",
     "styled-components": "^5.0.1",
     "xstate": "^4.9.1"
   },

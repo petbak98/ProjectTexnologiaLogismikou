@@ -15,7 +15,7 @@ import FinalScreen from './FinalScreen/FinalScreen';
 export default function FormCC() {
   const [state, send] = useMachine(StepsMachine());
   const [form, setForm] = React.useState({});
-
+  console.log(form);
   function updateForm(newValues) {
     setForm({ ...form, ...newValues });
   }

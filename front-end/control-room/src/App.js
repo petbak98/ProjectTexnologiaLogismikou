@@ -1,8 +1,12 @@
 import React from 'react';
+
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { ThemeProvider } from '@material-ui/core';
+import 'react-toastify/dist/ReactToastify.css';
+
 import GlobalStyle from './config/GlobalStyle';
 import Login from './pages/Login/Login';
-import { ThemeProvider } from '@material-ui/core';
 import theme from './config/theme';
 import { useAuth } from './hooks/useAuth';
 import AuthApp from './components/AuthApp/AuthApp';
@@ -11,6 +15,12 @@ function App() {
   const { value: authStatus } = useAuth();
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer
+        toastClassName='toast-style'
+        autoClose={2000}
+        closeButton={false}
+        draggable={false}
+      />
       <Router>
         {authStatus === 'authorized' ? <AuthApp /> : <Login />}
         <GlobalStyle />

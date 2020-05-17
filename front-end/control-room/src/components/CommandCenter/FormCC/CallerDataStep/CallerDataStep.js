@@ -3,6 +3,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import { FormLabel, TextField, Button } from '@material-ui/core';
 import { CallerDataStyles } from './CallerDataStep.style';
+import { toast } from 'react-toastify';
 
 function CallerDataStep({ previousStep, nextStep, updateForm }) {
   const classes = CallerDataStyles();
@@ -12,15 +13,35 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
     callerPhone: '',
     callerNationalId: ''
   });
+  const [error, setError] = React.useState({
+    callerFirstName: false,
+    callerLastName: false,
+    callerPhone: false,
+    callerNationalId: false
+  });
 
   function handleChange(e) {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
+    setError({ ...error, [name]: false });
+  }
+
+  function isValid() {
+    const err = Object.keys(formState).reduce((acc, cur) => {
+      return formState[cur] ? { ...acc, [cur]: false } : { ...acc, [cur]: true };
+    }, {});
+    setError(err);
+    return Object.values(err).filter((value) => value).length ? false : true;
   }
 
   function handleNext() {
-    updateForm(formState);
-    nextStep();
+    const valid = isValid();
+    if (valid) {
+      updateForm(formState);
+      nextStep();
+    } else {
+      toast.error('Συμπλήρωσε όλα τα πεδία');
+    }
   }
   function handlePrevious() {
     updateForm(formState);
@@ -33,6 +54,7 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
         Όνομα
       </FormLabel>
       <TextField
+        error={error.callerFirstName}
         size='small'
         name='callerFirstName'
         className={classes.input}
@@ -46,6 +68,7 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
       </FormLabel>
       <TextField
         onChange={handleChange}
+        error={error.callerLastName}
         value={formState.callerLastName}
         size='small'
         name='callerLastName'
@@ -57,6 +80,7 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
         Ταυτότητα
       </FormLabel>
       <TextField
+        error={error.callerNationalId}
         onChange={handleChange}
         name='callerNationalId'
         value={formState.callerNationalId}
@@ -70,6 +94,7 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
       </FormLabel>
       <TextField
         name='callerPhone'
+        error={error.callerPhone}
         onChange={handleChange}
         value={formState.callerPhone}
         size='small'
