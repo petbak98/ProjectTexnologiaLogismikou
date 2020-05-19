@@ -20,4 +20,9 @@ public class UserDto {
     @NotEmpty
     private String password;
 
+    private double latitude;
+    private double longitude;
+
+    private long authorityId;
+
 }

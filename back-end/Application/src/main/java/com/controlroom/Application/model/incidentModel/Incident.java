@@ -43,9 +43,11 @@ public class Incident {
     @JoinColumn(name ="importance_id", nullable = false)
     private Importance importance;
 
-    private String city;
+    private int number;
     private String region;
     private String street;
+    private int postalCode;
+
     private String notes;
 
     @ManyToOne (fetch = FetchType.LAZY)

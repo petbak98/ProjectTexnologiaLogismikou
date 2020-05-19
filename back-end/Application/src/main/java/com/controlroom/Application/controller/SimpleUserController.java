@@ -1,5 +1,6 @@
 package com.controlroom.Application.controller;
 
+import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.userModel.UserLocationIncident;
 import com.controlroom.Application.service.IncidentService;
@@ -42,8 +43,17 @@ public class SimpleUserController {
 //    }
 
     @PostMapping("/report")
-    public ResponseEntity<String> create(@RequestBody ReportDto reportDto) throws Exception {
+    public ResponseEntity<String> createReport(@RequestBody ReportDto reportDto) throws Exception {
         return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
+    }
+
+    @PutMapping("/report")
+    public ResponseEntity<String> updateReport(@RequestBody ReportDto reportDto) throws Exception {
+        if(reportDto!=null) {
+            return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
+        }
+        else
+            return ResponseEntity.ok().body(convertToJson("{\"Status\": \"Report not found\"}"));
     }
 
     @GetMapping(value = "sendvalue/{example}")

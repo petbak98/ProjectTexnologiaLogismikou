@@ -69,9 +69,11 @@ public class IncidentConverter {
         incidentDto.setAuthorityId(incident.getAuthority().getId());
         incidentDto.setImportanceId(incident.getImportance().getId());
 
-        incidentDto.setCity(incident.getCity());
+        incidentDto.setNumber(incident.getNumber());
         incidentDto.setRegion(incident.getRegion());
         incidentDto.setStreet(incident.getStreet());
+        incidentDto.setPostalCode(incident.getPostalCode());
+
         incidentDto.setNotes(incident.getNotes());
         incidentDto.setStatusId(incident.getStatus().getId());
 
@@ -99,13 +101,14 @@ public class IncidentConverter {
         incident.setId(incidentDto.getIncidentId());
         incident.setTitle(incidentDto.getTitle());
         incident.setLastUpdate(incidentDto.getLastUpdate());
-        //incident.setLocation(incidentDto.getLocation());
         incident.setAuthority(authorityServiceStatic.findById(incidentDto.getAuthorityId()));
         incident.setImportance(importanceServiceStatic.findById(incidentDto.getImportanceId()));
 
-        incident.setCity(incidentDto.getCity());
+        incident.setNumber(incidentDto.getNumber());
         incident.setRegion(incidentDto.getRegion());
         incident.setStreet(incidentDto.getStreet());
+        incident.setPostalCode(incidentDto.getPostalCode());
+
         incident.setNotes(incidentDto.getNotes());
         incident.setStatus(statusServiceStatic.findById(incidentDto.getStatusId()));
 
