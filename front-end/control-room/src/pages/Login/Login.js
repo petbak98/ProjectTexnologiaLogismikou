@@ -5,7 +5,7 @@ import { ReactComponent as LoginIcon } from '../../assets/icons/auth.svg';
 import { useAuthService } from '../../hooks/useAuth';
 
 export default function Login() {
-  const send = useAuthService();
+  const [, send] = useAuthService();
   const [credentials, setCredentials] = React.useState({ username: '', password: '' });
   function handleClick() {
     send('LOGIN', { ...credentials });

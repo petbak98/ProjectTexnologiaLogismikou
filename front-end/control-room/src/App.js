@@ -8,11 +8,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import GlobalStyle from './config/GlobalStyle';
 import Login from './pages/Login/Login';
 import theme from './config/theme';
-import { useAuth } from './hooks/useAuth';
+import { useAuthService } from './hooks/useAuth';
 import AuthApp from './components/AuthApp/AuthApp';
 
+export const ServiceContext = React.createContext();
+
 function App() {
-  const { value: authStatus } = useAuth();
+  const [state] = useAuthService();
+  const { authStatus } = state.value;
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer
