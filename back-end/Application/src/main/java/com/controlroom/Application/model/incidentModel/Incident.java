@@ -1,6 +1,6 @@
 package com.controlroom.Application.model.incidentModel;
 
-import com.controlroom.Application.model.reportModel.FullReport;
+import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.model.userModel.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -74,7 +74,7 @@ public class Incident {
     private List<User> receivers;
 
     @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY)
-    private List<FullReport> reports;
+    private List<Report> reports;
 
     @ManyToOne
     @JoinColumn(name ="authority_id", nullable = false)
@@ -90,4 +90,8 @@ public class Incident {
 
     private double latitude;
     private double longitude;
+
+    public Date getLastUpdate(){
+        return lastUpdate;
+    }
 }
