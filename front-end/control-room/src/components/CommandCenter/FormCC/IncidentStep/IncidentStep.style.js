@@ -8,7 +8,10 @@ export const IncidentStepStyles = makeStyles((theme) => {
     },
     input: {
       marginBottom: theme.spacing(8),
-      width: 400
+      [theme.breakpoints.down('sm')]: {
+        width: '95%'
+      },
+      width: 500
     },
     selectLabel: {
       marginBottom: theme.spacing(1),
@@ -21,6 +24,15 @@ export const IncidentStepStyles = makeStyles((theme) => {
     button: {
       marginTop: theme.spacing(8),
       marginLeft: 'auto'
+    },
+    formGroup: {
+      position: 'relative'
+    },
+    formGroupError: {
+      position: 'absolute',
+      color: theme.palette.purple.main,
+      left: theme.spacing(0),
+      bottom: -20
     }
   };
 });

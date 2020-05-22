@@ -19,6 +19,7 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class IncidentDto {
     private long incidentId;
+
     private long coordinatorId;
     private String coordinatorName;
 
@@ -28,10 +29,16 @@ public class IncidentDto {
     private long authorityId;
     private long importanceId;
 
-    private String city;
+    private double latitude;
+    private double longitude;
+
+    private int number;
+    private int postalCode;
     private String region;
     private String street;
+
     private String notes;
+
     private long statusId;
 
     private String callerFirstName;
@@ -39,6 +46,7 @@ public class IncidentDto {
     private String callerNationalId;
     private String callerPhone;
 
+    private Date creationTimestamp;
     private Date lastUpdate;
 
     private List<ReportDto> reports;

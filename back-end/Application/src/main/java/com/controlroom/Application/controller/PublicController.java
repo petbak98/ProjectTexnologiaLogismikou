@@ -1,21 +1,27 @@
 package com.controlroom.Application.controller;
 
+import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.userModel.User;
 import com.controlroom.Application.repository.UserRepository;
+import com.controlroom.Application.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.controlroom.Application.util.Helpers.convertToJson;
+
 @RestController
 @RequestMapping("api/public")
 public class PublicController {
-    private UserRepository userRepository;
 
-    public PublicController(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("test1")
     public String test1(){
@@ -28,8 +34,8 @@ public class PublicController {
     }
 
     @GetMapping("users")
-    public List<User> users(){
-        return this.userRepository.findAll();
+    public ResponseEntity<String> findAll() throws JsonProcessingException {
+        return ResponseEntity.ok().body(convertToJson(userService.findAll()));
     }
 
 }

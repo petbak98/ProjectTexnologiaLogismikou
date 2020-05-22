@@ -13,7 +13,11 @@ import CallerDataStep from './CallerDataStep/CallerDataStep';
 import FinalScreen from './FinalScreen/FinalScreen';
 
 export default function FormCC() {
-  const [state, send] = useMachine(StepsMachine());
+  const [, send] = useMachine(StepsMachine());
+  const [form, setForm] = React.useState({});
+  function updateForm(newValues) {
+    setForm({ ...form, ...newValues });
+  }
   const classes = FormStyles();
   return (
     <>
@@ -32,9 +36,9 @@ export default function FormCC() {
             exitLeft: 'exit'
           }}
         >
-          <IncidentStep send={send} />
-          <LocationStep />
-          <CallerDataStep />
+          <IncidentStep updateForm={updateForm} send={send} />
+          <LocationStep updateForm={updateForm} />
+          <CallerDataStep updateForm={updateForm} />
           <FinalScreen />
         </StepWizard>
       </div>

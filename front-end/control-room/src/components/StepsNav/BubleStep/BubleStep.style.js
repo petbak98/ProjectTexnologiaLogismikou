@@ -15,30 +15,29 @@ export const BubbleItem = styled.div`
 
   &:after {
     content: '';
-    transform: translate(5em, 2.5em);
-    /* transform: translateY(2.5em); */
+    transform: translate(4em, 2em);
     position: absolute;
-    width: calc(-4.9em + 100%);
+    width: calc(-3.9em + 100%);
     border-top: 2px solid ${(props) => (props.active ? `#3F3C56` : '#737373')};
   }
   :last-child :after {
     content: '';
     top: 30%;
-    transform: translateX(5em);
+    transform: translateX(4em);
     position: absolute;
-    width: calc(-5em + 100%);
+    width: calc(-4em + 100%);
     border-top: 0.1em solid transparent;
   }
 `;
 export const BubbleIcon = styled.div`
-  height: 5em;
-  width: 5em;
+  height: 4em;
+  width: 4em;
   display: flex;
   justify-content: center;
   align-items: center;
   svg {
-    width: 2em;
-    height: 2em;
+    width: 1.7em;
+    height: 1.7em;
     fill: ${(props) => (props.active ? 'white' : '#737373')};
   }
   border: 2px solid ${(props) => (props.active ? `#3F3C56` : '#737373')};

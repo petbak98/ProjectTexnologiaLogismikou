@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthService } from '../../hooks/useAuth';
 import HomeCC from '../../pages/Home/HomeCC';
-
 function AuthApp() {
-  const { context } = useAuth();
+  const [state] = useAuthService();
+  const { context } = state;
   if (context.user.role === 'cc') {
     return <HomeCC />;
   }
