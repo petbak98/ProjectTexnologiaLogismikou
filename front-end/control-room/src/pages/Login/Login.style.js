@@ -1,5 +1,4 @@
 import styled from 'styled-components/macro';
-
 export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
