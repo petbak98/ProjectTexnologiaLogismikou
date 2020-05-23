@@ -17,7 +17,10 @@ INSERT INTO `controlroom`.`user`
 `username`,
 `latitude`,
 `longitude`,
-`authority_id`)
+`authority_id`,
+`first_name`,
+`last_name`
+)
 VALUES
 (1,
 12345,
@@ -26,7 +29,32 @@ VALUES
 "john",
 0.0,
 0.0,
-1);
+1,
+"giannis",
+"mpampinou");
+
+INSERT INTO `controlroom`.`user`
+(`active`,
+`password`,
+`permissions`,
+`roles`,
+`username`,
+`latitude`,
+`longitude`,
+`authority_id`,
+`first_name`,
+`last_name`)
+VALUES
+(1,
+12345,
+"",
+"USER",
+"peter",
+0.0,
+0.0,
+2,
+"petros",
+"karkosis");
 
 INSERT INTO `controlroom`.`incidents`
 (`caller_first_name`,
@@ -51,12 +79,12 @@ VALUES
 'pap',
 'greek',
 '2100000000',
-5,
+'5',
 1,
 NOW(),
 "Simeiosh",
 "Attiki",
-15234,
+'15234',
 1,
 "Sapfous",
 'Listeia',
@@ -102,12 +130,12 @@ VALUES
 'mix',
 'greek',
 '2100000000',
-6,
+'6',
 1,
 NOW(),
 "nope note",
 "Attiki",
-15234,
+'15234',
 2,
 "Sapfous",
 'FWTIA',

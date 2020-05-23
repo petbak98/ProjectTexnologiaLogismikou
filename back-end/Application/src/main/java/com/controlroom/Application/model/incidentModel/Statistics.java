@@ -13,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name="incident_statistics")
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Statistics {
     @Id
@@ -26,4 +27,14 @@ public class Statistics {
     @OneToOne(fetch = FetchType.LAZY)
     private Incident incident;
 
+
+    public long getDeaths() {
+        return deaths;
+    }
+
+    public Incident getIncident(){
+        return incident;
+    }
+
 }
+

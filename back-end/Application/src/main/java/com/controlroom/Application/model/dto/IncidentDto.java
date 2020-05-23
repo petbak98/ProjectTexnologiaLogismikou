@@ -32,8 +32,8 @@ public class IncidentDto {
     private double latitude;
     private double longitude;
 
-    private int number;
-    private int postalCode;
+    private String number;
+    private String postalCode;
     private String region;
     private String street;
 

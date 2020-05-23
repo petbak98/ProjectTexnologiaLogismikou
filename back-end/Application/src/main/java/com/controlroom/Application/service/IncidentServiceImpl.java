@@ -49,7 +49,7 @@ public class IncidentServiceImpl implements IncidentService{
         // TODO: Add null check
         return incidentRepository.findAll()
                 .stream()
-                .map(incidentConverter::convertToDto)
+                .map(IncidentConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -80,7 +80,7 @@ public class IncidentServiceImpl implements IncidentService{
                 else
                     return filteredIncidents
                         .stream()
-                        .map(incidentConverter::convertToDto)
+                        .map(IncidentConverter::convertToDto)
                         .collect(Collectors.toList());
         }
     }
@@ -89,7 +89,7 @@ public class IncidentServiceImpl implements IncidentService{
     public List<IncidentDto> findByTitle(String title) {
         return incidentRepository.findByTitleContaining(title)
                 .stream()
-                .map(incidentConverter::convertToDto)
+                .map(IncidentConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -97,7 +97,7 @@ public class IncidentServiceImpl implements IncidentService{
     public List<IncidentDto> findByAuthorityId(Long id) {
         return incidentRepository.findByAuthorityId(id)
                 .stream()
-                .map(incidentConverter::convertToDto)
+                .map(IncidentConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 

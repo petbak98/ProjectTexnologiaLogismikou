@@ -5,13 +5,17 @@ import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
@@ -29,6 +33,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    private String firstName;
+    private String lastName;
 
     private int active;
 
@@ -61,6 +68,48 @@ public class User {
     }
 
     public User(){}
+
+    public List<String> getRoleList(){
+        if(this.roles.length() > 0){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
+    }
+
+    public List<String> getPermissionList(){
+        if(this.permissions.length() > 0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
+    }
+
+    /*public void setMyIncidents(List<Incident> myIncidents) {
+        this.myIncidents = myIncidents;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
+    }
+
+    public void setIncidents(List<Incident> incidents) {
+        this.incidents = incidents;
+    }
+
+    public void setReports(List<Report> reports) {
+        this.reports = reports;
+    }
+
+    public List<Incident> getMyIncidents() {
+        return myIncidents;
+    }
 
     public Authority getAuthority() {
         return authority;
@@ -106,20 +155,6 @@ public class User {
         return permissions;
     }
 
-    public List<String> getRoleList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
-
-    public List<String> getPermissionList(){
-        if(this.permissions.length() > 0){
-            return Arrays.asList(this.permissions.split(","));
-        }
-        return new ArrayList<>();
-    }
-
     public List<Incident> getIncidents() {
         return incidents;
     }
@@ -142,5 +177,5 @@ public class User {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
-    }
+    }*/
 }
