@@ -90,4 +90,8 @@ public class Incident {
 
     private double latitude;
     private double longitude;
+
+    public Date getLastUpdate(){
+        return lastUpdate;
+    }
 }
