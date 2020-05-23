@@ -43,10 +43,10 @@ public class Incident {
     @JoinColumn(name ="importance_id", nullable = false)
     private Importance importance;
 
-    private int number;
+    private String number;
     private String region;
     private String street;
-    private int postalCode;
+    private String postalCode;
 
     private String notes;
 

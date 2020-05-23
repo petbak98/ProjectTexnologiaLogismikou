@@ -36,7 +36,7 @@ public class SuperAdminController {
     public String reset() {
         resetService.resetDatabase();
 
-        return "{\"reset\": \"done\"}";
+        return "{\"status\": \"ok\"}";
     }
 
 }

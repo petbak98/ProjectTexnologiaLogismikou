@@ -53,7 +53,7 @@ public class IncidentConverter {
     @Autowired
     private ReportConverter reportConverter;
 
-    public IncidentDto convertToDto(Incident incident) {
+    public static IncidentDto convertToDto(Incident incident) {
 
         IncidentDto incidentDto = new IncidentDto();
 
@@ -121,8 +121,22 @@ public class IncidentConverter {
         incident.setLongitude(incidentDto.getLongitude());
 
         // Den ta exw dei akoma, asta etsi pros to paron
-        incident.setReceivers(new ArrayList<User>()); // Maybe will be changed, check it again. Without it NullPointerException at Post Incident
-        incident.setReports(new ArrayList<Report>()); // Maybe will be changed, check it again. Without it NullPointerException at Post Incident
+        if(incidentDto.getReceivers() == null) {
+            incident.setReceivers(new ArrayList<User>());
+        }
+        else {
+            List<User> userList = incidentDto.getReceivers().stream().map(UserConverter::convert).collect(Collectors.toList());
+            incident.setReceivers(userList);
+        }
+
+        if(incidentDto.getReports() == null) {
+            incident.setReports(new ArrayList<Report>());
+        }
+        else {
+            List<Report> reportList = incidentDto.getReports().stream().map(ReportConverter::convert).collect(Collectors.toList());
+            incident.setReports(reportList);
+
+        }
         return incident;
     }
 

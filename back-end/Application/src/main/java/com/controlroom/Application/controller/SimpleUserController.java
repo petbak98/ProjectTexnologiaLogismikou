@@ -2,9 +2,11 @@ package com.controlroom.Application.controller;
 
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
+import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.userModel.UserLocationIncident;
 import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.ReportService;
+import com.controlroom.Application.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ public class SimpleUserController {
 
     @Autowired
     private IncidentService incidentService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/reports")
     public List<ReportDto> index(){
@@ -76,5 +81,16 @@ public class SimpleUserController {
     @ResponseBody
     public ResponseEntity<String> postResponseController(@RequestBody UserLocationIncident userLocationIncident) throws JsonProcessingException {
         return ResponseEntity.ok().body(convertToJson(incidentService.findAllByDistance(userLocationIncident)));
+    }
+
+    @PutMapping("/update-location")
+    public ResponseEntity<String> updateUserLocation(@RequestBody UserLocationIncident userLocationIncident) throws JsonProcessingException {
+        UserDto userDto = userService.updateLocation(userLocationIncident);
+        if (userDto == null) {
+            return ResponseEntity.badRequest().body(convertToJson("{\"Status\": \"User not found\"}"));
+        }
+        else {
+            return ResponseEntity.ok().body(convertToJson(userDto));
+        }
     }
 }

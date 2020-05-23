@@ -3,6 +3,7 @@ package com.controlroom.Application.converter;
 import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.userModel.User;
 import com.controlroom.Application.service.AuthorityService;
+import com.controlroom.Application.service.IncidentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,8 @@ public class UserConverter {
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
         userDto.setLatitude(user.getLatitude());
         userDto.setLongitude(user.getLongitude());
 
@@ -36,8 +39,10 @@ public class UserConverter {
         user.setId(userDto.getId());
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
-        user.setLatitude(user.getLatitude());
-        user.setLongitude(user.getLongitude());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setLatitude(userDto.getLatitude());
+        user.setLongitude(userDto.getLongitude());
 
         user.setAuthority(authorityServiceStatic.findById(userDto.getAuthorityId()));
         return user;
