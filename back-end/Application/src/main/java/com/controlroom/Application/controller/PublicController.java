@@ -22,37 +22,27 @@ public class PublicController {
     private UserService userService;
 
 
-    @GetMapping("test1")
-    public String test1(){
-        return "API Test 1";
-    }
-
-    @GetMapping("test2")
-    public String test2(){
-        return "API Test 2";
-    }
-
     @GetMapping("users")
-    public ResponseEntity<String> findAll() throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(userService.findAll()));
+    public ResponseEntity<List<UserDto>> findAll(){
+        return ResponseEntity.ok().body(userService.findAll());
     }
 
-    @GetMapping("user/{id}")
-    public ResponseEntity<String> findUserById(@PathVariable("id") Long id) throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(userService.findDtoById(id)));
+    @GetMapping("users/{id}")
+    public ResponseEntity<UserDto> findUserById(@PathVariable("id") Long id) throws JsonProcessingException {
+        return ResponseEntity.ok().body(userService.findDtoById(id));
     }
 
-    @GetMapping("user/{id}/full")
-    public ResponseEntity<String> findFullUserById(@PathVariable("id") Long id) throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(userService.findFullDtoById(id)));
+    @GetMapping("users/{id}/full")
+    public ResponseEntity<UserPostDto> findFullUserById(@PathVariable("id") Long id) throws JsonProcessingException {
+        return ResponseEntity.ok().body(userService.findFullDtoById(id));
     }
 
-    @PostMapping("user")
-    public ResponseEntity<String> createUser(@RequestBody UserPostDto userPostDto) throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(userService.save(userPostDto)));
+    @PostMapping("users")
+    public ResponseEntity<UserDto> createUser(@RequestBody UserPostDto userPostDto) throws JsonProcessingException {
+        return ResponseEntity.ok().body(userService.save(userPostDto));
     }
 
-    @PutMapping("user")
+    @PutMapping("users")
     public ResponseEntity<String> updateUser(@RequestBody UserPostDto userPostDto) throws JsonProcessingException {
         if (userPostDto != null)
         {

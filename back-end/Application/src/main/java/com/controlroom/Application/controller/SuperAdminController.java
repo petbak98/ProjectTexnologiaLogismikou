@@ -5,6 +5,7 @@ import com.controlroom.Application.model.dto.StatisticsDto;
 import com.controlroom.Application.service.HealthCheckService;
 import com.controlroom.Application.service.ResetService;
 import com.controlroom.Application.service.StatisticsService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
@@ -33,20 +34,19 @@ public class SuperAdminController {
     StatisticsService statService;
 
     @GetMapping("/health-check")
-    public String healthCheck() throws ResponseStatusException {
+    public ResponseEntity <String> healthCheck() throws ResponseStatusException{
         try {
             healthCheck.healthCheck();
-            return "{\"status\": \"ok\"}";
+            return ResponseEntity.ok().body("{\"status\": \"ok\"}");
         }catch (DataRetrievalFailureException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Data access exception: " + e.getMessage(), e);
         }
     }
 
-    @GetMapping("/reset")
-    public String reset() {
+    @PostMapping("/reset")
+    public ResponseEntity <String> reset(){
         resetService.resetDatabase();
-
-        return "{\"status\": \"ok\"}";
+        return ResponseEntity.ok().body("{\"status\": \"ok\"}");
     }
 
     @GetMapping("/deathstats")

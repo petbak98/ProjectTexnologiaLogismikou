@@ -1,12 +1,14 @@
 package com.controlroom.Application.controller;
 
 import com.controlroom.Application.model.dto.IncidentDto;
+import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.service.IncidentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
@@ -20,13 +22,13 @@ public class ControlRoomController {
     IncidentService incidentService;
 
     @GetMapping("/incidents")
-    public ResponseEntity<String> findAll() throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(incidentService.findAll()));
+    public ResponseEntity<List<IncidentDto>> findAll() {
+        return ResponseEntity.ok().body(incidentService.findAll());
     }
 
     @GetMapping("/incidents/authority/{id}")
-    public ResponseEntity<String> findByAuthorityId(@PathVariable("id") Long id) throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(incidentService.findByAuthorityId(id)));
+    public ResponseEntity<List<IncidentDto>> findByAuthorityId(@PathVariable("id") Long id) throws JsonProcessingException {
+        return ResponseEntity.ok().body(incidentService.findByAuthorityId(id));
     }
 
     /*@GetMapping("/incident/{title}")
@@ -35,18 +37,18 @@ public class ControlRoomController {
         return convertToJson(incidentDtos);
     }*/
 
-    @GetMapping("/incident/{id}")
-    public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
+    @GetMapping("/incidents/{id}")
+    public ResponseEntity<IncidentDto> findById(@PathVariable("id") Long id) throws Exception {
         IncidentDto incidentDto = incidentService.findDtoById(id);
-        return ResponseEntity.ok().body(convertToJson(incidentDto));
+        return ResponseEntity.ok().body(incidentDto);
     }
 
-    @PostMapping("/incident")
-    public ResponseEntity<String> createIncident(@RequestBody IncidentDto incidentDto) throws Exception {
-        return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
+    @PostMapping("/incidents")
+    public ResponseEntity<IncidentDto> createIncident(@RequestBody IncidentDto incidentDto) throws Exception {
+        return ResponseEntity.ok().body(incidentService.save(incidentDto));
     }
 
-    @PutMapping("/incident")
+    @PutMapping("/incidents") // Should be checked.
     public ResponseEntity<String> updateIncident(@RequestBody IncidentDto incidentDto) throws Exception {
         if(incidentDto!=null) {
             return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
