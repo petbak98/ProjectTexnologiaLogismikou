@@ -11,11 +11,9 @@ import theme from './config/theme';
 import { useAuthService } from './hooks/useAuth';
 import AuthApp from './components/AuthApp/AuthApp';
 
-export const ServiceContext = React.createContext();
-
 function App() {
   const [state] = useAuthService();
-  const { authStatus } = state.value;
+  const authStatus = state.value;
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer

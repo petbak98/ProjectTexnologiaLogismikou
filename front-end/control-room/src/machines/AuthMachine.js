@@ -13,7 +13,8 @@ export const AuthMachine = Machine(
     context: {
       user: undefined,
       username: '',
-      password: ''
+      password: '',
+      error: ''
     },
     states: {
       authorized: {
@@ -45,8 +46,8 @@ export const AuthMachine = Machine(
                 actions: 'assignUser'
               },
               onError: {
-                target: '#authMachine.authorized',
-                actions: 'assignUser'
+                target: 'idle',
+                actions: 'assignError'
               }
             }
           }
@@ -60,9 +61,12 @@ export const AuthMachine = Machine(
       clearLocalStorage: (_, __) => {
         localStorage.clear();
       },
+      assignError: assign((ctx, e) => {
+        console.log(e);
+        return { ...ctx, error: e.data.message };
+      }),
       //need to assign user from e.data
       assignUser: assign((ctx, e) => {
-        console.log(e);
         return { ...ctx, user };
       }),
       assignCred: assign((ctx, e) => ({
@@ -73,11 +77,13 @@ export const AuthMachine = Machine(
     },
     services: {
       login: async (ctx, e) => {
-        console.log(`${API}login`);
-        const result = await Axios.post(`${API}login`, {
-          username: ctx.username,
-          password: ctx.password
-        });
+        // const result = await Axios.post(`${API}login`, {
+        //   username: ctx.username,
+        //   password: ctx.password
+        // });
+        setTimeout(() => {
+          return true;
+        }, 50000);
       }
     }
   }
