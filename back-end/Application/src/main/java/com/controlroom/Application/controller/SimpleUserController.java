@@ -12,6 +12,7 @@ import com.controlroom.Application.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.util.List;
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/user")
 public class SimpleUserController {
 
     @Autowired
@@ -31,6 +32,7 @@ public class SimpleUserController {
 
     @Autowired
     private UserService userService;
+
 
     @GetMapping("/reports")
     public ResponseEntity<List<ReportDto>> index(){
@@ -43,41 +45,36 @@ public class SimpleUserController {
         return ResponseEntity.ok().body(reportDto);
     }
 
-//    @PostMapping("/report/search")
-//    public List<Report> search(@RequestBody Map<String, String> body){
-//        String searchTerm = body.get("text");
-//        return reportRepository.exampleTitleMethod(searchTerm);
-//    }
-
     @PostMapping("/reports")
     public ResponseEntity<ReportDto> createReport(@RequestBody ReportDto reportDto){
         return ResponseEntity.ok().body(reportService.save(reportDto));
     }
 
     @PutMapping("/reports")
-    public ResponseEntity<String> updateReport(@RequestBody ReportDto reportDto) throws Exception {
+    public ResponseEntity<String> updateReport(@RequestBody @Nullable ReportDto reportDto) throws JsonProcessingException {
         if(reportDto!=null) {
             return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
         }
         else
-            return ResponseEntity.ok().body(convertToJson("{\"Status\": \"Report not found\"}"));
+            return ResponseEntity.badRequest().body("{\"Status\": \"Report not found\"}");
     }
 
-    /*@GetMapping(value = "sendvalue/{example}")
-    public ResponseEntity<String> sendGetName(@PathVariable String example) throws IOException {
-        return ResponseEntity.ok().body(convertToJson(example));
-    }*/
-
-    @GetMapping("/incidents/{incidentId}/reports")
-    public ResponseEntity<List<ReportDto>> findReportsByIncidentId(@PathVariable("incidentId") Long incidentId) {
-        List<ReportDto> incidentDtoList = reportService.findAllByIncidentId(incidentId);
-        return ResponseEntity.ok().body(incidentDtoList);
-    }
 
     @GetMapping("/{id}/reports")
     public ResponseEntity<List<ReportDto>> findByUserId(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(reportService.findByUserId(id));
     }
+
+//    @PostMapping("/report/search")
+//    public List<Report> search(@RequestBody Map<String, String> body){
+//        String searchTerm = body.get("text");
+//        return reportRepository.exampleTitleMethod(searchTerm);
+//    }
+
+    /*@GetMapping(value = "sendvalue/{example}")
+    public ResponseEntity<String> sendGetName(@PathVariable String example) throws IOException {
+        return ResponseEntity.ok().body(convertToJson(example));
+    }*/
 
     @GetMapping("/incidents") /* Returns incidents by distance and authority of user. UserId will be changed to token */
     @ResponseBody

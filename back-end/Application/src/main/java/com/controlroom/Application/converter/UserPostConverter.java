@@ -38,9 +38,6 @@ public class UserPostConverter {
 
         userPostDto.setUserId(user.getId());
 
-        List<IncidentDto> myIncidentDtoList = user.getMyIncidents().stream().map(IncidentConverter::convertToDto).collect(Collectors.toList());
-        userPostDto.setMyIncidents(myIncidentDtoList);
-
         userPostDto.setUsername(user.getUsername());
         userPostDto.setPassword(user.getPassword());
 
@@ -56,8 +53,12 @@ public class UserPostConverter {
 
         userPostDto.setAuthorityId(user.getAuthority().getId());
 
+
+        List<IncidentDto> myIncidentDtoList = user.getMyIncidents().stream().map(IncidentConverter::convertToDto).collect(Collectors.toList());
+        userPostDto.setMyIncidents(myIncidentDtoList);
+
         List<IncidentDto> incidentDtoList = user.getIncidents().stream().map(IncidentConverter::convertToDto).collect(Collectors.toList());
-        userPostDto.setMyIncidents(incidentDtoList);
+        userPostDto.setIncidents(incidentDtoList);
 
         List<ReportDto> reportDtoList = user.getReports().stream().map(ReportConverter::convertToDto).collect(Collectors.toList());
         userPostDto.setReports(reportDtoList);
@@ -68,14 +69,6 @@ public class UserPostConverter {
         User user = new User();
 
         user.setId(userPostDto.getUserId());
-
-        if(userPostDto.getMyIncidents() == null) {
-            user.setMyIncidents(new ArrayList<Incident>());
-        }
-        else {
-            List<Incident> myIncidentList = userPostDto.getMyIncidents().stream().map(IncidentConverter::convert).collect(Collectors.toList());
-            user.setMyIncidents(myIncidentList);
-        }
 
         user.setUsername(userPostDto.getUsername());
         user.setPassword(userPostDto.getPassword());
@@ -92,12 +85,21 @@ public class UserPostConverter {
 
         user.setAuthority(authorityServiceStatic.findById(userPostDto.getAuthorityId()));
 
+
+        if(userPostDto.getMyIncidents() == null) {
+            user.setMyIncidents(new ArrayList<Incident>());
+        }
+        else {
+            List<Incident> myIncidentList = userPostDto.getMyIncidents().stream().map(IncidentConverter::convert).collect(Collectors.toList());
+            user.setMyIncidents(myIncidentList);
+        }
+
         if(userPostDto.getIncidents() == null) {
             user.setIncidents(new ArrayList<Incident>());
         }
         else {
             List<Incident> incidentList = userPostDto.getIncidents().stream().map(IncidentConverter::convert).collect(Collectors.toList());
-            user.setMyIncidents(incidentList);
+            user.setIncidents(incidentList);
         }
 
         if(userPostDto.getReports() == null) {

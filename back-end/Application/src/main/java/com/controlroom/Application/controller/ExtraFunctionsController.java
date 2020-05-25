@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,8 +22,7 @@ import static com.controlroom.Application.util.Helpers.convertToJson;
 
 
 @RestController
-@RequestMapping("/api/superadmin")
-public class SuperAdminController {
+public class ExtraFunctionsController {
 
     @Autowired
     HealthCheckService healthCheck;
@@ -50,7 +50,7 @@ public class SuperAdminController {
     }
 
     @GetMapping("/deathstats")
-    public String deathstats(@RequestBody StatisticsDto statisticsDto) throws Exception {
+    public String deathstats(@RequestBody @Nullable StatisticsDto statisticsDto) throws Exception {
         if (statisticsDto == null){
             return "{\"status\": \"Body not found\"}";
         }else{
