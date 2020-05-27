@@ -44,9 +44,7 @@ public class UserPostConverter {
         userPostDto.setFirstName(user.getFirstName());
         userPostDto.setLastName(user.getLastName());
 
-        userPostDto.setActive(user.getActive());
-        userPostDto.setRoles(user.getRoles());
-        userPostDto.setPermissions(user.getPermissions());
+//        userPostDto.setRoles(user.getRoles());
 
         userPostDto.setLatitude(user.getLatitude());
         userPostDto.setLongitude(user.getLongitude());
@@ -76,9 +74,7 @@ public class UserPostConverter {
         user.setFirstName(userPostDto.getFirstName());
         user.setLastName(userPostDto.getLastName());
 
-        user.setActive(userPostDto.getActive());
-        user.setRoles(userPostDto.getRoles());
-        user.setPermissions(userPostDto.getPermissions());
+//        user.setRoles(userPostDto.getRoles());
 
         user.setLatitude(userPostDto.getLatitude());
         user.setLongitude(userPostDto.getLongitude());
