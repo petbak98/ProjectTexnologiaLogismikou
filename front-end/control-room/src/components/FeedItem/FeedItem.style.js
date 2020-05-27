@@ -83,9 +83,7 @@ export const feedItemStyles = makeStyles((theme) => {
       height: '100%'
     },
     button: {
-      display: 'flex',
-      marginTop: theme.spacing(8),
-      marginLeft: 'auto',
+      marginLeft: theme.spacing(2),
       textTransform: 'none'
     }
   };

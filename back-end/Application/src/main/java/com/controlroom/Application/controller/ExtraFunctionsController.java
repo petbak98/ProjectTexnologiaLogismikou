@@ -14,6 +14,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.constraints.Null;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,4 +64,52 @@ public class ExtraFunctionsController {
 
     }
 
+    @GetMapping("/dpm/{year}")
+    public String deathspermonth(@PathVariable("year") int year) throws ParseException {
+        StringBuilder returnString = new StringBuilder();
+        for (int i = 1; i <= 12; i++){
+            switch (i){
+                case 1:
+                    returnString.append("{\"January\":");
+                    break;
+                case 2:
+                    returnString.append("{\"February\":");
+                    break;
+                case 3:
+                    returnString.append("{\"March\":");
+                    break;
+                case 4:
+                    returnString.append("{\"April\":");
+                    break;
+                case 5:
+                    returnString.append("{\"May\":");
+                    break;
+                case 6:
+                    returnString.append("{\"June\":");
+                    break;
+                case 7:
+                    returnString.append("{\"July\":");
+                    break;
+                case 8:
+                    returnString.append("{\"August\":");
+                    break;
+                case 9:
+                    returnString.append("{\"September\":");
+                    break;
+                case 10:
+                    returnString.append("{\"October\":");
+                    break;
+                case 11:
+                    returnString.append("{\"November\":");
+                    break;
+                case 12:
+                    returnString.append("{\"December\":");
+                    break;
+            }
+
+            int inc = statService.getIncidentsForMonth(i,year);
+            returnString.append(inc).append("}\n");
+        }
+        return returnString.toString();
+    }
 }
