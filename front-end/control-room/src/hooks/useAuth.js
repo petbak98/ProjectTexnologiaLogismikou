@@ -6,7 +6,14 @@ import { useMachine, useService } from '@xstate/react';
 const AuthServiceContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [, , service] = useMachine(AuthMachine);
+  const previousState = JSON.parse(localStorage.getItem('authMachine'));
+  const [state, , service] = useMachine(AuthMachine, { state: previousState });
+
+  React.useEffect(() => {
+    const jsonState = JSON.stringify(state);
+    localStorage.setItem('authMachine', jsonState);
+  }, [state]);
+
   return <AuthServiceContext.Provider value={service}>{children}</AuthServiceContext.Provider>;
 };
 

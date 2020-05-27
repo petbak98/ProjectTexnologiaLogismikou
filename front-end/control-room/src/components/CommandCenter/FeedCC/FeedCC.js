@@ -1,38 +1,20 @@
 import React from 'react';
-import Feed from '../../Feed/Feed';
 import { TextField, Button, InputAdornment } from '@material-ui/core';
+
+import Feed from '../../Feed/Feed';
 import { feedCCStyle } from './FeedCC.style';
 import SearchIcon from '@material-ui/icons/Search';
+import useIncidents from '../../../hooks/useIncidents';
+import Loading from '../../Loading/Loading';
 
-const incidents = [
-  {
-    date: '21-4-202',
-    adress: 'Πευκάκια 5',
-    title: 'Πυρκαγιά',
-    id: 12456,
-    type: 'firefighting',
-    related: ['Πυροσβεστική']
-  },
-  {
-    date: '22-4-202',
-    adress: 'Χλόης 5',
-    title: 'Ληστεία',
-    id: 12457,
-    type: 'police',
-    related: ['Αστυνομία']
-  },
-
-  {
-    date: '22-4-202',
-    adress: 'Κατίνας Παξινού 10',
-    title: 'Πυρκαγιά',
-    id: 12458,
-    type: 'firefighting',
-    related: ['Πυροσβεστική', 'Αστυνομία']
-  }
-];
 export default function FeedCC() {
+  const { status, data: incidents, error } = useIncidents();
   const classes = feedCCStyle();
+
+  if (status === 'loading') return <Loading />;
+
+  if (status === 'error') return <div>Κάτι πήγε στραβά</div>;
+
   return (
     <div className={classes.container}>
       <TextField
