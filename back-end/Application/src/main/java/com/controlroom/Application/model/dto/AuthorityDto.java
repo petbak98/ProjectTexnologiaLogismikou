@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class AuthorityDto {
     private long id;
-    private String authorityName;
-    private IncidentDto incident;
+    private String name;
 }

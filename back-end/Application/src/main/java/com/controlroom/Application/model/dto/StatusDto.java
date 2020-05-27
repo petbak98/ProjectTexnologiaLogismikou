@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class StatusDto {
     private long id;
-    private String statusName;
-    private IncidentDto incident;
+    private int completed;
 }

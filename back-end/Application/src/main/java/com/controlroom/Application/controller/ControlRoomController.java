@@ -49,11 +49,12 @@ public class ControlRoomController {
         return ResponseEntity.ok().body(incidentDtoList);
     }
 
-    /*@GetMapping("/incident/{title}")
-    public String findByTitle(@PathVariable("title") String incidentTitle) throws JsonProcessingException {
+    @GetMapping("/incidents/search/{title}")
+    public ResponseEntity<List<IncidentDto>> findByTitle(@PathVariable("title") String incidentTitle){
         List<IncidentDto> incidentDtos = incidentService.findByTitle(incidentTitle);
-        return convertToJson(incidentDtos);
-    }*/
+        return ResponseEntity.ok().body(incidentDtos);
+    }
+
 
     @PostMapping("/incidents")
     public ResponseEntity<IncidentDto> createIncident(@RequestBody IncidentDto incidentDto) throws Exception {

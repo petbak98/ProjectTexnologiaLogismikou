@@ -19,7 +19,7 @@ public class Status {
     private long id;
 
     @Column(name = "status_name", nullable = false)
-    private String statusName;
+    private int completed;
 
     @OneToMany(mappedBy="status", fetch = FetchType.LAZY)
     private List<Incident> incidents;

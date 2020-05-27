@@ -1,19 +1,16 @@
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΠΟΛΥ ΜΕΓΑΛΗΣ ΣΗΜΑΣΙΑΣ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΓΑΛΗΣ ΣΗΜΑΣΙΑΣ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΤΡΙΑΣ ΣΗΜΑΣΙΑΣ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΙΚΡΗΣ ΣΗΜΑΣΙΑΣ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΑΣΗΜΑΝΤΟ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΚΑΜΙΑ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΙΚΡΗ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΤΡΙΑ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΓΑΛΗ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΕΚΤΑΚΤΗ');
 
 INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΑΣΤΥΝΟΜΙΑ');
 INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΠΥΡΟΣΒΕΣΤΙΚΗ');
 INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΕΚΑΒ');
 INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΛΗΜΕΝΙΚΟ');
 
-INSERT INTO controlroom.incident_status (status_name) VALUES ('ΑΝΑΜΕΝΟΝΤΑΣ ΟΡΓΑΝΑ');
-INSERT INTO controlroom.incident_status (status_name) VALUES ('ΥΠΟ ΕΞΕΛΙΞΗ');
-INSERT INTO controlroom.incident_status (status_name) VALUES ('ΕΠΙΛΥΘΗΚΕ - ΠΕΡΙΜΕΝΟΝΤΑΣ REPORTS');
-INSERT INTO controlroom.incident_status (status_name) VALUES ('ΠΕΡΙΜΕΝΟΝΤΑΣ ΤΟ CONTROL-CENTER');
-INSERT INTO controlroom.incident_status (status_name) VALUES ('ΕΚΛΕΙΣΕ');
+INSERT INTO controlroom.incident_status (status_name) VALUES (0);
+INSERT INTO controlroom.incident_status (status_name) VALUES (1);
 
 INSERT INTO `controlroom`.`user`
 (`active`,

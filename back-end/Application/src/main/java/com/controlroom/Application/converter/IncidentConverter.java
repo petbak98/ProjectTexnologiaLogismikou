@@ -4,6 +4,7 @@ import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.incidentModel.Authority;
+import com.controlroom.Application.model.incidentModel.Importance;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.model.userModel.User;
@@ -66,8 +67,11 @@ public class IncidentConverter {
         incidentDto.setLastUpdate(incident.getLastUpdate());
         incidentDto.setCreationTimestamp(incident.getCreationTimestamp());
 
-        incidentDto.setAuthorityId(incident.getAuthority().getId());
-        incidentDto.setImportanceId(incident.getImportance().getId());
+        /*incidentDto.setAuthorityId(incident.getAuthority().getId());
+        incidentDto.setImportanceId(incident.getImportance().getId());*/
+
+        incidentDto.setAuthority(AuthorityConverter.convertToDto(incident.getAuthority()));
+        incidentDto.setImportance(ImportanceConverter.convertToDto(incident.getImportance()));
 
         incidentDto.setNumber(incident.getNumber());
         incidentDto.setRegion(incident.getRegion());
@@ -75,7 +79,7 @@ public class IncidentConverter {
         incidentDto.setPostalCode(incident.getPostalCode());
 
         incidentDto.setNotes(incident.getNotes());
-        incidentDto.setStatusId(incident.getStatus().getId());
+        incidentDto.setStatus(StatusConverter.convertToDto(incident.getStatus()));
 
         incidentDto.setCallerFirstName(incident.getCallerFirstName());
         incidentDto.setCallerLastName(incident.getCallerLastName());
@@ -101,8 +105,8 @@ public class IncidentConverter {
         incident.setId(incidentDto.getIncidentId());
         incident.setTitle(incidentDto.getTitle());
         incident.setLastUpdate(incidentDto.getLastUpdate());
-        incident.setAuthority(authorityServiceStatic.findById(incidentDto.getAuthorityId()));
-        incident.setImportance(importanceServiceStatic.findById(incidentDto.getImportanceId()));
+        incident.setAuthority(authorityServiceStatic.findById(incidentDto.getAuthority().getId()));
+        incident.setImportance(importanceServiceStatic.findById(incidentDto.getImportance().getId()));
 
         incident.setNumber(incidentDto.getNumber());
         incident.setRegion(incidentDto.getRegion());
@@ -110,7 +114,7 @@ public class IncidentConverter {
         incident.setPostalCode(incidentDto.getPostalCode());
 
         incident.setNotes(incidentDto.getNotes());
-        incident.setStatus(statusServiceStatic.findById(incidentDto.getStatusId()));
+        incident.setStatus(statusServiceStatic.findById(incidentDto.getStatus().getId()));
 
         incident.setCallerFirstName(incidentDto.getCallerFirstName());
         incident.setCallerLastName(incidentDto.getCallerLastName());
