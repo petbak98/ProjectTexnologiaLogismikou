@@ -3,6 +3,8 @@ package com.controlroom.Application.controller;
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.dto.UserDto;
+import com.controlroom.Application.model.incidentModel.Incident;
+import com.controlroom.Application.model.reportModel.Report;
 import com.controlroom.Application.model.userModel.UserLocationIncident;
 import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.ReportService;
@@ -10,6 +12,7 @@ import com.controlroom.Application.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -18,7 +21,7 @@ import java.util.List;
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/user")
 public class SimpleUserController {
 
     @Autowired
@@ -30,15 +33,36 @@ public class SimpleUserController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/reports")
-    public List<ReportDto> index(){
-        return reportService.findAll();
+    public ResponseEntity<List<ReportDto>> index(){
+        return ResponseEntity.ok().body(reportService.findAll());
     }
 
-    @GetMapping("/report/{id}")
-    public ResponseEntity<String> findById(@PathVariable("id") Long id) throws Exception {
+    @GetMapping("/reports/{id}")
+    public ResponseEntity<ReportDto> findById(@PathVariable("id") Long id) throws Exception {
         ReportDto reportDto = reportService.findById(id);
-        return ResponseEntity.ok().body(convertToJson(reportDto));
+        return ResponseEntity.ok().body(reportDto);
+    }
+
+    @PostMapping("/reports")
+    public ResponseEntity<ReportDto> createReport(@RequestBody ReportDto reportDto){
+        return ResponseEntity.ok().body(reportService.save(reportDto));
+    }
+
+    @PutMapping("/reports")
+    public ResponseEntity<String> updateReport(@RequestBody @Nullable ReportDto reportDto) throws JsonProcessingException {
+        if(reportDto!=null) {
+            return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
+        }
+        else
+            return ResponseEntity.badRequest().body("{\"Status\": \"Report not found\"}");
+    }
+
+
+    @GetMapping("/{id}/reports")
+    public ResponseEntity<List<ReportDto>> findByUserId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(reportService.findByUserId(id));
     }
 
 //    @PostMapping("/report/search")
@@ -47,40 +71,15 @@ public class SimpleUserController {
 //        return reportRepository.exampleTitleMethod(searchTerm);
 //    }
 
-    @PostMapping("/report")
-    public ResponseEntity<String> createReport(@RequestBody ReportDto reportDto) throws Exception {
-        return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
-    }
-
-    @PutMapping("/report")
-    public ResponseEntity<String> updateReport(@RequestBody ReportDto reportDto) throws Exception {
-        if(reportDto!=null) {
-            return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
-        }
-        else
-            return ResponseEntity.ok().body(convertToJson("{\"Status\": \"Report not found\"}"));
-    }
-
-    @GetMapping(value = "sendvalue/{example}")
+    /*@GetMapping(value = "sendvalue/{example}")
     public ResponseEntity<String> sendGetName(@PathVariable String example) throws IOException {
         return ResponseEntity.ok().body(convertToJson(example));
-    }
+    }*/
 
-    @GetMapping("/incident/{incidentId}/reports")
-    public ResponseEntity<String> findReportsByIncidentId(@PathVariable("incidentId") Long incidentId) throws Exception {
-        List<ReportDto> incidentDto = reportService.findAllByIncidentId(incidentId);
-        return ResponseEntity.ok().body(convertToJson(incidentDto));
-    }
-
-    @GetMapping("/{id}/reports")
-    public ResponseEntity<String> findByUserId(@PathVariable("id") Long id) throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(reportService.findByUserId(id)));
-    }
-
-    @GetMapping("/incidents")
+    @GetMapping("/incidents") /* Returns incidents by distance and authority of user. UserId will be changed to token */
     @ResponseBody
-    public ResponseEntity<String> postResponseController(@RequestBody UserLocationIncident userLocationIncident) throws JsonProcessingException {
-        return ResponseEntity.ok().body(convertToJson(incidentService.findAllByDistance(userLocationIncident)));
+    public ResponseEntity<List<IncidentDto>> postResponseController(@RequestBody UserLocationIncident userLocationIncident) {
+        return ResponseEntity.ok().body(incidentService.findAllByDistance(userLocationIncident));
     }
 
     @PutMapping("/update-location")

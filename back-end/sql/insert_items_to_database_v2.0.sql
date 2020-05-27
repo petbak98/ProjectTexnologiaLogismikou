@@ -1,13 +1,19 @@
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('SIMANTIKO');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ASIMANTO');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΠΟΛΥ ΜΕΓΑΛΗΣ ΣΗΜΑΣΙΑΣ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΓΑΛΗΣ ΣΗΜΑΣΙΑΣ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΤΡΙΑΣ ΣΗΜΑΣΙΑΣ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΙΚΡΗΣ ΣΗΜΑΣΙΑΣ');
+INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΑΣΗΜΑΝΤΟ');
 
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ASTINOMIA');
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('PIROSVESTIKI');
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('EKAV');
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('LIMENIKO');
+INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΑΣΤΥΝΟΜΙΑ');
+INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΠΥΡΟΣΒΕΣΤΙΚΗ');
+INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΕΚΑΒ');
+INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΛΗΜΕΝΙΚΟ');
 
-INSERT INTO controlroom.incident_status (status_name) VALUES ('OPEN');
-INSERT INTO controlroom.incident_status (status_name) VALUES ('CLOSED');
+INSERT INTO controlroom.incident_status (status_name) VALUES ('ΑΝΑΜΕΝΟΝΤΑΣ ΟΡΓΑΝΑ');
+INSERT INTO controlroom.incident_status (status_name) VALUES ('ΥΠΟ ΕΞΕΛΙΞΗ');
+INSERT INTO controlroom.incident_status (status_name) VALUES ('ΕΠΙΛΥΘΗΚΕ - ΠΕΡΙΜΕΝΟΝΤΑΣ REPORTS');
+INSERT INTO controlroom.incident_status (status_name) VALUES ('ΠΕΡΙΜΕΝΟΝΤΑΣ ΤΟ CONTROL-CENTER');
+INSERT INTO controlroom.incident_status (status_name) VALUES ('ΕΚΛΕΙΣΕ');
 
 INSERT INTO `controlroom`.`user`
 (`active`,
@@ -75,7 +81,7 @@ INSERT INTO `controlroom`.`incidents`
 `latitude`,
 `longitude`)
 VALUES
-('nick',
+('ΝΙΚΟΣ',
 'pap',
 'greek',
 '2100000000',

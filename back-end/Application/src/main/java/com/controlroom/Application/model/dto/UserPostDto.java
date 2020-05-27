@@ -14,7 +14,6 @@ import java.util.List;
 public class UserPostDto {
     private long userId;
 
-    private List<IncidentDto> myIncidents;
     @NotNull
     @NotEmpty
     private String username;
@@ -36,6 +35,8 @@ public class UserPostDto {
     private double longitude;
 
     private long authorityId;
+
+    private List<IncidentDto> myIncidents;
 
     private List<IncidentDto> incidents;
     private List<ReportDto> reports;
