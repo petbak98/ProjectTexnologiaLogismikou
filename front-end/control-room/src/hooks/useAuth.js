@@ -6,8 +6,8 @@ import { useMachine, useService } from '@xstate/react';
 const AuthServiceContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const previousState = JSON.parse(localStorage.getItem('authMachine'));
-  const [state, , service] = useMachine(AuthMachine, { state: previousState });
+  // const previousState = JSON.parse(localStorage.getItem('authMachine'));
+  const [state, , service] = useMachine(AuthMachine);
 
   React.useEffect(() => {
     const jsonState = JSON.stringify(state);
