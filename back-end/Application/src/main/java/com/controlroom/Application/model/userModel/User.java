@@ -3,16 +3,15 @@ package com.controlroom.Application.model.userModel;
 import com.controlroom.Application.model.incidentModel.Authority;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.*;
 
 @Getter
 @Setter
@@ -25,25 +24,33 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private long id;
 
-    @OneToMany(mappedBy = "coordinator", fetch = FetchType.LAZY)
-    private List<Incident> myIncidents;
-
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 20)
     private String username;
-
-    @Column(nullable = false)
-    private String password;
 
     private String firstName;
     private String lastName;
 
-    private int active;
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
 
-    private String roles = "";
+    @NotBlank
+    @Size(max = 120)
+    private String password;
 
-    private String permissions = "";
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "coordinator", fetch = FetchType.LAZY)
+    private List<Incident> myIncidents;
 
     private double latitude;
+
     private double longitude;
 
     @ManyToOne
@@ -56,111 +63,67 @@ public class User {
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
     private List<Report> reports;
 
+    public User() {
+    }
 
-    public User(String username, String password, String roles, String permissions, double latitude, double longitude){
+    public User(String username, String firstName, String lastName, String email, String password, double latitude, double longitude, long authority) {
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
         this.password = password;
-        this.roles = roles;
-        this.permissions = permissions;
-        this.active = 1;
         this.latitude = latitude;
         this.longitude = longitude;
-    }
 
-    public User(){}
-
-    public List<String> getRoleList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
-
-    public List<String> getPermissionList(){
-        if(this.permissions.length() > 0){
-            return Arrays.asList(this.permissions.split(","));
-        }
-        return new ArrayList<>();
-    }
-
-    /*public void setMyIncidents(List<Incident> myIncidents) {
-        this.myIncidents = myIncidents;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public void setPermissions(String permissions) {
-        this.permissions = permissions;
-    }
-
-    public void setIncidents(List<Incident> incidents) {
-        this.incidents = incidents;
-    }
-
-    public void setReports(List<Report> reports) {
-        this.reports = reports;
-    }
-
-    public List<Incident> getMyIncidents() {
-        return myIncidents;
-    }
-
-    public Authority getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(Authority authority) {
-        this.authority = authority;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+//        this.authority = 0;
     }
 
     public long getId() {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public int getActive() {
-        return active;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public String getPermissions() {
-        return permissions;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public List<Incident> getIncidents() {
-        return incidents;
+    public List<Incident> getMyIncidents() {
+        return myIncidents;
     }
 
-    public List<Report> getReports() {
-        return reports;
+    public void setMyIncidents(List<Incident> myIncidents) {
+        this.myIncidents = myIncidents;
     }
 
     public double getLatitude() {
@@ -177,5 +140,29 @@ public class User {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
-    }*/
+    }
+
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+    }
+
+    public List<Incident> getIncidents() {
+        return incidents;
+    }
+
+    public void setIncidents(List<Incident> incidents) {
+        this.incidents = incidents;
+    }
+
+    public List<Report> getReports() {
+        return reports;
+    }
+
+    public void setReports(List<Report> reports) {
+        this.reports = reports;
+    }
 }

@@ -9,14 +9,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
     @Autowired

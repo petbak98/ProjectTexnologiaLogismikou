@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,10 @@ import java.util.Optional;
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/mod")
+@RequestMapping("/api/mod")
+@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 public class ControlRoomController {
 
     @Autowired
@@ -49,11 +52,12 @@ public class ControlRoomController {
         return ResponseEntity.ok().body(incidentDtoList);
     }
 
-    /*@GetMapping("/incident/{title}")
-    public String findByTitle(@PathVariable("title") String incidentTitle) throws JsonProcessingException {
+    @GetMapping("/incidents/search/{title}")
+    public ResponseEntity<List<IncidentDto>> findByTitle(@PathVariable("title") String incidentTitle){
         List<IncidentDto> incidentDtos = incidentService.findByTitle(incidentTitle);
-        return convertToJson(incidentDtos);
-    }*/
+        return ResponseEntity.ok().body(incidentDtos);
+    }
+
 
     @PostMapping("/incidents")
     public ResponseEntity<IncidentDto> createIncident(@RequestBody IncidentDto incidentDto) throws Exception {

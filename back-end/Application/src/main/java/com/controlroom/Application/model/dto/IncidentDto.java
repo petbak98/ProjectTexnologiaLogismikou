@@ -24,22 +24,20 @@ public class IncidentDto {
     private String coordinatorName;
 
     private String title;
-    //private Point location;
 
-    private long authorityId;
-    private long importanceId;
+    private AuthorityDto authority;
+    private ImportanceDto importance;
+    private StatusDto status;
 
     private double latitude;
     private double longitude;
 
-    private String number;
-    private String postalCode;
     private String region;
+    private String postalCode;
     private String street;
+    private String number;
 
     private String notes;
-
-    private long statusId;
 
     private String callerFirstName;
     private String callerLastName;

@@ -16,9 +16,9 @@ public class UserDto {
     @NotEmpty
     private String username;
 
-    @NotNull
+   /* @NotNull
     @NotEmpty
-    private String password;
+    private String password;*/
 
     private String firstName;
     private String lastName;
@@ -26,6 +26,6 @@ public class UserDto {
     private double latitude;
     private double longitude;
 
-    private long authorityId;
+    private AuthorityDto authority;
 
 }

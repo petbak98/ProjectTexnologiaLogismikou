@@ -11,6 +11,7 @@ import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,7 +23,10 @@ import java.util.Date;
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("/api/admin")
+@PreAuthorize("hasRole('ADMIN')")
 public class ExtraFunctionsController {
 
     @Autowired
