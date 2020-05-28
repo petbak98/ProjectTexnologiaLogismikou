@@ -67,7 +67,7 @@ export const AuthMachine = Machine(
       }),
       //need to assign user from e.data
       assignUser: assign((ctx, e) => {
-        return { ...ctx, user };
+        // return { ...ctx, user };
       }),
       assignCred: assign((ctx, e) => ({
         ...ctx,
@@ -77,13 +77,15 @@ export const AuthMachine = Machine(
     },
     services: {
       login: async (ctx, e) => {
-        // const result = await Axios.post(`${API}login`, {
-        //   username: ctx.username,
-        //   password: ctx.password
-        // });
-        setTimeout(() => {
-          return true;
-        }, 50000);
+        const result = await Axios.post(
+          `${API}control-center/api/auth/sign`,
+          {
+            username: ctx.username,
+            password: ctx.password
+          },
+          { headers: { 'Access-Control-Allow-Origin': '*' } }
+        );
+        return result;
       }
     }
   }
