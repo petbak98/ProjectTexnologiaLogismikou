@@ -78,7 +78,7 @@ export const AuthMachine = Machine(
     services: {
       login: async (ctx, e) => {
         const result = await Axios.post(
-          `${API}control-center/api/auth/sign`,
+          `${API}control-center/api/auth/signin`,
           {
             username: ctx.username,
             password: ctx.password
