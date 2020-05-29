@@ -10,13 +10,12 @@ function usePerstistedMachine(key, machine, options = { initialContext: undefine
     previousState ? { state: previousState } : { context: initialContext }
   );
 
-  const [state, send] = useMachine(machine, machineOptions);
-
+  const [state, send, service] = useMachine(machine, machineOptions);
   React.useEffect(() => {
     const jsonState = JSON.stringify(state);
     localStorage.setItem(key, jsonState);
   }, [state, key]);
-  return [state, send];
+  return [state, send, service];
 }
 
 export default usePerstistedMachine;

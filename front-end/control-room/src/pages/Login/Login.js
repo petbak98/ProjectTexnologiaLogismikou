@@ -12,10 +12,9 @@ export default function Login() {
   const [credentials, setCredentials] = React.useState({ username: '', password: '' });
   const theme = useTheme();
 
-  function handleClick() {
+  function handleSubmit() {
     send({ type: 'LOGIN', ...credentials });
   }
-
   function handleChange(e) {
     const {
       target: { name, value }
@@ -28,7 +27,7 @@ export default function Login() {
   return (
     <LoginContainer>
       <LoginIcon style={{ width: '100%', height: '300px' }} />
-      <FormContainer noValidate autoComplete='off'>
+      <FormContainer noValidate autoComplete='off' onSubmit={handleSubmit}>
         <TextField
           onChange={handleChange}
           fullWidth={true}
@@ -50,7 +49,7 @@ export default function Login() {
         />
       </FormContainer>
       <Button
-        onClick={handleClick}
+        onClick={handleSubmit}
         style={{ padding: 10, marginTop: 10 }}
         fullWidth={true}
         variant='contained'

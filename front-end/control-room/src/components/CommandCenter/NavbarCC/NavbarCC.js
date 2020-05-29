@@ -5,21 +5,19 @@ import AddIcon from '@material-ui/icons/Add';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Navbar, NavLink, LinkButton } from '../../Navbar/Navbar';
-import { useAuthService } from '../../../hooks/useAuth';
-import { userLogout } from '../../../machines/AuthMachine.types';
 
 export default function NavbarCC() {
   let location = useLocation();
-  const send = useAuthService();
 
   function handeLogout() {
-    send(userLogout);
+    localStorage.clear();
+    window.location.href = '/';
   }
   return (
     <Navbar>
       <NavLink to='/' activeclassname='activeLink'>
         <LinkButton
-          active={location.pathname === '/' ? 'active' : ''}
+          style={location.pathname === '/' ? { color: '#FAFAFB' } : {}}
           endIcon={<RssFeedIcon />}
           color='secondary'
         >
@@ -28,7 +26,7 @@ export default function NavbarCC() {
       </NavLink>
       <NavLink to='/form'>
         <LinkButton
-          active={location.pathname === '/form' ? 'active' : ''}
+          style={location.pathname === '/form' ? { color: '#FAFAFB' } : {}}
           color='secondary'
           endIcon={<AddIcon style={{ display: 'block' }} />}
         >
@@ -37,8 +35,7 @@ export default function NavbarCC() {
       </NavLink>
       <LinkButton
         onClick={handeLogout}
-        active={'active'}
-        style={{ marginLeft: 'auto' }}
+        style={{ marginLeft: 'auto', color: '#FAFAFB' }}
         color='secondary'
         endIcon={<ExitToAppIcon />}
       >

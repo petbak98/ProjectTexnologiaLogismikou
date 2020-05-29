@@ -1,20 +1,13 @@
 import React, { createContext, useContext } from 'react';
 import { AuthMachine } from '../machines/AuthMachine';
 
-import { useMachine, useService } from '@xstate/react';
-import useInterceptor from './useInterceptor';
+import { useService } from '@xstate/react';
+import usePerstistedMachine from './usePersistedMachine';
 
 const AuthServiceContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  // const previousState = JSON.parse(localStorage.getItem('authMachine'));
-  const [state, , service] = useMachine(AuthMachine);
-  useInterceptor(state.user);
-  React.useEffect(() => {
-    const jsonState = JSON.stringify(state);
-    localStorage.setItem('authMachine', jsonState);
-  }, [state]);
-
+  const [, , service] = usePerstistedMachine('auth', AuthMachine);
   return <AuthServiceContext.Provider value={service}>{children}</AuthServiceContext.Provider>;
 };
 

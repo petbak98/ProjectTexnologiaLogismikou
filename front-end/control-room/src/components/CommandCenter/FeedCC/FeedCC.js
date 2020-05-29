@@ -10,11 +10,9 @@ import Loading from '../../Loading/Loading';
 export default function FeedCC() {
   const { status, data: incidents, error } = useIncidents();
   const classes = feedCCStyle();
-
   if (status === 'loading') return <Loading />;
 
   if (status === 'error') return <div>Κάτι πήγε στραβά</div>;
-
   return (
     <div className={classes.container}>
       <TextField

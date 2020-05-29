@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import styled from 'styled-components/macro';
+import styled, { createGlobalStyle } from 'styled-components/macro';
 import { Layout } from '../Layout/Layout';
 const NavLink = styled(Link)`
   :focus,
@@ -16,8 +16,6 @@ const NavLink = styled(Link)`
   }
 `;
 const LinkButton = styled(Button)`
-  color: ${(props) => (props.active ? '#FAFAFB' : null)};
-
   h5 {
     text-transform: none;
     margin-left: 0;

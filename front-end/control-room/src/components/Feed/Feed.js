@@ -15,7 +15,7 @@ const variants = {
 };
 
 export default function Feed({ incidents }) {
-  incidents.map((inc) => console.log(inc));
+  // incidents.map((inc) => console.log(inc));
   return (
     <AnimatePresence>
       <FeedContainer animate='visible' initial='hidden' variants={variants}>

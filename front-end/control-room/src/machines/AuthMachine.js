@@ -16,7 +16,7 @@ export const AuthMachine = Machine(
       authorized: {
         on: {
           LOGOUT: {
-            target: 'authorized',
+            target: 'unauthorized',
             actions: 'clearUser'
           }
         },
@@ -39,7 +39,7 @@ export const AuthMachine = Machine(
               src: 'login',
               onDone: {
                 target: '#authMachine.authorized',
-                actions: 'assignUser'
+                actions: ['assignUser']
               },
               onError: {
                 target: 'idle',
@@ -58,19 +58,20 @@ export const AuthMachine = Machine(
         localStorage.clear();
       },
       assignError: assign((ctx, e) => {
-        return { ...ctx, error: e.data.message };
+        const message = e?.data?.response?.data?.message;
+        return { ...ctx, error: message ? message : e.message };
       }),
-      //need to assign user from e.data
       assignUser: assign((ctx, e) => {
-        console.log(e);
+        localStorage.setItem('token', e.data.accessToken);
         const user = {
           username: e.data.username,
           latitude: e.data.latitude,
           longitude: e.data.longitude,
           accessToken: e.data.accessToken,
-          roles: e.data.roles
+          roles: e.data.roles,
+          id: e.data.id
         };
-        return { ...ctx, user };
+        return { ...ctx, user, username: '', password: '' };
       }),
       assignCred: assign((ctx, e) => {
         return { ...ctx, username: e.username, password: e.password };
@@ -82,7 +83,7 @@ export const AuthMachine = Machine(
           username: ctx.username,
           password: ctx.password
         });
-        return result;
+        return result.data;
       }
     }
   }

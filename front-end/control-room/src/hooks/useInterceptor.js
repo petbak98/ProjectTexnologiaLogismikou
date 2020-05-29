@@ -1,23 +1,22 @@
 import React from 'react';
 import Axios from 'axios';
 
-function useInterceptor(user) {
+function useInterceptor(accessToken) {
   React.useLayoutEffect(() => {
     const myInterceptor = Axios.interceptors.request.use(
       function (config) {
-        if (user) {
-          //if user exits pass to every request clientID and appId
+        if (accessToken) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
         }
-        // Do something before request is sent
         return config;
       },
-      function (error) {
+      function () {
         // Do something with request error
-        return Promise.reject(error);
+        return Promise.reject();
       }
     );
     return () => Axios.interceptors.request.eject(myInterceptor);
-  }, [user]);
+  }, [accessToken]);
 }
 
 export default useInterceptor;
