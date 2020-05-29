@@ -2,13 +2,14 @@ import React, { createContext, useContext } from 'react';
 import { AuthMachine } from '../machines/AuthMachine';
 
 import { useMachine, useService } from '@xstate/react';
+import useInterceptor from './useInterceptor';
 
 const AuthServiceContext = createContext();
 
 const AuthProvider = ({ children }) => {
   // const previousState = JSON.parse(localStorage.getItem('authMachine'));
   const [state, , service] = useMachine(AuthMachine);
-
+  useInterceptor(state.user);
   React.useEffect(() => {
     const jsonState = JSON.stringify(state);
     localStorage.setItem('authMachine', jsonState);

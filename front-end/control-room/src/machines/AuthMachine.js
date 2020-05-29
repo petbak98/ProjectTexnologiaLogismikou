@@ -1,10 +1,6 @@
 import { Machine, assign } from 'xstate';
 import Axios from 'axios';
 import { API } from '../config/config.utils';
-const user = {
-  username: 'test',
-  role: 'cc'
-};
 
 export const AuthMachine = Machine(
   {
@@ -32,8 +28,8 @@ export const AuthMachine = Machine(
           idle: {
             on: {
               LOGIN: {
-                target: 'authorizing',
-                actions: 'assignCred'
+                actions: 'assignCred',
+                target: 'authorizing'
               }
             }
           },
@@ -62,29 +58,30 @@ export const AuthMachine = Machine(
         localStorage.clear();
       },
       assignError: assign((ctx, e) => {
-        console.log(e);
         return { ...ctx, error: e.data.message };
       }),
       //need to assign user from e.data
       assignUser: assign((ctx, e) => {
-        // return { ...ctx, user };
+        console.log(e);
+        const user = {
+          username: e.data.username,
+          latitude: e.data.latitude,
+          longitude: e.data.longitude,
+          accessToken: e.data.accessToken,
+          roles: e.data.roles
+        };
+        return { ...ctx, user };
       }),
-      assignCred: assign((ctx, e) => ({
-        ...ctx,
-        username: e.username,
-        password: e.password
-      }))
+      assignCred: assign((ctx, e) => {
+        return { ...ctx, username: e.username, password: e.password };
+      })
     },
     services: {
       login: async (ctx, e) => {
-        const result = await Axios.post(
-          `${API}control-center/api/auth/sign`,
-          {
-            username: ctx.username,
-            password: ctx.password
-          },
-          { headers: { 'Access-Control-Allow-Origin': '*' } }
-        );
+        const result = await Axios.post(`${API}control-center/api/auth/signin`, {
+          username: ctx.username,
+          password: ctx.password
+        });
         return result;
       }
     }

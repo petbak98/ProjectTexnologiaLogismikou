@@ -13,7 +13,7 @@ export default function Login() {
   const theme = useTheme();
 
   function handleClick() {
-    send('LOGIN', { ...credentials });
+    send({ type: 'LOGIN', ...credentials });
   }
 
   function handleChange(e) {
