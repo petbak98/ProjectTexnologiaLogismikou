@@ -4,8 +4,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import styled, { createGlobalStyle } from 'styled-components/macro';
+import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
+
 import { Layout } from '../Layout/Layout';
+
 const NavLink = styled(Link)`
   :focus,
   :hover,
@@ -27,10 +30,10 @@ const LinkButton = styled(Button)`
 `;
 const Navbar = ({ children }) => {
   return (
-    <AppBar color='primary' position='static'>
+    <AppBar color="primary" position="static">
       <Layout>
         <Toolbar>
-          <Typography style={{ marginRight: '1rem' }} variant='subtitle1'>
+          <Typography style={{ marginRight: '1rem' }} variant="subtitle1">
             Control Room
           </Typography>
           {children}
@@ -40,4 +43,11 @@ const Navbar = ({ children }) => {
   );
 };
 
+Navbar.propTypes = {
+  children: PropTypes.node
+};
+
+Navbar.defaultProps = {
+  children: null
+};
 export { Navbar, LinkButton, NavLink };

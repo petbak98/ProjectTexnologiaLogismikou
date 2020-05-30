@@ -1,8 +1,9 @@
 import { Machine, assign } from 'xstate';
 import Axios from 'axios';
+import { toast } from 'react-toastify';
 import { API } from '../config/config.utils';
 
-export const AuthMachine = Machine(
+const AuthMachine = Machine(
   {
     id: 'authMachine',
     initial: 'unauthorized',
@@ -54,12 +55,12 @@ export const AuthMachine = Machine(
   {
     actions: {
       clearUser: assign({ user: undefined }),
-      clearLocalStorage: (_, __) => {
+      clearLocalStorage: () => {
         localStorage.clear();
       },
       assignError: assign((ctx, e) => {
         const message = e?.data?.response?.data?.message;
-        return { ...ctx, error: message ? message : e.data.message };
+        return { ...ctx, error: message || e.data.message };
       }),
       assignUser: assign((ctx, e) => {
         const user = {
@@ -77,13 +78,19 @@ export const AuthMachine = Machine(
       })
     },
     services: {
-      login: async (ctx, e) => {
-        const result = await Axios.post(`${API}control-center/api/auth/signin`, {
-          username: ctx.username,
-          password: ctx.password
-        });
+      login: async (ctx) => {
+        const result = await Axios.post(
+          `${API}control-center/api/auth/signin`,
+          {
+            username: ctx.username,
+            password: ctx.password
+          }
+        );
+        toast.success(`Ωρα για δράση ${ctx.username}`);
         return result.data;
       }
     }
   }
 );
+
+export { AuthMachine };

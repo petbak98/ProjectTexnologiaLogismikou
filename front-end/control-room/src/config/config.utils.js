@@ -1,3 +1,8 @@
 const API = 'http://localhost:9000/';
 
-export { API };
+const queryConfig = {
+  refetchAllOnWindowFocus: false,
+  retry: 1
+};
+
+export { API, queryConfig };

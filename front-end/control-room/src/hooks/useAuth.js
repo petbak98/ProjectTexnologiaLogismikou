@@ -1,14 +1,18 @@
 import React, { createContext, useContext } from 'react';
+import { useService } from '@xstate/react';
 import { AuthMachine } from '../machines/AuthMachine';
 
-import { useService } from '@xstate/react';
 import usePerstistedMachine from './usePersistedMachine';
 
 const AuthServiceContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [, , service] = usePerstistedMachine('auth', AuthMachine);
-  return <AuthServiceContext.Provider value={service}>{children}</AuthServiceContext.Provider>;
+  return (
+    <AuthServiceContext.Provider value={service}>
+      {children}
+    </AuthServiceContext.Provider>
+  );
 };
 
 const useAuthService = () => {

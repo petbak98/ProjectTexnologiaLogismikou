@@ -1,9 +1,26 @@
-import { useQuery } from 'react-query';
+import { queryCache, useQuery } from 'react-query';
 
 import { fetchIncidents } from '../services/services';
 
 function useIncidents() {
-  return useQuery('incidents', fetchIncidents, { retry: 0 });
+  function prefetchIncidentById(incidents) {
+    incidents.forEach((incident) => {
+      const { incidentId } = incident;
+      queryCache.setQueryData(
+        [
+          'incident',
+          {
+            id: incidentId
+          }
+        ],
+        incident
+      );
+    });
+  }
+
+  return useQuery('incidents', fetchIncidents, {
+    onSuccess: prefetchIncidentById
+  });
 }
 
 export default useIncidents;

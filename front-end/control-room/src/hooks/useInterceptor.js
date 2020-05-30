@@ -4,13 +4,13 @@ import Axios from 'axios';
 function useInterceptor(accessToken) {
   React.useLayoutEffect(() => {
     const myInterceptor = Axios.interceptors.request.use(
-      function (config) {
+      function changeConfig(config) {
         if (accessToken) {
           config.headers.Authorization = `Bearer ${accessToken}`;
         }
         return config;
       },
-      function () {
+      function handleError() {
         // Do something with request error
         return Promise.reject();
       }

@@ -1,7 +1,9 @@
 import React from 'react';
+import { AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
+
 import FeedItem from '../FeedItem/FeedItem';
 import { FeedContainer } from './Feed.style';
-import { AnimatePresence } from 'framer-motion';
 
 const variants = {
   visible: {
@@ -15,10 +17,9 @@ const variants = {
 };
 
 export default function Feed({ incidents }) {
-  // incidents.map((inc) => console.log(inc));
   return (
     <AnimatePresence>
-      <FeedContainer animate='visible' initial='hidden' variants={variants}>
+      <FeedContainer animate="visible" initial="hidden" variants={variants}>
         {incidents.map((incident) => (
           <FeedItem key={incident.incidentId} incident={incident} />
         ))}
@@ -26,3 +27,7 @@ export default function Feed({ incidents }) {
     </AnimatePresence>
   );
 }
+
+Feed.propTypes = {
+  incidents: PropTypes.arrayOf.isRequired
+};
