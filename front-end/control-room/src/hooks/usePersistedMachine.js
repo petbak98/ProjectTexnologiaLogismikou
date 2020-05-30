@@ -13,7 +13,11 @@ function usePerstistedMachine(key, machine, options = { initialContext: undefine
   const [state, send, service] = useMachine(machine, machineOptions);
   React.useEffect(() => {
     const jsonState = JSON.stringify(state);
-    localStorage.setItem(key, jsonState);
+    if (state.matches('unauthorized')) {
+      if (jsonState) localStorage.removeItem(key);
+    } else {
+      localStorage.setItem(key, jsonState);
+    }
   }, [state, key]);
   return [state, send, service];
 }

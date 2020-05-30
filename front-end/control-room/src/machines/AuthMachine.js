@@ -59,10 +59,9 @@ export const AuthMachine = Machine(
       },
       assignError: assign((ctx, e) => {
         const message = e?.data?.response?.data?.message;
-        return { ...ctx, error: message ? message : e.message };
+        return { ...ctx, error: message ? message : e.data.message };
       }),
       assignUser: assign((ctx, e) => {
-        localStorage.setItem('token', e.data.accessToken);
         const user = {
           username: e.data.username,
           latitude: e.data.latitude,
