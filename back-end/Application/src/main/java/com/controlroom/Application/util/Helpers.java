@@ -1,8 +1,17 @@
 package com.controlroom.Application.util;
 
+import com.controlroom.Application.model.dto.IncidentDto;
+import com.controlroom.Application.model.dto.ReportDto;
+import com.controlroom.Application.model.incidentModel.Incident;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.io.StringWriter;
+import java.util.List;
 
 public class Helpers {
 
@@ -29,5 +38,41 @@ public class Helpers {
             }
             return (dist);
         }
+    }
+
+    public static String incidentDtoToXML(IncidentDto incidentDto) {
+        String xmlString = "";
+        try {
+            JAXBContext context = JAXBContext.newInstance(IncidentDto.class);
+            Marshaller m = context.createMarshaller();
+
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            StringWriter sw = new StringWriter();
+            m.marshal(incidentDto, sw);
+            xmlString = sw.toString();
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return xmlString;
+    }
+
+    public static String reportDtoToXML(ReportDto reportDto) {
+        String xmlString = "";
+        try {
+            JAXBContext context = JAXBContext.newInstance(IncidentDto.class);
+            Marshaller m = context.createMarshaller();
+
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            StringWriter sw = new StringWriter();
+            m.marshal(reportDto, sw);
+            xmlString = sw.toString();
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return xmlString;
     }
 }

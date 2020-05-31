@@ -2,10 +2,9 @@ package com.controlroom.Application.controller;
 
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
-import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.ReportService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.controlroom.Application.util.Helpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -13,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
@@ -36,9 +34,12 @@ public class ControlRoomController {
     }
 
     @GetMapping("/incidents/{id}")
-    public ResponseEntity<IncidentDto> findById(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<String> findById(@PathVariable("id") Long id, @RequestParam String format) throws Exception {
         IncidentDto incidentDto = incidentService.findDtoById(id);
-        return ResponseEntity.ok().body(incidentDto);
+        if(format.equals("xml"))
+            return ResponseEntity.ok().body(Helpers.incidentDtoToXML(incidentDto));
+        else
+            return ResponseEntity.ok().body(Helpers.convertToJson(incidentDto));
     }
 
     @GetMapping("/incidents/authority/{id}")
