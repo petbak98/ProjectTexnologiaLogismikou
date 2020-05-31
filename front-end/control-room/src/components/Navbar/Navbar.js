@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import styled from 'styled-components/macro';
-import PropTypes from 'prop-types';
 
 import { Layout } from '../Layout/Layout';
 
@@ -43,11 +42,4 @@ const Navbar = ({ children }) => {
   );
 };
 
-Navbar.propTypes = {
-  children: PropTypes.node
-};
-
-Navbar.defaultProps = {
-  children: null
-};
 export { Navbar, LinkButton, NavLink };

@@ -2,8 +2,9 @@ import React from 'react';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import { FormLabel, TextField, Button } from '@material-ui/core';
-import { CallerDataStyles } from './CallerDataStep.style';
 import { toast } from 'react-toastify';
+
+import { CallerDataStyles } from './CallerDataStep.style';
 
 function CallerDataStep({ previousStep, nextStep, updateForm }) {
   const classes = CallerDataStyles();
@@ -28,10 +29,12 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
 
   function isValid() {
     const err = Object.keys(formState).reduce((acc, cur) => {
-      return formState[cur] ? { ...acc, [cur]: false } : { ...acc, [cur]: true };
+      return formState[cur]
+        ? { ...acc, [cur]: false }
+        : { ...acc, [cur]: true };
     }, {});
     setError(err);
-    return Object.values(err).filter((value) => value).length ? false : true;
+    return !Object.values(err).filter((value) => value).length;
   }
 
   function handleNext() {
@@ -50,66 +53,66 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
 
   return (
     <div className={classes.container}>
-      <FormLabel className={classes.selectLabel} component='legend'>
+      <FormLabel className={classes.selectLabel} component="legend">
         Όνομα
       </FormLabel>
       <TextField
         error={error.callerFirstName}
-        size='small'
-        name='callerFirstName'
+        size="small"
+        name="callerFirstName"
         className={classes.input}
-        variant='outlined'
+        variant="outlined"
         value={formState.callerFirstName}
         onChange={handleChange}
-        placeholder='π.χ. Παναγιώτης'
+        placeholder="π.χ. Παναγιώτης"
       />
-      <FormLabel className={classes.selectLabel} component='legend'>
+      <FormLabel className={classes.selectLabel} component="legend">
         Επώνυμο
       </FormLabel>
       <TextField
         onChange={handleChange}
         error={error.callerLastName}
         value={formState.callerLastName}
-        size='small'
-        name='callerLastName'
+        size="small"
+        name="callerLastName"
         className={classes.input}
-        variant='outlined'
-        placeholder='π.χ. Τσίπρας'
+        variant="outlined"
+        placeholder="π.χ. Τσίπρας"
       />
-      <FormLabel className={classes.selectLabel} component='legend'>
+      <FormLabel className={classes.selectLabel} component="legend">
         Ταυτότητα
       </FormLabel>
       <TextField
         error={error.callerNationalId}
         onChange={handleChange}
-        name='callerNationalId'
+        name="callerNationalId"
         value={formState.callerNationalId}
-        size='small'
+        size="small"
         className={classes.input}
-        variant='outlined'
-        placeholder='π.χ. ΑΕ10440'
+        variant="outlined"
+        placeholder="π.χ. ΑΕ10440"
       />
-      <FormLabel className={classes.selectLabel} component='legend'>
+      <FormLabel className={classes.selectLabel} component="legend">
         Τηλέφωνο
       </FormLabel>
       <TextField
-        name='callerPhone'
+        name="callerPhone"
         error={error.callerPhone}
         onChange={handleChange}
         value={formState.callerPhone}
-        size='small'
+        size="small"
         className={classes.input}
-        variant='outlined'
-        placeholder='π.χ. 2102596392'
+        variant="outlined"
+        placeholder="π.χ. 2102596392"
       />
       <div style={{ marginLeft: 'auto' }}>
         <Button
           style={{ marginRight: 5 }}
           onClick={handlePrevious}
           className={classes.button}
-          size='large'
-          color='primary'
-          variant='text'
+          size="large"
+          color="primary"
+          variant="text"
           startIcon={<NavigateBeforeIcon />}
         >
           ΠΡΟΗΓΟΥΜΕΝΟ
@@ -117,9 +120,9 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
         <Button
           onClick={handleNext}
           className={classes.button}
-          size='large'
-          color='primary'
-          variant='contained'
+          size="large"
+          color="primary"
+          variant="contained"
           endIcon={<NavigateNextIcon />}
         >
           ΕΠΟΜΕΝΟ

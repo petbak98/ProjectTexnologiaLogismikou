@@ -16,22 +16,22 @@ import { ReactComponent as Firetrack } from '../../assets/icons/firetruck.svg';
 const variants = {
   visible: {
     opacity: 1,
-    x: 0
+    x: 0,
   },
-  hidden: { opacity: 0, x: 10 }
+  hidden: { opacity: 0, x: 10 },
 };
 export default function FeedItem({ incident }) {
   const {
+    authority,
     reports,
     receivers,
-    authorityId,
     number,
     street,
     region,
     lastUpdate,
     title,
     incidentId,
-    postalCode
+    postalCode,
   } = incident;
   const classes = feedItemStyles();
   const date = new Date(lastUpdate).toLocaleDateString();
@@ -42,8 +42,8 @@ export default function FeedItem({ incident }) {
   }
 
   const renderAvatar = () => {
-    if (authorityId === 1) return <Policeman className={classes.avatar} />;
-    if (authorityId === 2) return <Firetrack className={classes.avatar} />;
+    if (authority.id === 1) return <Policeman className={classes.avatar} />;
+    if (authority.id === 2) return <Firetrack className={classes.avatar} />;
     return <Policeman className={classes.avatar} />;
   };
 
@@ -69,13 +69,13 @@ export default function FeedItem({ incident }) {
         </li>
         <li className={classes.feedLi}>
           <Typography variant="subtitle1">
-            {`${reports.length} reports`}{' '}
+            {`${reports.length} reports`}
           </Typography>
           <AssessmentOutlinedIcon className={classes.dateIcon} />
         </li>
         <li className={classes.feedLi}>
           <Typography variant="subtitle1">
-            {`${receivers.length} αποδέκτες`}{' '}
+            {`${receivers.length} αποδέκτες`}
           </Typography>
           <PermIdentityIcon className={classes.dateIcon} />
         </li>

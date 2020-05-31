@@ -2,62 +2,76 @@ import React from 'react';
 import { FormLabel, TextField, Button, Typography } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import { ReactComponent as LocationIcon } from '../../../../assets/icons/location.svg';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng
+} from 'react-places-autocomplete';
+import { toast } from 'react-toastify';
 
+import { ReactComponent as LocationIcon } from '../../../../assets/icons/location.svg';
 import { LocationStepStyles } from './LocationStep.style';
 import LocationStepInfo from './LocationStepInfo';
-import { toast } from 'react-toastify';
+
+function getStreetΝumber(address) {
+  return address.find((item) => item.types.includes('street_number'))?.longName;
+}
+function getPostalCode(address) {
+  return address.find((item) => item.types.includes('postal_code'))?.longName;
+}
+function getStreet(address) {
+  return address.find((item) => item.types.includes('route'))?.longName;
+}
+function getRegion(address) {
+  return address.find((item) => item.types.includes('locality'))?.longName;
+}
 
 function LocationStep({ nextStep, previousStep, updateForm }) {
   const [formState, setFormState] = React.useState(undefined);
   const [address, setAddress] = React.useState('');
   const [error, setError] = React.useState(false);
-  function fillAdress(address, latLng) {
+  function fillAdress(adrs, latLng) {
     const state = {
-      street: `${getStreet(address)}`,
-      number: getStreetΝumber(address),
-      region: getRegion(address),
-      postalCode: getPostalCode(address),
+      street: `${getStreet(adrs)}`,
+      number: getStreetΝumber(adrs),
+      region: getRegion(adrs),
+      postalCode: getPostalCode(adrs),
       lat: latLng.lat,
       lng: latLng.lng
     };
     setFormState(state);
   }
 
-  function getStreetΝumber(address) {
-    return address.find((item) => item.types.includes('street_number'))?.long_name;
-  }
-  function getPostalCode(address) {
-    return address.find((item) => item.types.includes('postal_code'))?.long_name;
-  }
-  function getStreet(address) {
-    return address.find((item) => item.types.includes('route'))?.long_name;
-  }
-  function getRegion(address) {
-    return address.find((item) => item.types.includes('locality'))?.long_name;
-  }
-
-  function handleGeoChange(address) {
+  function handleGeoChange(adrs) {
     setFormState(undefined);
     setError(false);
-    setAddress(address);
+    setAddress(adrs);
   }
 
-  function handleSelect(address) {
+  function handleSelect(adrs) {
     setAddress('');
-    let adress_components;
-    geocodeByAddress(address)
+    let adressComponents;
+    geocodeByAddress(adrs)
       .then((results) => {
-        adress_components = results[0].address_components;
+        adressComponents = results[0].adressComponents;
         return getLatLng(results[0]);
       })
       .then((latLng) => {
-        fillAdress(adress_components, latLng);
+        fillAdress(adressComponents, latLng);
       })
-      .catch((error) => console.error('Error', error));
+      .catch((err) => console.error('Error', err));
   }
 
+  function isValid() {
+    if (!formState) {
+      setError(true);
+      return false;
+    }
+    if (Object.keys(formState).filter((key) => !formState[key]).length) {
+      setError(true);
+      return false;
+    }
+    return true;
+  }
   function handleNext() {
     const valid = isValid();
     if (valid) {
@@ -72,17 +86,6 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
     previousStep();
   }
 
-  function isValid() {
-    if (!formState) {
-      setError(true);
-      return false;
-    }
-    if (Object.keys(formState).filter((key) => !formState[key]).length) {
-      setError(true);
-      return false;
-    }
-    return true;
-  }
   const classes = LocationStepStyles();
 
   return (
@@ -93,18 +96,19 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
         onChange={handleGeoChange}
         onSelect={handleSelect}
       >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+        {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <div>
-            <FormLabel className={classes.selectLabel} component='legend'>
+            <FormLabel className={classes.selectLabel} component="legend">
               Βρες την διεύθυνηση σου
             </FormLabel>
             <TextField
+              // eslint-disable-next-line
               {...getInputProps({
                 placeholder: 'Οδός Νούμερο, Περιοχή',
                 size: 'small',
                 variant: 'outlined',
                 className: classes.input,
-                error: error
+                error
               })}
             />
             <div className={classes.dropdown}>
@@ -116,6 +120,7 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
                   : { backgroundColor: '#FAFAFA', cursor: 'pointer' };
                 return (
                   <div
+                    // eslint-disable-next-line
                     {...getSuggestionItemProps(suggestion, {
                       className,
                       style
@@ -132,14 +137,14 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
       </PlacesAutocomplete>
       {formState && (
         <>
-          <Typography color='secondary' className={classes.infoLabel}>
+          <Typography color="secondary" className={classes.infoLabel}>
             Η επιλογή σου
           </Typography>
           <div className={classes.infoContainer}>
-            <LocationStepInfo label='Περιοχή' content={formState.region} />
-            <LocationStepInfo label='Οδός' content={formState.street} />
-            <LocationStepInfo label='Νούμερο' content={formState.number} />
-            <LocationStepInfo label='T.K' content={formState.postalCode} />
+            <LocationStepInfo label="Περιοχή" content={formState.region} />
+            <LocationStepInfo label="Οδός" content={formState.street} />
+            <LocationStepInfo label="Νούμερο" content={formState.number} />
+            <LocationStepInfo label="T.K" content={formState.postalCode} />
           </div>
         </>
       )}
@@ -148,9 +153,9 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
           style={{ marginRight: 5 }}
           onClick={handlePrevious}
           className={classes.button}
-          size='large'
-          color='primary'
-          variant='text'
+          size="large"
+          color="primary"
+          variant="text"
           startIcon={<NavigateBeforeIcon />}
         >
           ΠΡΟΗΓΟΥΜΕΝΟ
@@ -158,9 +163,9 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
         <Button
           onClick={handleNext}
           className={classes.button}
-          size='large'
-          color='primary'
-          variant='contained'
+          size="large"
+          color="primary"
+          variant="contained"
           endIcon={<NavigateNextIcon />}
         >
           ΕΠΟΜΕΝΟ

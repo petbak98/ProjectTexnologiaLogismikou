@@ -1,6 +1,5 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import PropTypes from 'prop-types';
 
 import FeedItem from '../FeedItem/FeedItem';
 import { FeedContainer } from './Feed.style';
@@ -27,7 +26,3 @@ export default function Feed({ incidents }) {
     </AnimatePresence>
   );
 }
-
-Feed.propTypes = {
-  incidents: PropTypes.arrayOf.isRequired
-};

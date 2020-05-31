@@ -10,10 +10,14 @@ import { ReactComponent as Call } from '../../assets/icons/call.svg';
 function StepNav({ currentStep }) {
   return (
     <StepsInfoContainer>
-      <BubleStep active={currentStep >= 1} label='Αρμοδιότητες' icon={CC} />
-      <BubleStep active={currentStep >= 2} label='Τοποθεσία' icon={Location} />
-      <BubleStep active={currentStep >= 3} label='Στοχεία Κλήσης' icon={Call} />
-      <BubleStep active={currentStep >= 4} label='Ολοκλήρωση' icon={Checkmark} />
+      <BubleStep active={currentStep >= 1} label="Αρμοδιότητες" icon={CC} />
+      <BubleStep active={currentStep >= 2} label="Τοποθεσία" icon={Location} />
+      <BubleStep active={currentStep >= 3} label="Στοχεία Κλήσης" icon={Call} />
+      <BubleStep
+        active={currentStep >= 4}
+        label="Ολοκλήρωση"
+        icon={Checkmark}
+      />
     </StepsInfoContainer>
   );
 }

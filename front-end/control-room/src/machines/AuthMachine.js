@@ -1,6 +1,7 @@
 import { Machine, assign } from 'xstate';
 import Axios from 'axios';
 import { toast } from 'react-toastify';
+
 import { API } from '../config/config.utils';
 
 const AuthMachine = Machine(

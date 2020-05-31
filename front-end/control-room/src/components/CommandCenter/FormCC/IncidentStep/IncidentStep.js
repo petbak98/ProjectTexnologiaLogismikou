@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   TextField,
   Checkbox,
@@ -8,7 +7,7 @@ import {
   FormControl,
   FormLabel,
   Button,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { toast } from 'react-toastify';
@@ -17,8 +16,15 @@ import { IncidentStepStyles } from './IncidentStep.style';
 
 function IncidentStep({ nextStep, send, updateForm }) {
   const [title, setTitle] = React.useState('');
-  const [authority, setAuthority] = React.useState({ port: false, police: false, fire: false });
-  const [errors, setErrors] = React.useState({ title: false, authority: false });
+  const [authority, setAuthority] = React.useState({
+    port: false,
+    police: false,
+    fire: false,
+  });
+  const [errors, setErrors] = React.useState({
+    title: false,
+    authority: false,
+  });
 
   function handleChange(e) {
     setErrors({ ...errors, title: false });
@@ -55,21 +61,21 @@ function IncidentStep({ nextStep, send, updateForm }) {
 
   return (
     <div className={classes.container}>
-      <FormLabel className={classes.selectLabel} component='legend'>
+      <FormLabel className={classes.selectLabel} component="legend">
         Τίτλος
       </FormLabel>
       <TextField
         error={errors?.title}
-        name='title'
-        size='small'
+        name="title"
+        size="small"
         value={title}
         className={classes.input}
-        variant='outlined'
+        variant="outlined"
         onChange={handleChange}
-        placeholder='Δώσε τίτλο'
+        placeholder="Δώσε τίτλο"
       />
-      <FormControl component='fieldset'>
-        <FormLabel className={classes.selectLabel} component='legend'>
+      <FormControl component="fieldset">
+        <FormLabel className={classes.selectLabel} component="legend">
           Διάλεξε υπηρεσία
         </FormLabel>
         <FormGroup className={classes.formGroup}>
@@ -78,47 +84,49 @@ function IncidentStep({ nextStep, send, updateForm }) {
               <Checkbox
                 checked={authority.police}
                 className={classes.select}
-                name='police'
-                color='primary'
+                name="police"
+                color="primary"
                 onChange={handleSelectChange}
               />
             }
-            label='Αστυνομία'
+            label="Αστυνομία"
           />
           <FormControlLabel
             control={
               <Checkbox
                 className={classes.select}
                 onChange={handleSelectChange}
-                name='fire'
+                name="fire"
                 checked={authority.fire}
-                color='primary'
+                color="primary"
               />
             }
-            label='Πυροσβεστική'
+            label="Πυροσβεστική"
           />
           <FormControlLabel
             control={
               <Checkbox
                 className={classes.select}
                 onChange={handleSelectChange}
-                name='port'
-                color='primary'
+                name="port"
+                color="primary"
               />
             }
-            label='Λιμενικό'
+            label="Λιμενικό"
           />
         </FormGroup>
         {errors.authority && (
-          <Typography className={classes.formGroupError}>Διάλεξε μια επιλογή</Typography>
+          <Typography className={classes.formGroupError}>
+            Διάλεξε μια επιλογή
+          </Typography>
         )}
       </FormControl>
       <Button
         onClick={handleNext}
         className={classes.button}
-        size='large'
-        color='primary'
-        variant='contained'
+        size="large"
+        color="primary"
+        variant="contained"
         endIcon={<NavigateNextIcon />}
       >
         ΕΠΟΜΕΝΟ
