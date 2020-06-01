@@ -2,6 +2,7 @@ package com.controlroom.Application.util;
 
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
+import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,6 +69,23 @@ public class Helpers {
 
             StringWriter sw = new StringWriter();
             m.marshal(reportDto, sw);
+            xmlString = sw.toString();
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return xmlString;
+    }
+    public static String userDtoToXML(UserDto userDto) {
+        String xmlString = "";
+        try {
+            JAXBContext context = JAXBContext.newInstance(UserDto.class);
+            Marshaller m = context.createMarshaller();
+
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            StringWriter sw = new StringWriter();
+            m.marshal(userDto, sw);
             xmlString = sw.toString();
 
         } catch (JAXBException e) {

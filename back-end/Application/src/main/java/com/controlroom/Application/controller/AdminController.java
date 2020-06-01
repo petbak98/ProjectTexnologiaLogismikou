@@ -1,10 +1,12 @@
 package com.controlroom.Application.controller;
 
+import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.dto.UserPostDto;
 import com.controlroom.Application.model.userModel.User;
 import com.controlroom.Application.repository.UserRepository;
 import com.controlroom.Application.service.UserService;
+import com.controlroom.Application.util.Helpers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +34,12 @@ public class AdminController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> findUserById(@PathVariable("id") Long id){
-        return ResponseEntity.ok().body(userService.findDtoById(id));
+    public ResponseEntity<String> findUserById(@PathVariable("id") Long id, @RequestParam String format) throws JsonProcessingException {
+        UserDto userDto = userService.findDtoById(id);
+        if(format.equals("xml"))
+            return ResponseEntity.ok().body(Helpers.userDtoToXML(userDto));
+        else
+            return ResponseEntity.ok().body(Helpers.convertToJson(userDto));
     }
 
     @PostMapping("/users")
