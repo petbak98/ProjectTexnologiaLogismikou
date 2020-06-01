@@ -22,11 +22,32 @@ const AvatarWrapper = styled.div`
 
 function Avatar({ id }) {
   const renderAvatar = () => {
-    if (id === 1) return <Policeman className="avatar" />;
-    if (id === 2) return <Firetrack className="avatar" />;
+    if (id === 1) return <Policeman className='avatar' />;
+    if (id === 2) return <Firetrack className='avatar' />;
     return null;
   };
   return <AvatarWrapper>{renderAvatar()}</AvatarWrapper>;
 }
 
-export { Avatar };
+const InfomationContainer = styled.div`
+  display: flex;
+  position: relative;
+  color: ${theme.palette.primary.main};
+  span {
+    margin-left: 0.5rem;
+  }
+`;
+
+function InformationItem({ label, value }) {
+  return (
+    <InfomationContainer>
+      <h4>
+        {label}
+        {':'}
+      </h4>
+      <span>{value}</span>
+    </InfomationContainer>
+  );
+}
+
+export { Avatar, InformationItem };

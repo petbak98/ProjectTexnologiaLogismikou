@@ -15,42 +15,67 @@ import {
   Label,
   AvatarContainer,
   IncidentNavigation,
+  TabsContainer,
 } from './Incident.style';
 import Stars from '../Stars/Stars';
 import { Avatar } from '../../shared';
 import { ReportsIcon, InformationIcon, UserIcon } from '../../assets/icons';
 import useTabs from '../../hooks/useTabs';
-
-const IncidentNavContent = [
-  { tag: 'Δημιουργός', Icon: UserIcon, content: 'test' },
-  { tag: 'Πληροφορίες', Icon: InformationIcon, content: 'test1' },
-  { tag: 'Αναφορές', Icon: ReportsIcon, content: 'test2' },
-];
+import CreatorInformation from '../CreatorInformation/CreatorInformation';
+import Status from '../Status/Status';
 
 function Incident() {
   const { id } = useParams();
-  const { currentTab, changeTab, currentIndex } = useTabs(
-    0,
-    IncidentNavContent,
-  );
+  const { data, status } = useIncidentById(id);
+  const {
+    callerFirstName,
+    callerLastName,
+    callerPhone,
+    callerNationalId,
+    coordinatorName,
+    incidentId,
+    status: incStatus,
+    importance,
+    authority,
+    title,
+  } = data || {};
+  const IncidentNavContent = [
+    {
+      tag: 'Δημιουργός',
+      Icon: UserIcon,
+      content: (
+        <CreatorInformation
+          callerFirstName={callerFirstName}
+          callerLastName={callerLastName}
+          callerPhone={callerPhone}
+          callerNationalId={callerNationalId}
+          coordinatorName={coordinatorName}
+        />
+      ),
+    },
+    { tag: 'Πληροφορίες', Icon: InformationIcon, content: 'test1' },
+    { tag: 'Αναφορές', Icon: ReportsIcon, content: 'test2' },
+  ];
+
+  const { currentTab, changeTab, currentIndex } = useTabs(0, IncidentNavContent);
 
   function changeActiveTab(index) {
     changeTab(index);
   }
 
-  const { data, status } = useIncidentById(id);
-  const {
-    incidentId, status: incStatus, importance, authority, title,
-  } = data || {};
-
   if (status === 'loading') return <Loading />;
   return (
     <Container>
+      <AvatarContainer>
+        <Avatar className='avatar-absolute' id={authority.id} />
+      </AvatarContainer>
       <HeaderContainer>
-        <h4>{title}</h4>
+        <Stars startsCount={importance.id} />
+        <h4 style={{ marginLeft: 5 }}>{title}</h4>
         <Seperator big />
         <h4>{id}</h4>
       </HeaderContainer>
+      <Status />
       <IncidentNavigation>
         {IncidentNavContent.map((tab, index) => (
           <Li
@@ -58,11 +83,12 @@ function Incident() {
             onClick={() => changeActiveTab(index)}
             active={index === currentIndex}
           >
-            <tab.Icon className="tab-icon" />
+            <tab.Icon className='tab-icon' />
             <p>{tab.tag}</p>
           </Li>
         ))}
       </IncidentNavigation>
+      <TabsContainer>{currentTab.content}</TabsContainer>
     </Container>
   );
 }

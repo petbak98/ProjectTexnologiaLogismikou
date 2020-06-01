@@ -10,13 +10,13 @@ const StarsContainer = styled.div`
   }
 `;
 
-function Stars({ startsCount }) {
-  const stars = [];
-  for (let i = 0; i < 5; i = +1) {
+function Stars({ startsCount = 0 }) {
+  let stars = [];
+  for (let i = 0; i < 5; i++) {
     if (i < startsCount) {
-      stars.push(<StarIcon key={i} className="star" />);
+      stars.push(<StarIcon key={i} className='star' />);
     } else {
-      stars.push(<StarBorderIcon key={i} className="star" />);
+      stars.push(<StarBorderIcon key={i} className='star' />);
     }
   }
   return <StarsContainer>{stars}</StarsContainer>;

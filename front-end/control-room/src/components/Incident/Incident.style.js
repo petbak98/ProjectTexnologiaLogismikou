@@ -11,7 +11,12 @@ const HeaderLine = css`
   top: 55%;
 `;
 
+export const TabsContainer = styled.div`
+  width: 100%;
+`;
+
 export const Li = styled.li`
+  position: relative;
   p {
     font-size: 13px;
     margin-top: 5px;
@@ -21,21 +26,29 @@ export const Li = styled.li`
   text-align: center;
   border: 2px solid ${theme.palette.primary.main};
   margin-right: 5px;
-  ${({ active }) => (active
-    ? css`
+  ${({ active }) =>
+    active
+      ? css`
           opacity: 1;
         `
-    : css`
+      : css`
           opacity: 0.5;
-        `)};
+        `};
 
   cursor: pointer;
   padding: 2rem 1rem;
-  transition: opacity 0.2s linear;
   .tab-icon {
     fill: ${theme.palette.primary.main};
     height: 25px;
     width: 25px;
+  }
+  flex: 1;
+  @media screen and (max-width: 550px) {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    :last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -43,39 +56,40 @@ export const IncidentNavigation = styled.ul`
   list-style: none;
   margin-top: 1rem;
   display: flex;
+  justify-content:space-between;
+  width:100%;
+  @media screen and (max-width: 550px) {
+    max-width: 550px;
+    flex-direction:column;
+    margin: 40px auto;
+  }
   }
 `;
 
 export const HeaderContainer = styled.section`
-  display:flex;
-
-  :after {
-    ${HeaderLine}
-    left:-25px;
-  }
-  :before {
-    right: -25px;
-    ${HeaderLine}
-  } */
+  display: flex;
+  align-items: center;
 `;
 
 export const Container = styled.main`
-  padding:2rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: ${theme.palette.primary.dark};
-
-
-  /* position: relative;
-  padding: 1rem 2rem;
+  margin: 40px 40px;
+  position: relative;
+  padding: 3rem 2rem;
   border-top: 5px solid ${theme.palette.primary.main};
   box-shadow: ${theme.shadows[5]};
-  margin: 40px 20px;
-  padding-top: 40px;
+  padding-top: 5 0px;
   border-radius: ${theme.shape.borderRadius};
   .avatar-absolute {
-  } */
+  }
+  @media screen and (min-width: 600px) {
+    max-width: 550px;
+    margin: 40px auto;
+  }
 `;
 
 export const TitleContainer = styled.div`
