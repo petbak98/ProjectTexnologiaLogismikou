@@ -34,16 +34,22 @@ public class IncidentsController {
 
     @GetMapping("/incidents")
     @ResponseBody
-    public ResponseEntity<String> incidentsCalculation(@RequestBody UserLocationIncident userLocationIncident) throws JsonProcessingException {
+    public ResponseEntity<String> commonIncidents(@RequestBody UserLocationIncident userLocationIncident) {
         User user = userService.findById(userLocationIncident.getUserId());
-        System.out.println(user.getRoles());
-       if(user.getRoles().contains(ERole.ROLE_USER) == true){
-           System.out.println("user");
-       }
-       else{
-           System.out.println("admin or moderator");
-       }
 
-       return ResponseEntity.ok().body("{\"Status\": \"LOL\"}");
+        if(user.getRoles().stream().findFirst().isPresent()) {
+            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER")) {
+                System.out.println("user");
+                return ResponseEntity.ok().body("{\"Status\": \"RETURNED USER INCIDENTS\"}");
+            } else {
+                System.out.println("admin or moderator");
+                return ResponseEntity.ok().body("{\"Status\": \"RETURNED MOD INCIDENTS\"}");
+            }
+        }
+        else
+        {
+            return ResponseEntity.ok().body("{\"Status\": \"USER NOT FOUND\"}");
+
+        }
     }
 }
