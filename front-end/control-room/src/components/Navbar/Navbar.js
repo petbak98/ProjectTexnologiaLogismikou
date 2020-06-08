@@ -1,9 +1,10 @@
 import React from 'react';
+
+import { Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 import styled from 'styled-components/macro';
 
 import { Layout } from '../Layout/Layout';
@@ -29,10 +30,10 @@ const LinkButton = styled(Button)`
 `;
 const Navbar = ({ children }) => {
   return (
-    <AppBar color="primary" position="static">
+    <AppBar color='primary' position='static'>
       <Layout>
         <Toolbar>
-          <Typography style={{ marginRight: '1rem' }} variant="subtitle1">
+          <Typography style={{ marginRight: '1rem' }} variant='subtitle1'>
             Control Room
           </Typography>
           {children}

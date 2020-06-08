@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { useAuthService } from '../../hooks/useAuth';
-import HomeCC from '../../pages/Home/HomeCC';
 import useInterceptor from '../../hooks/useInterceptor';
+import HomeCC from '../../pages/Home/HomeCC';
 
 function AuthApp() {
   const [state] = useAuthService();

@@ -4,7 +4,7 @@ export const FormStyles = makeStyles((theme) => {
   return {
     title: {
       color: theme.palette.primary.main,
-      paddingTop: theme.spacing(5)
+      paddingTop: theme.spacing(5),
     },
     container: {
       margin: '0 auto',
@@ -14,7 +14,7 @@ export const FormStyles = makeStyles((theme) => {
       maxWidth: '95%',
       color: theme.palette.primary.main,
       padding: theme.spacing(5),
-      boxShadow: theme.shadows[10]
-    }
+      boxShadow: theme.shadows[10],
+    },
   };
 });

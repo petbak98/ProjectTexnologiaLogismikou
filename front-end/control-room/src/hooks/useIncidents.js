@@ -10,16 +10,16 @@ function useIncidents() {
         [
           'incident',
           {
-            id: incidentId
-          }
+            id: incidentId,
+          },
         ],
-        incident
+        incident,
       );
     });
   }
 
   return useQuery('incidents', fetchIncidents, {
-    onSuccess: prefetchIncidentById
+    onSuccess: prefetchIncidentById,
   });
 }
 

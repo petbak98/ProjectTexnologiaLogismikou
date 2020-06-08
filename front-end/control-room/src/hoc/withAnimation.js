@@ -1,13 +1,14 @@
 import React from 'react';
+
 import { motion } from 'framer-motion';
 
 export const animationConfig = {
-  slideUp: 30
+  slideUp: 30,
 };
 
 export function WithAnimation(Wrapped) {
   const { slide = 0, slideUp = 0 } = animationConfig;
-  return () => (
+  const Animated = () => (
     <motion.div
       exit={{ opacity: 0, x: slide, y: slideUp }}
       initial={{ opacity: 0, x: slide, y: slideUp }}
@@ -16,4 +17,5 @@ export function WithAnimation(Wrapped) {
       <Wrapped />
     </motion.div>
   );
+  return Animated;
 }

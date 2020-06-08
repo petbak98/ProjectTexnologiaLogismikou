@@ -1,11 +1,9 @@
 import React from 'react';
+
 import { FormLabel, TextField, Button, Typography } from '@material-ui/core';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from 'react-places-autocomplete';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { toast } from 'react-toastify';
 
 import { ReactComponent as LocationIcon } from '../../../../assets/icons/location.svg';
@@ -36,17 +34,15 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
       region: getRegion(adrs),
       postalCode: getPostalCode(adrs),
       lat: latLng.lat,
-      lng: latLng.lng
+      lng: latLng.lng,
     };
     setFormState(state);
   }
-
   function handleGeoChange(adrs) {
     setFormState(undefined);
     setError(false);
     setAddress(adrs);
   }
-
   function handleSelect(adrs) {
     setAddress('');
     let adressComponents;
@@ -98,7 +94,7 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <div>
-            <FormLabel className={classes.selectLabel} component="legend">
+            <FormLabel className={classes.selectLabel} component='legend'>
               Βρες την διεύθυνηση σου
             </FormLabel>
             <TextField
@@ -108,7 +104,7 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
                 size: 'small',
                 variant: 'outlined',
                 className: classes.input,
-                error
+                error,
               })}
             />
             <div className={classes.dropdown}>
@@ -120,10 +116,10 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
                   : { backgroundColor: '#FAFAFA', cursor: 'pointer' };
                 return (
                   <div
-                    // eslint-disable-next-line
+                    key={suggestion}
                     {...getSuggestionItemProps(suggestion, {
                       className,
-                      style
+                      style,
                     })}
                   >
                     <LocationIcon className={classes.locationSvg} />
@@ -137,14 +133,14 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
       </PlacesAutocomplete>
       {formState && (
         <>
-          <Typography color="secondary" className={classes.infoLabel}>
+          <Typography color='secondary' className={classes.infoLabel}>
             Η επιλογή σου
           </Typography>
           <div className={classes.infoContainer}>
-            <LocationStepInfo label="Περιοχή" content={formState.region} />
-            <LocationStepInfo label="Οδός" content={formState.street} />
-            <LocationStepInfo label="Νούμερο" content={formState.number} />
-            <LocationStepInfo label="T.K" content={formState.postalCode} />
+            <LocationStepInfo label='Περιοχή' content={formState.region} />
+            <LocationStepInfo label='Οδός' content={formState.street} />
+            <LocationStepInfo label='Νούμερο' content={formState.number} />
+            <LocationStepInfo label='T.K' content={formState.postalCode} />
           </div>
         </>
       )}
@@ -153,9 +149,9 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
           style={{ marginRight: 5 }}
           onClick={handlePrevious}
           className={classes.button}
-          size="large"
-          color="primary"
-          variant="text"
+          size='large'
+          color='primary'
+          variant='text'
           startIcon={<NavigateBeforeIcon />}
         >
           ΠΡΟΗΓΟΥΜΕΝΟ
@@ -163,9 +159,9 @@ function LocationStep({ nextStep, previousStep, updateForm }) {
         <Button
           onClick={handleNext}
           className={classes.button}
-          size="large"
-          color="primary"
-          variant="contained"
+          size='large'
+          color='primary'
+          variant='contained'
           endIcon={<NavigateNextIcon />}
         >
           ΕΠΟΜΕΝΟ

@@ -14,48 +14,48 @@ export const feedItemStyles = makeStyles((theme) => {
       borderRadius: theme.shape.borderRadius,
       paddingTop: theme.spacing(10),
       paddingLeft: theme.spacing(5),
-      paddingRight: theme.spacing(5)
+      paddingRight: theme.spacing(5),
     },
     feedLi: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     title: {
-      fontWeight: theme.typography.fontWeightBold
+      fontWeight: theme.typography.fontWeightBold,
     },
     fireIcon: {
       marginLeft: theme.spacing(2),
-      color: theme.palette.warning.main
+      color: theme.palette.warning.main,
     },
     dateIcon: {
       color: theme.palette.primary.main,
-      marginLeft: theme.spacing(2)
+      marginLeft: theme.spacing(2),
     },
     chips: {
       display: 'flex',
       alignItems: 'center',
       marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(3)
+      marginBottom: theme.spacing(3),
     },
     chip: {
       color: '#fff',
       marginRight: theme.spacing(1),
-      background: theme.palette.grey[400]
+      background: theme.palette.grey[400],
     },
     locationIcon: {
       marginLeft: theme.spacing(2),
-      color: theme.palette.purple.main
+      color: theme.palette.purple.main,
     },
     infoContainer: {
       display: 'flex',
       alignItems: 'center',
       paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(2)
+      paddingBottom: theme.spacing(2),
     },
     chipsContainer: {
       display: 'flex',
       alignItems: 'center',
-      borderBottom: `1px solid ${theme.palette.primary.main}`
+      borderBottom: `1px solid ${theme.palette.primary.main}`,
     },
     avatarContainer: {
       position: 'absolute',
@@ -68,7 +68,7 @@ export const feedItemStyles = makeStyles((theme) => {
       padding: theme.spacing(2),
       height: 70,
       boxShadow: theme.shadows[5],
-      border: `2px solid ${theme.palette.primary.main}`
+      border: `2px solid ${theme.palette.primary.main}`,
     },
     id: {
       fontWeight: theme.typography.fontWeightBold,
@@ -76,15 +76,15 @@ export const feedItemStyles = makeStyles((theme) => {
       top: 0,
       right: 0,
       marginTop: theme.spacing(2),
-      marginRight: theme.spacing(5)
+      marginRight: theme.spacing(5),
     },
     avatar: {
       width: '100%',
-      height: '100%'
+      height: '100%',
     },
     button: {
       marginLeft: theme.spacing(2),
-      textTransform: 'none'
-    }
+      textTransform: 'none',
+    },
   };
 });

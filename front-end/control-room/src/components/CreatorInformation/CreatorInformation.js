@@ -1,11 +1,12 @@
 import React from 'react';
+
 import styled from 'styled-components/macro';
 
 import theme from '../../config/theme';
 import { InformationItem } from '../../shared';
 
 const CreatorContainer = styled.ul`
-  margin-top: 1rem;
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -13,7 +14,7 @@ const CreatorContainer = styled.ul`
 `;
 
 const CreatorInfoItem = styled.li`
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   :last-child {
     margin-bottom: 0;
   }

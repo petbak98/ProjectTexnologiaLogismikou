@@ -1,28 +1,30 @@
 import React from 'react';
+
 import { useParams } from 'react-router-dom';
 
+import { InformationIcon, ReportsIcon, UserIcon } from '../../assets/icons';
 import useIncidentById from '../../hooks/useIncidentById';
-import Loading from '../Loading/Loading';
-import {
-  Li,
-  HeaderContainer,
-  Seperator,
-  Container,
-  TitleContainer,
-  CreatorContainer,
-  CodeContainer,
-  StatusContainer,
-  Label,
-  AvatarContainer,
-  IncidentNavigation,
-  TabsContainer,
-} from './Incident.style';
-import Stars from '../Stars/Stars';
-import { Avatar } from '../../shared';
-import { ReportsIcon, InformationIcon, UserIcon } from '../../assets/icons';
 import useTabs from '../../hooks/useTabs';
+import { Avatar } from '../../shared';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
+import IncidentInformation from '../IncidentInformation/IncidentInformation';
+import Loading from '../Loading/Loading';
+import Stars from '../Stars/Stars';
 import Status from '../Status/Status';
+import {
+  AvatarContainer,
+  CodeContainer,
+  Container,
+  CreatorContainer,
+  HeaderContainer,
+  IncidentNavigation,
+  Label,
+  Li,
+  Seperator,
+  StatusContainer,
+  TabsContainer,
+  TitleContainer,
+} from './Incident.style';
 
 function Incident() {
   const { id } = useParams();
@@ -34,10 +36,15 @@ function Incident() {
     callerNationalId,
     coordinatorName,
     incidentId,
+    number,
+    street,
     status: incStatus,
     importance,
+    notes,
+    receivers,
     authority,
     title,
+    region,
   } = data || {};
   const IncidentNavContent = [
     {
@@ -53,10 +60,24 @@ function Incident() {
         />
       ),
     },
-    { tag: 'Πληροφορίες', Icon: InformationIcon, content: 'test1' },
+    {
+      tag: 'Πληροφορίες',
+      Icon: InformationIcon,
+      content: (
+        <IncidentInformation
+          receivers={receivers}
+          notes={notes}
+          region={region}
+          street={street}
+          number={number}
+          incidentId={incidentId}
+          completed={incStatus?.completed}
+        />
+      ),
+    },
     { tag: 'Αναφορές', Icon: ReportsIcon, content: 'test2' },
   ];
-
+  console.log(data);
   const { currentTab, changeTab, currentIndex } = useTabs(0, IncidentNavContent);
 
   function changeActiveTab(index) {
@@ -75,14 +96,10 @@ function Incident() {
         <Seperator big />
         <h4>{id}</h4>
       </HeaderContainer>
-      <Status />
+      <Status status={incStatus.completed} />
       <IncidentNavigation>
         {IncidentNavContent.map((tab, index) => (
-          <Li
-            key={tab.content}
-            onClick={() => changeActiveTab(index)}
-            active={index === currentIndex}
-          >
+          <Li key={index} onClick={() => changeActiveTab(index)} active={index === currentIndex}>
             <tab.Icon className='tab-icon' />
             <p>{tab.tag}</p>
           </Li>
@@ -94,35 +111,3 @@ function Incident() {
 }
 
 export default Incident;
-
-{
-  /* <Container>
-      <TitleContainer>
-        <CodeContainer>
-          <div>Κωδικός Περιστατικού:</div>
-          <h4>
-            <span>{incidentId}</span>
-          </h4>
-        </CodeContainer>
-        <StatusContainer>
-          <Label>{incStatus.completed ? 'Κλειστό' : 'Ανοιχτό'}</Label>
-          <Seperator />
-          <Label>
-            <span>Προτεραιότητα</span>
-          </Label>
-          <Stars startsCount={importance.id} />
-        </StatusContainer>
-      </TitleContainer>
-      <CreatorContainer>
-        <AvatarContainer>
-          <Avatar className="avatar-absolute" id={authority.id} />
-        </AvatarContainer>
-        <CodeContainer>
-          <div>Tίτλος:</div>
-          <h4>
-            <span>{title}</span>
-          </h4>
-        </CodeContainer>
-      </CreatorContainer>
-    </Container> */
-}

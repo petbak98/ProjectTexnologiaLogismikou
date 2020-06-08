@@ -1,11 +1,12 @@
 import React from 'react';
-import { TextField, InputAdornment } from '@material-ui/core';
+
+import { InputAdornment, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-import Feed from '../../Feed/Feed';
-import { feedCCStyle } from './FeedCC.style';
 import useIncidents from '../../../hooks/useIncidents';
+import Feed from '../../Feed/Feed';
 import Loading from '../../Loading/Loading';
+import { feedCCStyle } from './FeedCC.style';
 
 export default function FeedCC() {
   const { status, data: incidents } = useIncidents();
@@ -18,15 +19,15 @@ export default function FeedCC() {
       <TextField
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
+            <InputAdornment position='start'>
               <SearchIcon />
             </InputAdornment>
-          )
+          ),
         }}
-        placeholder="π.χ 12325"
-        variant="outlined"
-        id="input-with-icon-textfield"
-        label="Ανάζητηση"
+        placeholder='π.χ 12325'
+        variant='outlined'
+        id='input-with-icon-textfield'
+        label='Ανάζητηση'
         className={classes.search}
       />
       <Feed incidents={incidents} />

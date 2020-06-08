@@ -1,16 +1,17 @@
 import React from 'react';
+
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const styles = makeStyles((theme) => {
   return {
     container: {
-      display: 'flex'
+      display: 'flex',
     },
     errorContainer: {
       display: 'flex',
-      color: theme.palette.purple.main
-    }
+      color: theme.palette.purple.main,
+    },
   };
 });
 export default function LocationStepInfo({ label, content }) {
