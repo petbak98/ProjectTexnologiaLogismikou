@@ -12,13 +12,17 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.StringWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Helpers {
 
     public static String convertToJson(Object ob) throws JsonProcessingException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.setDateFormat(df);
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ob);
     }
 
