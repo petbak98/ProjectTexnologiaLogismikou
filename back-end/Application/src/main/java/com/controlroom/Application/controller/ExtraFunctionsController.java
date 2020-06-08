@@ -25,8 +25,8 @@ import static com.controlroom.Application.util.Helpers.convertToJson;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/admin")
-@PreAuthorize("hasRole('ADMIN')")
+@RequestMapping("/api")
+@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 public class ExtraFunctionsController {
 
     @Autowired
