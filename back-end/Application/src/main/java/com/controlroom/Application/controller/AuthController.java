@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -27,7 +27,7 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -45,5 +45,10 @@ public class AuthController {
                 userDetails.getUsername(), userDetails.getEmail(), roles,
                 userDetails.getFirstName(), userDetails.getLastName(),
                 userDetails.getLatitude(), userDetails.getLongitude(), userDetails.getAuthority()));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutUser() {
+        return ResponseEntity.ok().body("{}");
     }
 }
