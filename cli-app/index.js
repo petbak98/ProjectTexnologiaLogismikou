@@ -15,6 +15,7 @@ console.log(
 		)
 	);
 
+
 inquirer
 .prompt([
 {
@@ -48,8 +49,6 @@ inquirer
 
 	}
 });
-
-
 
 
 
