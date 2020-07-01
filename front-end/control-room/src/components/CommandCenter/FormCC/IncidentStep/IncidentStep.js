@@ -1,26 +1,25 @@
 import React from 'react';
+
 import {
   TextField,
-  Checkbox,
-  FormGroup,
   FormControlLabel,
   FormControl,
   FormLabel,
   Button,
   Typography,
+  RadioGroup,
+  Radio,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { toast } from 'react-toastify';
 
+import Stars from '../../../Stars/Stars';
 import { IncidentStepStyles } from './IncidentStep.style';
 
-function IncidentStep({ nextStep, send, updateForm }) {
-  const [title, setTitle] = React.useState('');
-  const [authority, setAuthority] = React.useState({
-    port: false,
-    police: false,
-    fire: false,
-  });
+function IncidentStep({ nextStep, send, updateForm, editProps }) {
+  const [title, setTitle] = React.useState(editProps?.title || '');
+  const [authority, setAuthority] = React.useState(editProps?.authority || '');
+  const [importance, setImportance] = React.useState(1);
   const [errors, setErrors] = React.useState({
     title: false,
     authority: false,
@@ -31,10 +30,13 @@ function IncidentStep({ nextStep, send, updateForm }) {
     setTitle(e.target.value);
   }
 
-  function handleSelectChange(e) {
+  function handleAuthorityChange(e) {
     setErrors({ ...errors, authority: false });
-    const { name, checked } = e.target;
-    setAuthority({ ...authority, [name]: checked });
+    setAuthority(e.target.value);
+  }
+
+  function handleStarsUpdate(value) {
+    setImportance(value);
   }
 
   function isValid() {
@@ -51,7 +53,7 @@ function IncidentStep({ nextStep, send, updateForm }) {
   function handleNext() {
     const valid = isValid({ title, authority });
     if (valid) {
-      updateForm({ title, authority });
+      updateForm({ title, authority: { id: Number(authority) }, importance: { id: importance } });
       send({ type: 'EVENT', nextStep });
     } else {
       toast.error('Συμπλήρωσε όλα τα πεδία');
@@ -61,72 +63,58 @@ function IncidentStep({ nextStep, send, updateForm }) {
 
   return (
     <div className={classes.container}>
-      <FormLabel className={classes.selectLabel} component="legend">
+      <FormLabel className={classes.selectLabel} component='legend'>
         Τίτλος
       </FormLabel>
       <TextField
         error={errors?.title}
-        name="title"
-        size="small"
+        name='title'
+        size='small'
         value={title}
         className={classes.input}
-        variant="outlined"
+        variant='outlined'
         onChange={handleChange}
-        placeholder="Δώσε τίτλο"
+        placeholder='Δώσε τίτλο'
       />
-      <FormControl component="fieldset">
-        <FormLabel className={classes.selectLabel} component="legend">
+      <FormControl component='fieldset'>
+        <FormLabel className={classes.selectLabel} component='legend'>
           Διάλεξε υπηρεσία
         </FormLabel>
-        <FormGroup className={classes.formGroup}>
+        <RadioGroup
+          className={classes.formGroup}
+          value={authority}
+          onChange={handleAuthorityChange}
+        >
           <FormControlLabel
-            control={
-              <Checkbox
-                checked={authority.police}
-                className={classes.select}
-                name="police"
-                color="primary"
-                onChange={handleSelectChange}
-              />
-            }
-            label="Αστυνομία"
+            value='1'
+            control={<Radio className={classes.select} />}
+            label='Αστυνομία'
           />
           <FormControlLabel
-            control={
-              <Checkbox
-                className={classes.select}
-                onChange={handleSelectChange}
-                name="fire"
-                checked={authority.fire}
-                color="primary"
-              />
-            }
-            label="Πυροσβεστική"
+            value='2'
+            control={<Radio className={classes.select} />}
+            label='Πυροσβετική'
           />
           <FormControlLabel
-            control={
-              <Checkbox
-                className={classes.select}
-                onChange={handleSelectChange}
-                name="port"
-                color="primary"
-              />
-            }
-            label="Λιμενικό"
+            value='3'
+            control={<Radio className={classes.select} />}
+            label='Λυμενικό'
           />
-        </FormGroup>
+        </RadioGroup>
         {errors.authority && (
-          <Typography className={classes.formGroupError}>
-            Διάλεξε μια επιλογή
-          </Typography>
+          <Typography className={classes.formGroupError}>Διάλεξε μια επιλογή</Typography>
         )}
       </FormControl>
+      <FormLabel className={classes.starsLabel} component='legend'>
+        Σημασία
+      </FormLabel>
+      <Stars size='large' startsCount={importance} handleClick={handleStarsUpdate} />
       <Button
         onClick={handleNext}
         className={classes.button}
-        size="large"
-        color="primary"
-        variant="contained"
+        size='large'
+        color='primary'
+        variant='contained'
         endIcon={<NavigateNextIcon />}
       >
         ΕΠΟΜΕΝΟ

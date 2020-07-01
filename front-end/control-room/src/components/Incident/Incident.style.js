@@ -2,15 +2,6 @@ import styled, { css } from 'styled-components/macro';
 
 import theme from '../../config/theme';
 
-const HeaderLine = css`
-  position: absolute;
-  content: '';
-  width: 20px;
-  background: rgba(0, 0, 0, 0.2);
-  height: 0.5px;
-  top: 55%;
-`;
-
 export const TabsContainer = styled.div`
   width: 100%;
 `;

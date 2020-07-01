@@ -11,50 +11,64 @@ import { LocationStepStyles } from './LocationStep.style';
 import LocationStepInfo from './LocationStepInfo';
 
 function getStreetΝumber(address) {
-  return address.find((item) => item.types.includes('street_number'))?.longName;
+  return address.find((item) => item.types.includes('street_number'))?.long_name;
 }
 function getPostalCode(address) {
-  return address.find((item) => item.types.includes('postal_code'))?.longName;
+  return address.find((item) => item.types.includes('postal_code'))?.long_name;
 }
 function getStreet(address) {
-  return address.find((item) => item.types.includes('route'))?.longName;
+  return address.find((item) => item.types.includes('route'))?.long_name;
 }
 function getRegion(address) {
-  return address.find((item) => item.types.includes('locality'))?.longName;
+  return address.find((item) => item.types.includes('locality'))?.long_name;
 }
 
-function LocationStep({ nextStep, previousStep, updateForm }) {
-  const [formState, setFormState] = React.useState(undefined);
+function LocationStep({ nextStep, previousStep, updateForm, updateProps }) {
+  const [formState, setFormState] = React.useState(
+    updateProps
+      ? {
+          street: updateProps.street,
+          number: updateProps.number,
+          region: updateProps.region,
+          postalCode: updateProps.postalCode,
+          latitude: updateProps.latitude,
+          longitude: updateProps.longitude,
+        }
+      : undefined,
+  );
   const [address, setAddress] = React.useState('');
   const [error, setError] = React.useState(false);
+
   function fillAdress(adrs, latLng) {
     const state = {
-      street: `${getStreet(adrs)}`,
+      street: getStreet(adrs),
       number: getStreetΝumber(adrs),
       region: getRegion(adrs),
       postalCode: getPostalCode(adrs),
-      lat: latLng.lat,
-      lng: latLng.lng,
+      lattitude: latLng.lat,
+      longitude: latLng.lng,
     };
     setFormState(state);
   }
+
   function handleGeoChange(adrs) {
     setFormState(undefined);
     setError(false);
     setAddress(adrs);
   }
+
   function handleSelect(adrs) {
     setAddress('');
     let adressComponents;
     geocodeByAddress(adrs)
       .then((results) => {
-        adressComponents = results[0].adressComponents;
+        adressComponents = results[0].address_components;
         return getLatLng(results[0]);
       })
       .then((latLng) => {
         fillAdress(adressComponents, latLng);
-      })
-      .catch((err) => console.error('Error', err));
+      });
+    // .catch((err) => console.error('Error', err));
   }
 
   function isValid() {

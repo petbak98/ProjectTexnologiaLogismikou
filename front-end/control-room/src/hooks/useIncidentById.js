@@ -1,12 +1,11 @@
-import { useQuery } from 'react-query';
 import Axios from 'axios';
+import { useQuery } from 'react-query';
+
 import { API } from '../config/config.utils';
 
 function useIncidentById(id) {
   async function fetchIncidentById() {
-    const result = await Axios.get(
-      `${API}control-center/api/mod/incidents/${id}`
-    );
+    const result = await Axios.get(`${API}/incidents/${id}?format=json`);
     return result.data;
   }
 

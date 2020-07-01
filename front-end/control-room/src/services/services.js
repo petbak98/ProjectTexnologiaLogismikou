@@ -1,8 +1,12 @@
 import Axios from 'axios';
+
 import { API } from '../config/config.utils';
-import { incidents } from './mockiIncidents';
 
 export async function fetchIncidents() {
-  const result = await Axios.get(API + 'control-center/api/mod/incidents');
+  const result = await Axios.get(API + '/mod/incidents');
   return result.data;
+}
+
+export function createIncident(params) {
+  return Axios.post(API + '/incidents', params);
 }

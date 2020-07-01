@@ -7,19 +7,21 @@ import { toast } from 'react-toastify';
 
 import { CallerDataStyles } from './CallerDataStep.style';
 
-function CallerDataStep({ previousStep, nextStep, updateForm }) {
+function CallerDataStep({ previousStep, nextStep, updateForm, updateProps, handleSubmit }) {
   const classes = CallerDataStyles();
   const [formState, setFormState] = React.useState({
-    callerFirstName: '',
-    callerLastName: '',
-    callerPhone: '',
-    callerNationalId: '',
+    callerFirstName: updateProps?.callerFirstName || '',
+    callerLastName: updateProps?.callerLastName || '',
+    callerPhone: updateProps?.callerPhone || '',
+    callerNationalId: updateProps?.callerNationalId || '',
+    notes: updateProps?.notes || '',
   });
   const [error, setError] = React.useState({
     callerFirstName: false,
     callerLastName: false,
     callerPhone: false,
     callerNationalId: false,
+    notes: false,
   });
 
   function handleChange(e) {
@@ -39,8 +41,7 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
   function handleNext() {
     const valid = isValid();
     if (valid) {
-      updateForm(formState);
-      nextStep();
+      handleSubmit(formState);
     } else {
       toast.error('Συμπλήρωσε όλα τα πεδία');
     }
@@ -52,7 +53,6 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
 
   return (
     <div className={classes.container}>
-      Π
       <FormLabel className={classes.selectLabel} component='legend'>
         Όνομα
       </FormLabel>
@@ -105,6 +105,21 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
         variant='outlined'
         placeholder='π.χ. 2102596392'
       />
+      <FormLabel className={classes.selectLabel} component='legend'>
+        Σημειώσεις
+      </FormLabel>
+      <TextField
+        name='notes'
+        error={error.notes}
+        onChange={handleChange}
+        value={formState.notes}
+        size='small'
+        multiline={true}
+        rows={4}
+        className={classes.input}
+        variant='outlined'
+        placeholder='π.χ. Γείτονας που παρατήρησε το συμβάν'
+      />
       <div style={{ marginLeft: 'auto' }}>
         <Button
           style={{ marginRight: 5 }}
@@ -125,7 +140,7 @@ function CallerDataStep({ previousStep, nextStep, updateForm }) {
           variant='contained'
           endIcon={<NavigateNextIcon />}
         >
-          ΕΠΟΜΕΝΟ
+          Καταχώρηση
         </Button>
       </div>
     </div>

@@ -77,7 +77,7 @@ function Incident() {
     },
     { tag: 'Αναφορές', Icon: ReportsIcon, content: 'test2' },
   ];
-  console.log(data);
+
   const { currentTab, changeTab, currentIndex } = useTabs(0, IncidentNavContent);
 
   function changeActiveTab(index) {

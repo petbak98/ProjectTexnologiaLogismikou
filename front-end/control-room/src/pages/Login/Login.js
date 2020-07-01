@@ -1,10 +1,12 @@
 import React from 'react';
+
 import { TextField, Button, useTheme } from '@material-ui/core';
 import { toast } from 'react-toastify';
-import Loading from '../../components/Loading/Loading';
+
 import { ReactComponent as LoginIcon } from '../../assets/icons/auth.svg';
-import { LoginContainer, FormContainer } from './Login.style';
+import Loading from '../../components/Loading/Loading';
 import { useAuthService } from '../../hooks/useAuth';
+import { LoginContainer, FormContainer } from './Login.style';
 
 export default function Login() {
   const [state, send] = useAuthService();
@@ -34,33 +36,33 @@ export default function Login() {
   return (
     <LoginContainer>
       <LoginIcon style={{ width: '100%', height: '300px' }} />
-      <FormContainer noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <FormContainer noValidate autoComplete='off' onSubmit={handleSubmit}>
         <TextField
           onChange={handleChange}
           fullWidth
-          name="username"
+          name='username'
           style={{ marginTop: 10 }}
-          variant="outlined"
-          margin="normal"
-          label="ΑΡΙΘΜΟΣ ΜΗΤΡΩΟΥ"
+          variant='outlined'
+          margin='normal'
+          label='ΑΡΙΘΜΟΣ ΜΗΤΡΩΟΥ'
         />
         <TextField
           onChange={handleChange}
-          name="password"
+          name='password'
           fullWidth
-          variant="outlined"
-          margin="normal"
-          type="password"
+          variant='outlined'
+          margin='normal'
+          type='password'
           style={{ marginTop: 10 }}
-          label="Κωδικός"
+          label='Κωδικός'
         />
       </FormContainer>
       <Button
         onClick={handleSubmit}
         style={{ padding: 10, marginTop: 10 }}
         fullWidth
-        variant="contained"
-        color="primary"
+        variant='contained'
+        color='primary'
       >
         ΣΥΝΔΕΣΗ
       </Button>

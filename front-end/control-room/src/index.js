@@ -1,9 +1,10 @@
 import React from 'react';
+
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { AuthProvider } from './hooks/useAuth';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
