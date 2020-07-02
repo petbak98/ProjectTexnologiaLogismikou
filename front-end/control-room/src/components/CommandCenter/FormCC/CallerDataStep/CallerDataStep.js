@@ -7,14 +7,14 @@ import { toast } from 'react-toastify';
 
 import { CallerDataStyles } from './CallerDataStep.style';
 
-function CallerDataStep({ previousStep, nextStep, updateForm, updateProps, handleSubmit }) {
+function CallerDataStep({ previousStep, nextStep, updateForm, editProps, handleSubmit }) {
   const classes = CallerDataStyles();
   const [formState, setFormState] = React.useState({
-    callerFirstName: updateProps?.callerFirstName || '',
-    callerLastName: updateProps?.callerLastName || '',
-    callerPhone: updateProps?.callerPhone || '',
-    callerNationalId: updateProps?.callerNationalId || '',
-    notes: updateProps?.notes || '',
+    callerFirstName: editProps?.callerFirstName || '',
+    callerLastName: editProps?.callerLastName || '',
+    callerPhone: editProps?.callerPhone || '',
+    callerNationalId: editProps?.callerNationalId || '',
+    notes: editProps?.notes || '',
   });
   const [error, setError] = React.useState({
     callerFirstName: false,
@@ -140,7 +140,7 @@ function CallerDataStep({ previousStep, nextStep, updateForm, updateProps, handl
           variant='contained'
           endIcon={<NavigateNextIcon />}
         >
-          Καταχώρηση
+          Καταχωρηση
         </Button>
       </div>
     </div>

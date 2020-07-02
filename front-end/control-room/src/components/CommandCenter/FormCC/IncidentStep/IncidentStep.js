@@ -18,7 +18,9 @@ import { IncidentStepStyles } from './IncidentStep.style';
 
 function IncidentStep({ nextStep, send, updateForm, editProps }) {
   const [title, setTitle] = React.useState(editProps?.title || '');
-  const [authority, setAuthority] = React.useState(editProps?.authority || '');
+  const [authority, setAuthority] = React.useState(
+    editProps.authority ? String(editProps?.authority.id) : '1',
+  );
   const [importance, setImportance] = React.useState(1);
   const [errors, setErrors] = React.useState({
     title: false,

@@ -3,14 +3,14 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { useMachine } from '@xstate/react';
 import { useMutation } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import StepWizard from 'react-step-wizard';
 import { toast } from 'react-toastify';
 import { Machine } from 'xstate';
 
 import './FormCC.style.css';
 import { useAuthService } from '../../../hooks/useAuth';
-import { createIncident } from '../../../services/services';
+import { createIncident, editIncident } from '../../../services/services';
 import Loading from '../../Loading/Loading';
 import StepsNav from '../../StepsNav/StepNav';
 import CallerDataStep from './CallerDataStep/CallerDataStep';
@@ -39,15 +39,18 @@ const StepsMachine = Machine({
 export default function FormCC() {
   const [, send] = useMachine(StepsMachine);
   const history = useHistory();
-  const [form, setForm] = React.useState({});
   const [state] = useAuthService();
-  const [mutate, { status, error }] = useMutation(createIncident);
   const coordinatorId = state.context.user.id;
-
+  const location = useLocation();
+  const incident = location.state?.incident;
+  window.history.pushState(null, '');
+  const editStrategy = incident ? true : false;
+  Object.freeze(editStrategy);
+  const [mutate, { status, error }] = useMutation(editStrategy ? editIncident : createIncident);
+  const [form, setForm] = React.useState(editStrategy ? incident : {});
   function updateForm(newValues) {
     setForm({ ...form, ...newValues });
   }
-
   React.useEffect(() => {
     if (status === 'success') {
       toast.success('Επιτυχής καταχώρηση');
@@ -79,7 +82,7 @@ export default function FormCC() {
   return (
     <>
       <Typography className={classes.title} align='center' variant='h6'>
-        Προσθήκη Συμβάντος
+        {editStrategy ? 'Επεξεργασία Συμβάντος' : 'Προσθήκη Συμβάντος'}
       </Typography>
       <div className={classes.container}>
         <StepWizard
@@ -93,9 +96,9 @@ export default function FormCC() {
             exitLeft: 'exit',
           }}
         >
-          <IncidentStep updateForm={updateForm} send={send} />
-          <LocationStep updateForm={updateForm} />
-          <CallerDataStep updateForm={updateForm} handleSubmit={handleSubmit} />
+          <IncidentStep editProps={form} updateForm={updateForm} send={send} />
+          <LocationStep editProps={form} updateForm={updateForm} />
+          <CallerDataStep editProps={form} updateForm={updateForm} handleSubmit={handleSubmit} />
           <FinalScreen />
         </StepWizard>
       </div>

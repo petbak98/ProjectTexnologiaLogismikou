@@ -15,6 +15,7 @@ export const feedItemStyles = makeStyles((theme) => {
       paddingTop: theme.spacing(10),
       paddingLeft: theme.spacing(5),
       paddingRight: theme.spacing(5),
+      paddingBottom: theme.spacing(5),
     },
     feedLi: {
       display: 'flex',
@@ -31,16 +32,9 @@ export const feedItemStyles = makeStyles((theme) => {
       color: theme.palette.primary.main,
       marginLeft: theme.spacing(2),
     },
-    chips: {
+    actions: {
       display: 'flex',
-      alignItems: 'center',
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(3),
-    },
-    chip: {
-      color: '#fff',
-      marginRight: theme.spacing(1),
-      background: theme.palette.grey[400],
+      flexWrap: 'wrap',
     },
     locationIcon: {
       marginLeft: theme.spacing(2),
@@ -83,8 +77,10 @@ export const feedItemStyles = makeStyles((theme) => {
       height: '100%',
     },
     button: {
-      marginLeft: theme.spacing(2),
       textTransform: 'none',
+      padding: theme.spacing(2),
+      paddingLeft: 15,
+      paddingRight: 15,
     },
   };
 });

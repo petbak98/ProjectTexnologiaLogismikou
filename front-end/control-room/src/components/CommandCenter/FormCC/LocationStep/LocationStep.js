@@ -23,16 +23,16 @@ function getRegion(address) {
   return address.find((item) => item.types.includes('locality'))?.long_name;
 }
 
-function LocationStep({ nextStep, previousStep, updateForm, updateProps }) {
+function LocationStep({ nextStep, previousStep, updateForm, editProps }) {
   const [formState, setFormState] = React.useState(
-    updateProps
+    Object.keys(editProps).length
       ? {
-          street: updateProps.street,
-          number: updateProps.number,
-          region: updateProps.region,
-          postalCode: updateProps.postalCode,
-          latitude: updateProps.latitude,
-          longitude: updateProps.longitude,
+          street: editProps.street,
+          number: editProps.number,
+          region: editProps.region,
+          postalCode: editProps.postalCode,
+          lattitude: editProps.latitude,
+          longitude: editProps.longitude,
         }
       : undefined,
   );
@@ -72,11 +72,19 @@ function LocationStep({ nextStep, previousStep, updateForm, updateProps }) {
   }
 
   function isValid() {
+    console.log(formState);
     if (!formState) {
       setError(true);
       return false;
     }
-    if (Object.keys(formState).filter((key) => !formState[key]).length) {
+    const keys = Object.keys(formState);
+
+    const completedKeys = keys.filter((key) => {
+      if (formState[key].length > 0 || key === 'longitude' || key === 'lattitude') return key;
+      else return null;
+    });
+    console.log(completedKeys, keys);
+    if (completedKeys.length !== keys.length) {
       setError(true);
       return false;
     }

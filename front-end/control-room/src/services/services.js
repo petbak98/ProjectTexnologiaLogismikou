@@ -10,3 +10,6 @@ export async function fetchIncidents() {
 export function createIncident(params) {
   return Axios.post(API + '/incidents', params);
 }
+export function editIncident(params) {
+  return Axios.put(API + '/incidents', params);
+}

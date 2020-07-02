@@ -10,6 +10,7 @@ export const feedCCStyle = makeStyles((theme) => {
       marginTop: theme.spacing(8),
       width: '100%'
     },
+    
     button: {
       // display: 'block',
       textTransform: 'none'
