@@ -40,7 +40,7 @@ export default function FeedItem({ incident }) {
   const date = new Date(lastUpdate).toLocaleDateString();
   const history = useHistory();
   const [authState] = useAuthService();
-
+  console.log(authState);
   function viewIncident() {
     history.push(`/incidents/${incidentId}`);
   }
