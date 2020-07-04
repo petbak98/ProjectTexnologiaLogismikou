@@ -13,3 +13,7 @@ export function createIncident(params) {
 export function editIncident(params) {
   return Axios.put(API + '/incidents', params);
 }
+
+export function updateLocation(key, params) {
+  return Axios.put(API + '/user/update-location', params);
+}

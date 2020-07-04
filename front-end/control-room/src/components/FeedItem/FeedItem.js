@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { ReactComponent as Firetrack } from '../../assets/icons/firetruck.svg';
 import { ReactComponent as Policeman } from '../../assets/icons/patrol.svg';
 import { useAuthService } from '../../hooks/useAuth';
+import Can from '../Permissions/Can';
 import { feedItemStyles } from './FeedItem.style';
 
 const variants = {
@@ -40,7 +41,7 @@ export default function FeedItem({ incident }) {
   const date = new Date(lastUpdate).toLocaleDateString();
   const history = useHistory();
   const [authState] = useAuthService();
-  console.log(authState);
+  const { roles } = authState.context.user;
   function viewIncident() {
     history.push(`/incidents/${incidentId}`);
   }
@@ -99,19 +100,39 @@ export default function FeedItem({ incident }) {
           >
             Πληροφορίες
           </Button>
-          {authState.context && (
-            <Button
-              style={{ marginLeft: 'auto' }}
-              onClick={editIncident}
-              className={classes.button}
-              size='small'
-              variant='text'
-              color='primary'
-              endIcon={<Edit />}
-            >
-              {' '}
-            </Button>
-          )}
+          <Can
+            resource='incident'
+            roles={roles}
+            action='edit'
+            yes={
+              <Button
+                style={{ marginLeft: 'auto' }}
+                onClick={editIncident}
+                className={classes.button}
+                size='small'
+                variant='text'
+                color='primary'
+                endIcon={<Edit />}
+              >
+                {' '}
+              </Button>
+            }
+            no={null}
+          >
+            {authState.context && (
+              <Button
+                style={{ marginLeft: 'auto' }}
+                onClick={editIncident}
+                className={classes.button}
+                size='small'
+                variant='text'
+                color='primary'
+                endIcon={<Edit />}
+              >
+                {' '}
+              </Button>
+            )}
+          </Can>
         </div>
       </ul>
     </motion.div>

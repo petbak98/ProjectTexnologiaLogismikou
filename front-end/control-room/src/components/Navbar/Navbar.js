@@ -28,6 +28,7 @@ const LinkButton = styled(Button)`
     }
   }
 `;
+
 const Navbar = ({ children }) => {
   return (
     <AppBar color='primary' position='static'>

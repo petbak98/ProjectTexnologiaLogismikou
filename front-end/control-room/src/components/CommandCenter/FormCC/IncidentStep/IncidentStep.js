@@ -89,17 +89,17 @@ function IncidentStep({ nextStep, send, updateForm, editProps }) {
         >
           <FormControlLabel
             value='1'
-            control={<Radio className={classes.select} />}
+            control={<Radio className={classes.select} color='primary' />}
             label='Αστυνομία'
           />
           <FormControlLabel
             value='2'
-            control={<Radio className={classes.select} />}
+            control={<Radio className={classes.select} color='primary' />}
             label='Πυροσβετική'
           />
           <FormControlLabel
             value='3'
-            control={<Radio className={classes.select} />}
+            control={<Radio className={classes.select} color='primary' />}
             label='Λυμενικό'
           />
         </RadioGroup>
