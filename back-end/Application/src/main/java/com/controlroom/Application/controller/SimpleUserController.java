@@ -83,7 +83,7 @@ public class SimpleUserController {
     @GetMapping("/incidents") /* Returns incidents by distance and authority of user. UserId will be changed to token */
     @ResponseBody
     public ResponseEntity<List<IncidentDto>> postResponseController(@RequestBody UserLocationIncident userLocationIncident) {
-        return ResponseEntity.ok().body(incidentService.findAllByDistance(userLocationIncident));
+        return ResponseEntity.ok().body(incidentService.findAllByDistance(userLocationIncident.getUserId()));
     }
 
     @PutMapping("/update-location")
