@@ -1,27 +1,18 @@
 package com.controlroom.Application.controller;
 
 import com.controlroom.Application.model.dto.IncidentDto;
-import com.controlroom.Application.model.dto.UserDto;
-import com.controlroom.Application.model.incidentModel.Incident;
-import com.controlroom.Application.model.userModel.ERole;
-import com.controlroom.Application.model.userModel.Role;
 import com.controlroom.Application.model.userModel.User;
-import com.controlroom.Application.model.userModel.UserLocationIncident;
-import com.controlroom.Application.repository.RoleRepository;
 import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.UserService;
 import com.controlroom.Application.util.Helpers;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
@@ -39,8 +30,8 @@ public class IncidentsController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<String> commonIncidents(Principal principal) throws JsonProcessingException { // @RequestBody UserLocationIncident userLocationIncident
-        User user = userService.findByUsername(principal.getName()); // userLocationIncident.getUserId()
+    public ResponseEntity<String> commonIncidents(Principal principal) throws JsonProcessingException {
+        User user = userService.findByUsername(principal.getName());
 
         if(user.getRoles().stream().findFirst().isPresent()) {
             if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER")) {
@@ -79,15 +70,5 @@ public class IncidentsController {
         }
         else
             return ResponseEntity.ok().body("{\"Status\": \"Incident not found\"}");
-    }
-
-
-
-    // -- TEST --
-
-    @GetMapping("/username")
-    @ResponseBody
-    public String currentUserName(Principal principal) {
-        return principal.getName();
     }
 }

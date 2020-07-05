@@ -75,10 +75,6 @@ public class SimpleUserController {
 //        return reportRepository.exampleTitleMethod(searchTerm);
 //    }
 
-    /*@GetMapping(value = "sendvalue/{example}")
-    public ResponseEntity<String> sendGetName(@PathVariable String example) throws IOException {
-        return ResponseEntity.ok().body(convertToJson(example));
-    }*/
 
     @GetMapping("/incidents") /* Returns incidents by distance and authority of user. UserId will be changed to token */
     @ResponseBody
