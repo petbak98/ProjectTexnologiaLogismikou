@@ -55,7 +55,7 @@ public class IncidentServiceImpl implements IncidentService{
 
     @Override
     public List<IncidentDto>findAllByDistance(Long id){
-        double maxDistance = 40;
+        double maxDistance = 20000; // change to 30-40
         Optional<User> currentUser = userRepository.findById(id);
 
         if(currentUser.isEmpty()){
