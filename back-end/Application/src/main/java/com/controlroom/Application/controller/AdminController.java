@@ -22,6 +22,7 @@ import static com.controlroom.Application.util.Helpers.convertToJson;
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
+
 public class AdminController {
 
     @Autowired

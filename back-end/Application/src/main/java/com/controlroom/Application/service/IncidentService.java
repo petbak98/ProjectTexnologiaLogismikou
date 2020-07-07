@@ -16,5 +16,5 @@ public interface IncidentService {
 
     IncidentDto save(IncidentDto incidentDto) throws Exception;
 
-    List<IncidentDto> findAllByDistance(UserLocationIncident userLocationIncident);
+    List<IncidentDto> findAllByDistance(Long id); // UserLocationIncident userLocationIncident
 }
