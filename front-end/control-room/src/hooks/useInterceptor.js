@@ -1,21 +1,34 @@
 import React from 'react';
+
 import Axios from 'axios';
 
 function useInterceptor(accessToken) {
   React.useLayoutEffect(() => {
-    const myInterceptor = Axios.interceptors.request.use(
-      function changeConfig(config) {
-        if (accessToken) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
-        }
-        return config;
-      },
-      function handleError() {
-        // Do something with request error
-        return Promise.reject();
+    const myInterceptorRequest = Axios.interceptors.request.use(function changeConfig(config) {
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
       }
+      return config;
+    });
+    const myInterceptorResponse = Axios.interceptors.response.use(
+      function (response) {
+        // Any status code that lie within the range of 2xx cause this function to trigger
+        // Do something with response data
+        return response;
+      },
+      function (error) {
+        if (error?.response?.status === 400 || error?.response?.status === 401) {
+          console.log(error);
+          localStorage.clear();
+          window.location.href = '/';
+        }
+      },
     );
-    return () => Axios.interceptors.request.eject(myInterceptor);
+
+    return () => {
+      Axios.interceptors.response.eject(myInterceptorResponse);
+      Axios.interceptors.request.eject(myInterceptorRequest);
+    };
   }, [accessToken]);
 }
 

@@ -1,8 +1,11 @@
 import React from 'react';
+
 import styled from 'styled-components/macro';
 
-import { ReactComponent as Policeman } from '../assets/icons/patrol.svg';
+import { ReactComponent as Ambulance } from '../assets/icons/ambulance.svg';
 import { ReactComponent as Firetrack } from '../assets/icons/firetruck.svg';
+import { ReactComponent as Policeman } from '../assets/icons/patrol.svg';
+import { ReactComponent as PortAuthority } from '../assets/icons/ship.svg';
 import theme from '../config/theme';
 
 const AvatarWrapper = styled.div`
@@ -11,7 +14,7 @@ const AvatarWrapper = styled.div`
   box-shadow: ${theme.shadows[5]};
   height: 4rem;
   width: 4rem;
-  padding: 5px;
+  padding: 10px;
   border: 2px solid ${theme.palette.primary.main};
   background: #fff;
   .avatar {
@@ -24,6 +27,8 @@ function Avatar({ id }) {
   const renderAvatar = () => {
     if (id === 1) return <Policeman className='avatar' />;
     if (id === 2) return <Firetrack className='avatar' />;
+    if (id === 3) return <Ambulance className='avatar' />;
+    if (id === 4) return <PortAuthority className='avatar' />;
     return null;
   };
   return <AvatarWrapper>{renderAvatar()}</AvatarWrapper>;

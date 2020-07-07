@@ -105,27 +105,3 @@ export default function FormCC() {
     </>
   );
 }
-
-const temp = {
-  coordinatorId: 1,
-  title: 'Pyrkagia',
-  authority: {
-    id: 1,
-  },
-  importance: {
-    id: 1,
-  },
-  city: 'Halandri',
-  number: '6',
-  postalCode: '15234',
-  region: 'Attiki',
-  street: 'Olumpoy 60',
-  callerFirstName: 'petros',
-  callerLastName: 'bakolas',
-  callerNationalId: 'AK123456',
-  callerPhone: '69802314567',
-  status: {
-    id: 1,
-  },
-  notes: 'lelelelel',
-};

@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { API } from '../config/config.utils';
 
 export async function fetchIncidents() {
-  const result = await Axios.get(API + '/mod/incidents');
+  const result = await Axios.get(API + '/incidents');
   return result.data;
 }
 

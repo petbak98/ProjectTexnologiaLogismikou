@@ -83,8 +83,8 @@ function Incident() {
   function changeActiveTab(index) {
     changeTab(index);
   }
-
   if (status === 'loading') return <Loading />;
+  console.log(authority);
   return (
     <Container>
       <AvatarContainer>

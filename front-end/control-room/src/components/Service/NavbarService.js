@@ -1,35 +1,48 @@
 import React from 'react';
 
-import { Route } from 'react-router-dom';
+import CheckIcon from '@material-ui/icons/Check';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import RssFeedIcon from '@material-ui/icons/RssFeed';
+import { useLocation } from 'react-router-dom';
 
-import { AnimatedRoutes } from '../../animation/AnimatedRoutes';
-import FeedCC from '../../components/CommandCenter/FeedCC/FeedCC';
-import FormCC from '../../components/CommandCenter/FormCC/FormCC';
-import NavbarCC from '../../components/CommandCenter/NavbarCC/NavbarCC';
-import Incident from '../../components/Incident/Incident';
-import { Layout } from '../../components/Layout/Layout';
-import { WithAnimation } from '../../hoc/withAnimation';
+import { Navbar, LinkButton, NavLink } from '../Navbar/Navbar';
 
-const Form = WithAnimation(FormCC);
-const Feed = WithAnimation(FeedCC);
-const AnimatedIncident = WithAnimation(Incident);
-export default function ContronCenterRoutes() {
+export default function NavbarService() {
+  let location = useLocation();
+
+  function handeLogout() {
+    localStorage.clear();
+    window.location.href = '/';
+  }
   return (
-    <>
-      <NavbarCC />
-      <Layout>
-        <AnimatedRoutes exitBeforeEnter initial={false}>
-          <Route exact path='/form'>
-            <Form />
-          </Route>
-          <Route exact path='/incidents/:id'>
-            <AnimatedIncident />
-          </Route>
-          <Route path='/'>
-            <Feed />
-          </Route>
-        </AnimatedRoutes>
-      </Layout>
-    </>
+    <Navbar>
+      <NavLink to='/' activeclassname='activeLink'>
+        <LinkButton
+          style={location.pathname === '/' ? { color: '#FAFAFB' } : {}}
+          endIcon={<RssFeedIcon />}
+          color='secondary'
+        >
+          <h5>Συμβάντα</h5>
+        </LinkButton>
+      </NavLink>
+      <NavLink to='/accepted'>
+        <LinkButton
+          style={location.pathname === '/accepted' ? { color: '#FAFAFB' } : {}}
+          color='secondary'
+          endIcon={<CheckIcon style={{ display: 'block' }} />}
+        >
+          <h5>Αποδεχθέντα</h5>
+        </LinkButton>
+      </NavLink>
+      <LinkButton
+        onClick={handeLogout}
+        style={{ marginLeft: 'auto', color: '#FAFAFB' }}
+        color='secondary'
+        endIcon={<ExitToAppIcon />}
+      >
+        <h5>Αποσύνδεση</h5>
+      </LinkButton>
+    </Navbar>
   );
 }

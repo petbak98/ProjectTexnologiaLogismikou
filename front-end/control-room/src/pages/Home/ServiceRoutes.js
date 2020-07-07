@@ -4,43 +4,49 @@ import { Route } from 'react-router-dom';
 
 import { AnimatedRoutes } from '../../animation/AnimatedRoutes';
 import FeedCC from '../../components/CommandCenter/FeedCC/FeedCC';
-import FormCC from '../../components/CommandCenter/FormCC/FormCC';
-import NavbarCC from '../../components/CommandCenter/NavbarCC/NavbarCC';
+import InfoDialog from '../../components/Dialogs/InfoDialog';
 import Incident from '../../components/Incident/Incident';
 import { Layout } from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
+import AcceptedIncidents from '../../components/Service/AcceptedIncidents/AcceptedIncidents';
+import NavbarService from '../../components/Service/NavbarService';
 import { WithAnimation } from '../../hoc/withAnimation';
 import { useAuthService } from '../../hooks/useAuth';
 import useUpdateLocation from '../../hooks/useUpdateLocation';
 
-const Form = WithAnimation(FormCC);
+const AnimatedAcceptedIncindents = WithAnimation(AcceptedIncidents);
 const Feed = WithAnimation(FeedCC);
 const AnimatedIncident = WithAnimation(Incident);
 
 export default function ServiceRoutes() {
   const [auth] = useAuthService();
   const { id } = auth.context.user;
-  const { status, data, isFetching } = useUpdateLocation({ id });
-  console.log(status, data, isFetching);
+  const { status, data } = useUpdateLocation({ id });
   if (status === 'loading') return <Loading />;
   if (status === 'error') return <div>error</div>;
-  if (!data) return <div>Πρέπει να ενεργοιποιήσεις την τοποθεσία σου</div>;
   return (
     <>
-      <NavbarCC />
-      <Layout>
-        <AnimatedRoutes exitBeforeEnter initial={false}>
-          <Route exact path='/accepted'>
-            <div>accepted incidents</div>
-          </Route>
-          <Route exact path='/incidents/:id'>
-            <AnimatedIncident />
-          </Route>
-          <Route path='/'>
-            <div>feed</div>
-          </Route>
-        </AnimatedRoutes>
-      </Layout>
+      <NavbarService />
+      {data ? (
+        <Layout>
+          <AnimatedRoutes exitBeforeEnter initial={false}>
+            <Route exact path='/accepted'>
+              <AnimatedAcceptedIncindents />
+            </Route>
+            <Route exact path='/incidents/:id'>
+              <AnimatedIncident />
+            </Route>
+            <Route path='/'>
+              <Feed />
+            </Route>
+          </AnimatedRoutes>
+        </Layout>
+      ) : (
+        <InfoDialog
+          title='Τοποθεσία'
+          content='Για να λειτουργήσει η εφαρμογή είναι απαραίτητο να επιτρεψέτε στην εφαρμογή να ανιχνεύει την τοποθεσία σας'
+        />
+      )}
     </>
   );
 }
