@@ -36,7 +36,7 @@ public class IncidentsController {
         if(user.getRoles().stream().findFirst().isPresent()) {
             if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER")) {
                 System.out.println("user");
-                return ResponseEntity.ok().body(convertToJson(incidentService.findAllByDistance(user.getId()))); // userLocationIncident)
+                return ResponseEntity.ok().body(convertToJson(incidentService.findAllByDistance(user.getId())));
             } else {
                 System.out.println("admin or moderator");
                 return ResponseEntity.ok().body(convertToJson(incidentService.findAll()));

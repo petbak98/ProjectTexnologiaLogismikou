@@ -6,6 +6,7 @@ import com.controlroom.Application.model.reportModel.Report;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -62,6 +63,9 @@ public class User {
 
     @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
     private List<Report> reports;
+
+    @CreationTimestamp
+    private Date lastNewIncident;
 
     public User() {
     }

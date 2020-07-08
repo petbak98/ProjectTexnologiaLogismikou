@@ -3,20 +3,28 @@ package com.controlroom.Application.controller;
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.dto.UserDto;
+import com.controlroom.Application.model.dto.UserPostDto;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
+import com.controlroom.Application.model.userModel.User;
 import com.controlroom.Application.model.userModel.UserLocationIncident;
 import com.controlroom.Application.service.IncidentService;
 import com.controlroom.Application.service.ReportService;
 import com.controlroom.Application.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
@@ -91,5 +99,22 @@ public class SimpleUserController {
         else {
             return ResponseEntity.ok().body(convertToJson(userDto));
         }
+    }
+
+    @GetMapping("/new-incidents")
+    public  ResponseEntity<String> returnNewIncidents(Principal principal) throws JsonProcessingException {
+        UserPostDto userPostDto = userService.findPostDtoByUsername(principal.getName());
+
+        List<IncidentDto> incidents = incidentService.returnNewIncidents(userPostDto.getUserId(), userPostDto.getLastNewIncident());
+
+        if(!incidents.isEmpty()) {
+            Date currentDate = new Date(System.currentTimeMillis());
+            userPostDto.setLastNewIncident(currentDate);
+            userService.save(userPostDto);
+
+            System.out.println("Updated lastIncidentUpdate of User with id:" + userPostDto.getUserId());
+        }
+
+        return ResponseEntity.ok().body(convertToJson(incidents));
     }
 }

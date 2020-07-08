@@ -20,4 +20,6 @@ public interface UserService {
 
     UserDto updateLocation(UserLocationIncident userLocationIncident);
 
+    UserPostDto findPostDtoByUsername(String username);
+
 }
