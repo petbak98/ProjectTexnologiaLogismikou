@@ -11,11 +11,14 @@ import TodayIcon from '@material-ui/icons/Today';
 import { motion } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
 
-import { ReactComponent as Firetrack } from '../../assets/icons/firetruck.svg';
-import { ReactComponent as Policeman } from '../../assets/icons/patrol.svg';
 import { useAuthService } from '../../hooks/useAuth';
+import useEditIncident from '../../hooks/useEditIncident';
+import { Avatar } from '../../shared';
+import { checkIfIncidentAccpeted } from '../../utils';
+import { AvatarContainer } from '../Incident/Incident.style';
+import Can from '../Permissions/Can';
+import AcceptButton from '../Service/AcceptButton/AcceptButton';
 import { feedItemStyles } from './FeedItem.style';
-
 const variants = {
   visible: {
     opacity: 1,
@@ -24,6 +27,7 @@ const variants = {
   hidden: { opacity: 0, x: 10 },
 };
 export default function FeedItem({ incident }) {
+  console.log(incident);
   const {
     authority,
     reports,
@@ -34,13 +38,27 @@ export default function FeedItem({ incident }) {
     lastUpdate,
     title,
     incidentId,
-    postalCode,
   } = incident;
   const classes = feedItemStyles();
   const date = new Date(lastUpdate).toLocaleDateString();
   const history = useHistory();
   const [authState] = useAuthService();
-  console.log(authState);
+  const { roles } = authState.context.user;
+  const isIncidentAccpted = checkIfIncidentAccpeted(incident, authState.context.user);
+
+  const { mutate, status } = useEditIncident();
+
+  async function acceptIncident() {
+    const requestParams = {
+      ...incident,
+      status: {
+        ...incident.status,
+        completed: 1,
+      },
+    };
+    await mutate(requestParams);
+  }
+
   function viewIncident() {
     history.push(`/incidents/${incidentId}`);
   }
@@ -48,16 +66,13 @@ export default function FeedItem({ incident }) {
   function editIncident() {
     history.replace({ pathname: '/form', state: { incident } });
   }
-  const renderAvatar = () => {
-    if (authority.id === 1) return <Policeman className={classes.avatar} />;
-    if (authority.id === 2) return <Firetrack className={classes.avatar} />;
-    return <Policeman className={classes.avatar} />;
-  };
 
   return (
     <motion.div variants={variants}>
       <ul className={classes.root}>
-        <div className={classes.avatarContainer}>{renderAvatar()}</div>
+        <AvatarContainer>
+          <Avatar id={authority.id} />
+        </AvatarContainer>
         <Typography className={classes.id} variant='subtitle1'>
           {incidentId}
         </Typography>
@@ -67,7 +82,7 @@ export default function FeedItem({ incident }) {
           </Typography>
         </li>
         <li className={classes.feedLi}>
-          <Typography variant='subtitle1'>{`${region} ${street} ${number}, ${postalCode}`}</Typography>
+          <Typography variant='subtitle1'>{`${region} ${street} ${number}`}</Typography>
           <LocationOnIcon className={classes.locationIcon} />
         </li>
         <li className={classes.feedLi}>
@@ -99,19 +114,56 @@ export default function FeedItem({ incident }) {
           >
             Πληροφορίες
           </Button>
-          {authState.context && (
-            <Button
-              style={{ marginLeft: 'auto' }}
-              onClick={editIncident}
-              className={classes.button}
-              size='small'
-              variant='text'
-              color='primary'
-              endIcon={<Edit />}
-            >
-              {' '}
-            </Button>
+          {!isIncidentAccpted ? (
+            <Can
+              resource='incident'
+              action='accept'
+              roles={roles}
+              yes={
+                <AcceptButton
+                  acceptIncident={acceptIncident}
+                  status={status}
+                  className={classes.button}
+                />
+              }
+              no={null}
+            />
+          ) : (
+            <Can resource='incident' action='addReport' roles={roles} />
           )}
+          <Can
+            resource='incident'
+            roles={roles}
+            action='edit'
+            yes={
+              <Button
+                style={{ marginLeft: 'auto' }}
+                onClick={editIncident}
+                className={classes.button}
+                size='small'
+                variant='text'
+                color='secondary'
+                endIcon={<Edit />}
+              >
+                {' '}
+              </Button>
+            }
+            no={null}
+          >
+            {authState.context && (
+              <Button
+                style={{ marginLeft: 'auto' }}
+                onClick={editIncident}
+                className={classes.button}
+                size='small'
+                variant='text'
+                color='primary'
+                endIcon={<Edit />}
+              >
+                {' '}
+              </Button>
+            )}
+          </Can>
         </div>
       </ul>
     </motion.div>

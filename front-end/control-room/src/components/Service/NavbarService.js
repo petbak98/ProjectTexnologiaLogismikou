@@ -1,13 +1,14 @@
 import React from 'react';
 
-import AddIcon from '@material-ui/icons/Add';
+import CheckIcon from '@material-ui/icons/Check';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import { useLocation } from 'react-router-dom';
 
-import { Navbar, NavLink, LinkButton } from '../../Navbar/Navbar';
+import { Navbar, LinkButton, NavLink } from '../Navbar/Navbar';
 
-export default function NavbarCC() {
+export default function NavbarService() {
   let location = useLocation();
 
   function handeLogout() {
@@ -25,13 +26,13 @@ export default function NavbarCC() {
           <h5>Συμβάντα</h5>
         </LinkButton>
       </NavLink>
-      <NavLink to='/form'>
+      <NavLink to='/accepted'>
         <LinkButton
-          style={location.pathname === '/form' ? { color: '#FAFAFB' } : {}}
+          style={location.pathname === '/accepted' ? { color: '#FAFAFB' } : {}}
           color='secondary'
-          endIcon={<AddIcon style={{ display: 'block' }} />}
+          endIcon={<CheckIcon style={{ display: 'block' }} />}
         >
-          <h5>Προσθήκη</h5>
+          <h5>Αποδεχθέντα</h5>
         </LinkButton>
       </NavLink>
       <LinkButton

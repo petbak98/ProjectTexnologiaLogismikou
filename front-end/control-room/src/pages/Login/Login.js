@@ -56,25 +56,25 @@ export default function Login() {
           style={{ marginTop: 10 }}
           label='Κωδικός'
         />
+        <Button
+          onClick={handleSubmit}
+          style={{ padding: 10, marginTop: 10 }}
+          fullWidth
+          variant='contained'
+          color='primary'
+        >
+          ΣΥΝΔΕΣΗ
+        </Button>
+        <div
+          style={{
+            marginTop: 10,
+            textAlign: 'center',
+            color: theme.palette.error.main,
+          }}
+        >
+          {state.context.error}
+        </div>
       </FormContainer>
-      <Button
-        onClick={handleSubmit}
-        style={{ padding: 10, marginTop: 10 }}
-        fullWidth
-        variant='contained'
-        color='primary'
-      >
-        ΣΥΝΔΕΣΗ
-      </Button>
-      <div
-        style={{
-          marginTop: 10,
-          textAlign: 'center',
-          color: theme.palette.error.main,
-        }}
-      >
-        {state.context.error}
-      </div>
     </LoginContainer>
   );
 }

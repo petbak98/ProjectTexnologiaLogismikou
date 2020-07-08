@@ -31,9 +31,6 @@ export default function FeedCC() {
         className={classes.search}
       />
       <Feed incidents={incidents} />
-      {/* <Button className={classes.button} variant='contained' color='primary'>
-        Περισσότερα
-      </Button> */}
     </div>
   );
 }

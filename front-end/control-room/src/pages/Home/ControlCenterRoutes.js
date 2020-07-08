@@ -13,7 +13,7 @@ import { WithAnimation } from '../../hoc/withAnimation';
 const Form = WithAnimation(FormCC);
 const Feed = WithAnimation(FeedCC);
 const AnimatedIncident = WithAnimation(Incident);
-export default function HomeCC() {
+export default function ContronCenterRoutes() {
   return (
     <>
       <NavbarCC />
