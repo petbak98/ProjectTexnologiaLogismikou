@@ -4,7 +4,11 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@material
 
 function InfoDialog({ title, content }) {
   return (
-    <Dialog open={true} aria-describedby='alert-dialog-description'>
+    <Dialog
+      transitionDuration={{ exit: 0 }}
+      open={true}
+      aria-describedby='alert-dialog-description'
+    >
       <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id='alert-dialog-description'>{content}</DialogContentText>

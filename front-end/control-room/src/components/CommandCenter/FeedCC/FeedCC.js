@@ -24,6 +24,7 @@ export default function FeedCC() {
             </InputAdornment>
           ),
         }}
+        style={{ zIndex: 100 }}
         placeholder='π.χ 12325'
         variant='outlined'
         id='input-with-icon-textfield'

@@ -4,19 +4,54 @@ import { useQuery } from 'react-query';
 
 import { fetchNewIncidents } from '../services/services';
 
-function useNewIncidents() {
-  const { data = [], status, error } = useQuery('new-incidents', fetchNewIncidents, {
-    refetchInterval: 10 * 1000,
-  });
-  const [newIncidentsCount, setNewIncidentsCount] = React.useState(3);
-  React.useEffect(() => {
-    setNewIncidentsCount(data.length);
-  }, [data.length]);
+const initialState = {
+  count: 0,
+  incidents: [],
+};
 
-  function resetIncidentsCount() {
-    setNewIncidentsCount(0);
+function reducer(state, action) {
+  switch (action.type) {
+    case 'ΝΕW_INCIDENTS':
+      return {
+        count: state.count + action.payload.length,
+        incidents: [...state.incidents, ...action.payload],
+      };
+    case 'RESET_COUNT':
+      return { ...state, count: 0 };
+    case 'RESET_STATE':
+      return initialState;
+    default:
+      return state;
   }
-  return { incidents: data, status, error, newIncidentsCount, resetIncidentsCount };
+}
+
+function useNewIncidents() {
+  const { data, error, status } = useQuery('new-incidents', fetchNewIncidents, {
+    //interval 1 minute
+    refetchInterval: 60 * 1000,
+  });
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  React.useEffect(() => {
+    if (status === 'success') dispatch({ type: 'ΝΕW_INCIDENTS', payload: data });
+  }, [data, status]);
+
+  function resetNewIncidentsCount() {
+    dispatch({ type: 'RESET_COUNT' });
+  }
+
+  function resetNewIncidentsState() {
+    dispatch({ type: 'RESET_STATE' });
+  }
+
+  return {
+    newIncidents: state,
+    dispatch,
+    error,
+    resetNewIncidentsCount,
+    resetNewIncidentsState,
+    status,
+  };
 }
 
 export default useNewIncidents;

@@ -13,17 +13,12 @@ import Stars from '../Stars/Stars';
 import Status from '../Status/Status';
 import {
   AvatarContainer,
-  CodeContainer,
   Container,
-  CreatorContainer,
   HeaderContainer,
   IncidentNavigation,
-  Label,
   Li,
   Seperator,
-  StatusContainer,
   TabsContainer,
-  TitleContainer,
 } from './Incident.style';
 
 function Incident() {

@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { useAuthService } from '../../hooks/useAuth';
 import useEditIncident from '../../hooks/useEditIncident';
 import { Avatar } from '../../shared';
-import { checkIfIncidentAccpeted } from '../../utils';
+import { checkIfIncidentAccepted } from '../../utils';
 import { AvatarContainer } from '../Incident/Incident.style';
 import Can from '../Permissions/Can';
 import AcceptButton from '../Service/AcceptButton/AcceptButton';
@@ -43,7 +43,7 @@ export default function FeedItem({ incident }) {
   const history = useHistory();
   const [authState] = useAuthService();
   const { roles, firstName, id, latitude, longitude, lastName, username } = authState.context.user;
-  const isIncidentAccpted = checkIfIncidentAccpeted(incident, authState.context.user);
+  const isIncidentAccpted = checkIfIncidentAccepted(incident, authState.context.user);
 
   const { mutate, status } = useEditIncident();
 

@@ -7,7 +7,6 @@ import FeedCC from '../../components/CommandCenter/FeedCC/FeedCC';
 import InfoDialog from '../../components/Dialogs/InfoDialog';
 import Incident from '../../components/Incident/Incident';
 import { Layout } from '../../components/Layout/Layout';
-import Loading from '../../components/Loading/Loading';
 import Notifications from '../../components/Notifications/Notifications';
 import AcceptedIncidents from '../../components/Service/AcceptedIncidents/AcceptedIncidents';
 import NavbarService from '../../components/Service/NavbarService';
@@ -23,13 +22,12 @@ const AnimatedNotifications = WithAnimation(Notifications);
 export default function ServiceRoutes() {
   const [auth] = useAuthService();
   const { id } = auth.context.user;
-  const { status, data } = useUpdateLocation({ id });
-  if (status === 'loading') return <Loading />;
-  if (status === 'error') return <div>error</div>;
+  const { error, status, geolocation } = useUpdateLocation({ id });
+  if (status === 'error') return <div>{error}</div>;
   return (
     <>
       <NavbarService />
-      {data ? (
+      {!geolocation.error ? (
         <Layout>
           <AnimatedRoutes exitBeforeEnter initial={false}>
             <Route exact path='/accepted'>

@@ -16,7 +16,7 @@ const variants = {
   hidden: { opacity: 0 },
 };
 
-export default function Feed({ incidents }) {
+export default function Feed({ incidents = [] }) {
   return (
     <AnimatePresence>
       <FeedContainer animate='visible' initial='hidden' variants={variants}>

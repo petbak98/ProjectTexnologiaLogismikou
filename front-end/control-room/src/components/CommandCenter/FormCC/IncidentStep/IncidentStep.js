@@ -100,7 +100,12 @@ function IncidentStep({ nextStep, send, updateForm, editProps }) {
           <FormControlLabel
             value='3'
             control={<Radio className={classes.select} color='primary' />}
-            label='Λυμενικό'
+            label='Εκάβ'
+          />
+          <FormControlLabel
+            value='4'
+            control={<Radio className={classes.select} color='primary' />}
+            label='Λιμενικό'
           />
         </RadioGroup>
         {errors.authority && (

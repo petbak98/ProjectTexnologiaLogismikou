@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 function useQueryError(status, error) {
   React.useEffect(() => {
     if (status === 'error') {
-      toast.error(error?.message || 'Πρόβλημα Server');
+      toast.error('Πρόβλημα Server');
     }
   }, [status, error]);
 }

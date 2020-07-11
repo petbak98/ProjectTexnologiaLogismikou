@@ -5,27 +5,37 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import useNewIncidents from '../../hooks/useNewIncidents';
 import useQueryError from '../../hooks/useQueryError';
+import NewIncidentsDialog from '../IncidentsDialog/NewIncidentsDialog';
 
 function Notifications() {
-  const { incidents, newIncidentsCount, status, error, resetIncidentsCount } = useNewIncidents();
-  console.log(newIncidentsCount);
+  const {
+    newIncidents,
+    error,
+    resetNewIncidentsState,
+    resetNewIncidentsCount,
+    status,
+  } = useNewIncidents();
+
   const [isOpen, setIsOpen] = React.useState(false);
   useQueryError(status, error);
 
-  function handleClick() {
-    resetIncidentsCount();
-    setIsOpen((current) => !current);
+  function handleClose() {
+    setIsOpen(false);
+    resetNewIncidentsState();
   }
+
+  function handleOpen() {
+    resetNewIncidentsCount();
+    setIsOpen(true);
+  }
+
   return (
-    <Badge
-      style={{ position: 'relative' }}
-      onClick={handleClick}
-      badgeContent={newIncidentsCount}
-      color='error'
-    >
-      {isOpen && <div>open</div>}
-      <NotificationsIcon />
-    </Badge>
+    <>
+      <Badge onClick={handleOpen} badgeContent={newIncidents.count} color='error'>
+        <NotificationsIcon />
+      </Badge>
+      <NewIncidentsDialog newIncidents={newIncidents} open={isOpen} handleClose={handleClose} />
+    </>
   );
 }
 

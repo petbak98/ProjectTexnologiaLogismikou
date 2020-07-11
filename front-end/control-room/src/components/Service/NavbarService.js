@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { Badge } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import { useLocation } from 'react-router-dom';
 
