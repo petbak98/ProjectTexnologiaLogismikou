@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { Badge } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import { useLocation } from 'react-router-dom';
 
 import { Navbar, LinkButton, NavLink } from '../Navbar/Navbar';
+import Notifications from '../Notifications/Notifications';
 
 export default function NavbarService() {
   let location = useLocation();
@@ -35,14 +37,23 @@ export default function NavbarService() {
           <h5>Αποδεχθέντα</h5>
         </LinkButton>
       </NavLink>
-      <LinkButton
-        onClick={handeLogout}
-        style={{ marginLeft: 'auto', color: '#FAFAFB' }}
-        color='secondary'
-        endIcon={<ExitToAppIcon />}
-      >
-        <h5>Αποσύνδεση</h5>
-      </LinkButton>
+      <div style={{ marginLeft: 'auto' }}>
+        <LinkButton
+          style={{ color: '#FAFAFB', marginLeft: 'auto' }}
+          color='secondary'
+          endIcon={<Notifications />}
+        >
+          {''}
+        </LinkButton>
+        <LinkButton
+          onClick={handeLogout}
+          style={{ marginLeft: 'auto', color: '#FAFAFB' }}
+          color='secondary'
+          endIcon={<ExitToAppIcon />}
+        >
+          <h5>Αποσύνδεση</h5>
+        </LinkButton>
+      </div>
     </Navbar>
   );
 }

@@ -65,6 +65,7 @@ const AuthMachine = Machine(
       }),
       assignUser: assign((ctx, e) => {
         const user = {
+          ...e.data,
           username: e.data.username,
           latitude: e.data.latitude,
           longitude: e.data.longitude,

@@ -10,10 +10,15 @@ export async function fetchIncidents() {
 export function createIncident(params) {
   return Axios.post(API + '/incidents', params);
 }
-export function editIncident(params) {
-  return Axios.put(API + '/incidents', params);
+export function editIncident({ incidentId, requestParams }) {
+  return Axios.put(`${API}/incidents/${incidentId}`, requestParams);
 }
 
 export function updateLocation(key, params) {
   return Axios.put(API + '/user/update-location', params);
+}
+
+export async function fetchNewIncidents() {
+  const result = await Axios.get(API + '/user/new-incidents');
+  return result.data;
 }

@@ -8,6 +8,7 @@ import InfoDialog from '../../components/Dialogs/InfoDialog';
 import Incident from '../../components/Incident/Incident';
 import { Layout } from '../../components/Layout/Layout';
 import Loading from '../../components/Loading/Loading';
+import Notifications from '../../components/Notifications/Notifications';
 import AcceptedIncidents from '../../components/Service/AcceptedIncidents/AcceptedIncidents';
 import NavbarService from '../../components/Service/NavbarService';
 import { WithAnimation } from '../../hoc/withAnimation';
@@ -17,6 +18,7 @@ import useUpdateLocation from '../../hooks/useUpdateLocation';
 const AnimatedAcceptedIncindents = WithAnimation(AcceptedIncidents);
 const Feed = WithAnimation(FeedCC);
 const AnimatedIncident = WithAnimation(Incident);
+const AnimatedNotifications = WithAnimation(Notifications);
 
 export default function ServiceRoutes() {
   const [auth] = useAuthService();
@@ -35,6 +37,9 @@ export default function ServiceRoutes() {
             </Route>
             <Route exact path='/incidents/:id'>
               <AnimatedIncident />
+            </Route>
+            <Route exact path='/new'>
+              <AnimatedNotifications />
             </Route>
             <Route path='/'>
               <Feed />

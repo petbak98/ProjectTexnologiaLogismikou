@@ -27,7 +27,6 @@ const variants = {
   hidden: { opacity: 0, x: 10 },
 };
 export default function FeedItem({ incident }) {
-  console.log(incident);
   const {
     authority,
     reports,
@@ -43,7 +42,7 @@ export default function FeedItem({ incident }) {
   const date = new Date(lastUpdate).toLocaleDateString();
   const history = useHistory();
   const [authState] = useAuthService();
-  const { roles } = authState.context.user;
+  const { roles, firstName, id, latitude, longitude, lastName, username } = authState.context.user;
   const isIncidentAccpted = checkIfIncidentAccpeted(incident, authState.context.user);
 
   const { mutate, status } = useEditIncident();
@@ -51,12 +50,13 @@ export default function FeedItem({ incident }) {
   async function acceptIncident() {
     const requestParams = {
       ...incident,
-      status: {
-        ...incident.status,
-        completed: 1,
-      },
+      receivers: [
+        ...incident.receivers,
+        { firstName, lastName, longitude, latitude, username, id },
+      ],
     };
-    await mutate(requestParams);
+    console.log(requestParams);
+    await mutate({ incidentId, requestParams });
   }
 
   function viewIncident() {
