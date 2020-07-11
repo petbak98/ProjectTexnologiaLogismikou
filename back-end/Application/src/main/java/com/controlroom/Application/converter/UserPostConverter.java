@@ -44,7 +44,10 @@ public class UserPostConverter {
         userPostDto.setFirstName(user.getFirstName());
         userPostDto.setLastName(user.getLastName());
 
+        userPostDto.setEmail(user.getEmail());
+
 //        userPostDto.setRoles(user.getRoles());
+        userPostDto.setRoles(user.getRoles());
 
         userPostDto.setLatitude(user.getLatitude());
         userPostDto.setLongitude(user.getLongitude());
@@ -60,6 +63,8 @@ public class UserPostConverter {
 
         List<ReportDto> reportDtoList = user.getReports().stream().map(ReportConverter::convertToDto).collect(Collectors.toList());
         userPostDto.setReports(reportDtoList);
+
+        userPostDto.setLastNewIncident(user.getLastNewIncident());
         return userPostDto;
     }
 
@@ -74,7 +79,10 @@ public class UserPostConverter {
         user.setFirstName(userPostDto.getFirstName());
         user.setLastName(userPostDto.getLastName());
 
+        user.setEmail(userPostDto.getEmail());
+
 //        user.setRoles(userPostDto.getRoles());
+        user.setRoles(userPostDto.getRoles());
 
         user.setLatitude(userPostDto.getLatitude());
         user.setLongitude(userPostDto.getLongitude());
@@ -105,6 +113,8 @@ public class UserPostConverter {
             List<Report> reportList = userPostDto.getReports().stream().map(ReportConverter::convert).collect(Collectors.toList());
             user.setReports(reportList);
         }
+
+        user.setLastNewIncident(userPostDto.getLastNewIncident());
 
 
         return user;

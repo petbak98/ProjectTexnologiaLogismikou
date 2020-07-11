@@ -14,10 +14,7 @@ import com.controlroom.Application.util.Helpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,6 +80,21 @@ public class IncidentServiceImpl implements IncidentService{
                         .map(IncidentConverter::convertToDto)
                         .collect(Collectors.toList());
         }
+    }
+
+    @Override
+    public List<IncidentDto> returnNewIncidents(Long id, Date timestamp) {
+
+        List<IncidentDto> usersIncidents = findAllByDistance(id);
+        List<IncidentDto> newIncidents = new ArrayList<>();
+
+        for (IncidentDto incident: usersIncidents) {
+            if (timestamp.before(incident.getCreationTimestamp())) {
+                newIncidents.add(incident);
+            }
+        }
+
+        return newIncidents;
     }
 
     @Override

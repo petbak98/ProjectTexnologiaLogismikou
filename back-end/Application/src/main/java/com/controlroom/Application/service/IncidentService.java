@@ -4,6 +4,7 @@ import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.userModel.UserLocationIncident;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IncidentService {
@@ -17,4 +18,5 @@ public interface IncidentService {
     IncidentDto save(IncidentDto incidentDto) throws Exception;
 
     List<IncidentDto> findAllByDistance(Long id); // UserLocationIncident userLocationIncident
+    List<IncidentDto> returnNewIncidents(Long id, Date timestamp);
 }

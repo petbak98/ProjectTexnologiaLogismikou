@@ -31,7 +31,8 @@ INSERT INTO `controlroom`.`user`
 `longitude`,
 `password`,
 `username`,
-`authority_id`)
+`authority_id`,
+`last_new_incident`)
 VALUES
 (1,
 "john@controlroom.test",
@@ -41,7 +42,8 @@ VALUES
 0.0,
 "$2a$10$YHVRGOscVYeMbIjkf5qRg.lYqB43jrIh1baf2SyeI5K3DfL8Mvj4G",
 "john",
-5);
+5,
+NOW());
 
 INSERT INTO `controlroom`.`user_roles`
 (`user_id`,
@@ -60,7 +62,8 @@ INSERT INTO `controlroom`.`user`
 `longitude`,
 `password`,
 `username`,
-`authority_id`)
+`authority_id`,
+`last_new_incident`)
 VALUES
 (2,
 "george@controlroom.test",
@@ -70,7 +73,8 @@ VALUES
 0.0,
 "$2a$10$s6eYUX4r7t80R8I5aYWhOODPIbp8EzRtH/JvttnKgwqVOtsgVOXVa",
 "george",
-5);
+5,
+NOW());
 
 INSERT INTO `controlroom`.`user_roles`
 (`user_id`,
@@ -89,7 +93,8 @@ INSERT INTO `controlroom`.`user`
 `longitude`,
 `password`,
 `username`,
-`authority_id`)
+`authority_id`,
+`last_new_incident`)
 VALUES
 (3,
 "petros@controlroom.test",
@@ -99,7 +104,8 @@ VALUES
 0.0,
 "$2a$10$Nd3aIiIwdzSMDbDNenKaJu8LdFrNiVQ4s/xnTkoJSm8lH7lS0A67m",
 "petros",
-1);
+1,
+NOW());
 
 INSERT INTO `controlroom`.`user_roles`
 (`user_id`,
@@ -118,7 +124,8 @@ INSERT INTO `controlroom`.`user`
 `longitude`,
 `password`,
 `username`,
-`authority_id`)
+`authority_id`,
+`last_new_incident`)
 VALUES
 (4,
 "user@controlroom.test",
@@ -128,7 +135,8 @@ VALUES
 0.0,
 "$2a$10$DIOnWbT.WcqH8CPRuoYp7uQced5z0Y3cxEeAHoVgBGRZfCQpNJW6K",
 "jack",
-2);
+2,
+NOW());
 
 INSERT INTO `controlroom`.`user_roles`
 (`user_id`,
@@ -147,7 +155,8 @@ INSERT INTO `controlroom`.`user`
 `longitude`,
 `password`,
 `username`,
-`authority_id`)
+`authority_id`,
+`last_new_incident`)
 VALUES
 (5,
 "julia@controlroom.test",
@@ -157,7 +166,8 @@ VALUES
 0.0,
 "$2a$10$QdFAfMU9KO1L6UKsjs3SpO2F.8zVyQ90lzg5Hd6VJfYXIsImstsIu",
 "julia",
-3);
+3,
+NOW());
 
 INSERT INTO `controlroom`.`user_roles`
 (`user_id`,
@@ -176,7 +186,8 @@ INSERT INTO `controlroom`.`user`
 `longitude`,
 `password`,
 `username`,
-`authority_id`)
+`authority_id`,
+`last_new_incident`)
 VALUES
 (6,
 "mpampinos@controlroom.test",
@@ -186,7 +197,8 @@ VALUES
 0.0,
 "$2a$10$QdFAfMU9KO1L6UKsjs3SpO2F.8zVyQ90lzg5Hd6VJfYXIsImstsIu",
 "mpampinos",
-4);
+4,
+NOW());
 
 INSERT INTO `controlroom`.`user_roles`
 (`user_id`,
@@ -205,7 +217,8 @@ INSERT INTO `controlroom`.`user`
 `longitude`,
 `password`,
 `username`,
-`authority_id`)
+`authority_id`,
+`last_new_incident`)
 VALUES
 (7,
 "controlroom@controlroom.test",
@@ -215,7 +228,8 @@ VALUES
 0.0,
 "$2a$10$QdFAfMU9KO1L6UKsjs3SpO2F.8zVyQ90lzg5Hd6VJfYXIsImstsIu",
 "controlroom",
-5);
+5,
+NOW());
 
 INSERT INTO `controlroom`.`user_roles`
 (`user_id`,
@@ -244,7 +258,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('ΝΙΚΟΣ',
 'pap',
@@ -262,7 +277,8 @@ NOW(),
 1,
 1,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (1,1);
@@ -284,7 +300,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('kostas',
 'mix',
@@ -302,7 +319,8 @@ NOW(),
 1,
 2,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (2,1);
@@ -324,7 +342,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('mpampis',
 'paipp',
@@ -342,7 +361,8 @@ NOW(),
 3,
 1,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (3,1);
@@ -366,7 +386,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('mpampifefes',
 'pbtbtbaipp',
@@ -384,7 +405,8 @@ NOW(),
 4,
 4,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (4,1);
@@ -410,7 +432,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('mbfdbdbfes',
 'pbxeepp',
@@ -428,7 +451,8 @@ NOW(),
 5,
 1,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (5,1);
@@ -450,7 +474,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('φεφεφγσs',
 'cvsrvsrvsvv',
@@ -468,7 +493,8 @@ NOW(),
 2,
 2,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (6,1);
@@ -494,7 +520,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('nuimnuim',
 'cvzaasdvsdv',
@@ -512,7 +539,8 @@ NOW(),
 3,
 3,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (7,1);
@@ -540,7 +568,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('mopsmkocejkscbh',
 'husbhuksvbsv',
@@ -558,7 +587,8 @@ NOW(),
 1,
 4,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (8,1);
@@ -582,7 +612,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('miimntrbeb',
 'qwsdqwedwedfwr',
@@ -600,7 +631,8 @@ NOW(),
 1,
 1,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (9,1);
@@ -624,7 +656,8 @@ INSERT INTO `controlroom`.`incidents`
 `importance_id`,
 `authority_id`,
 `latitude`,
-`longitude`)
+`longitude`,
+`created_timestamp`)
 VALUES
 ('ββςψεβςψρβυθςψ',
 'μπαμπηρης',
@@ -642,7 +675,8 @@ NOW(),
 2,
 2,
 0.0,
-0.0);
+0.0,
+NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (10,1);
