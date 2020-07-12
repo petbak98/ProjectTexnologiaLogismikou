@@ -1,14 +1,17 @@
 import React from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 
 import { InformationIcon, ReportsIcon, UserIcon } from '../../assets/icons';
+import { useAuthService } from '../../hooks/useAuth';
 import useIncidentById from '../../hooks/useIncidentById';
 import useTabs from '../../hooks/useTabs';
 import { Avatar } from '../../shared';
+import { isServiceUserInvolved } from '../../utils';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
 import IncidentInformation from '../IncidentInformation/IncidentInformation';
 import Loading from '../Loading/Loading';
+import Reports from '../Reports/Reports';
 import Stars from '../Stars/Stars';
 import Status from '../Status/Status';
 import {
@@ -25,6 +28,7 @@ function Incident() {
   const { id } = useParams();
   const { data, status } = useIncidentById(id);
   const {
+    reports,
     callerFirstName,
     callerLastName,
     callerPhone,
@@ -70,16 +74,21 @@ function Incident() {
         />
       ),
     },
-    { tag: 'Αναφορές', Icon: ReportsIcon, content: 'test2' },
+    { tag: 'Αναφορές', Icon: ReportsIcon, content: <Reports reports={reports} /> },
   ];
 
-  const { currentTab, changeTab, currentIndex } = useTabs(0, IncidentNavContent);
+  const { currentTab, changeTab, currentIndex } = useTabs(2, IncidentNavContent);
 
   function changeActiveTab(index) {
     changeTab(index);
   }
+
+  const [state] = useAuthService();
+  const { user } = state.context;
   if (status === 'loading') return <Loading />;
-  console.log(authority);
+
+  // if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;
+
   return (
     <Container>
       <AvatarContainer>

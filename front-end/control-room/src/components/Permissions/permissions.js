@@ -10,7 +10,7 @@ export const ROLES = {
 
 export const Permissions = {
   incident: {
-    view: [ADMIN_ROLE, CONTROL_CENTER_ROLE, USER_ROLE],
+    view: [ADMIN_ROLE, CONTROL_CENTER_ROLE],
     edit: [ADMIN_ROLE, CONTROL_CENTER_ROLE],
     accept: [USER_ROLE],
     addReport: [USER_ROLE],

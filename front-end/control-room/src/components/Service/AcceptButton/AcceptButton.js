@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 
-function AcceptButton({ status, acceptIncident, className }) {
+function AcceptButton({ acceptIncident, className }) {
   return (
     <Button
       style={{ marginLeft: 'auto' }}

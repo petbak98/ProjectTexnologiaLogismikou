@@ -14,10 +14,10 @@ import { useHistory } from 'react-router-dom';
 import { useAuthService } from '../../hooks/useAuth';
 import useEditIncident from '../../hooks/useEditIncident';
 import { Avatar } from '../../shared';
-import { checkIfIncidentAccepted } from '../../utils';
 import { AvatarContainer } from '../Incident/Incident.style';
 import Can from '../Permissions/Can';
-import AcceptButton from '../Service/AcceptButton/AcceptButton';
+import FeedServiceActions from '../Service/FeedServiceActions/FeedServiceActions';
+import Stars from '../Stars/Stars';
 import { feedItemStyles } from './FeedItem.style';
 const variants = {
   visible: {
@@ -43,9 +43,8 @@ export default function FeedItem({ incident }) {
   const history = useHistory();
   const [authState] = useAuthService();
   const { roles, firstName, id, latitude, longitude, lastName, username } = authState.context.user;
-  const isIncidentAccpted = checkIfIncidentAccepted(incident, authState.context.user);
 
-  const { mutate, status } = useEditIncident();
+  const { mutate } = useEditIncident();
 
   async function acceptIncident() {
     const requestParams = {
@@ -55,7 +54,6 @@ export default function FeedItem({ incident }) {
         { firstName, lastName, longitude, latitude, username, id },
       ],
     };
-    console.log(requestParams);
     await mutate({ incidentId, requestParams });
   }
 
@@ -90,6 +88,12 @@ export default function FeedItem({ incident }) {
           <TodayIcon className={classes.dateIcon} />
         </li>
         <li className={classes.feedLi}>
+          <Typography style={{ marginRight: 10 }} variant='subtitle1'>
+            Επείγον
+          </Typography>
+          <Stars startsCount={incident.importance.id} />
+        </li>
+        <li className={classes.feedLi}>
           <Typography variant='subtitle1'>{`${reports.length} reports`}</Typography>
           <AssessmentOutlinedIcon className={classes.dateIcon} />
         </li>
@@ -104,33 +108,39 @@ export default function FeedItem({ incident }) {
           </div>
         </div>
         <div className={classes.actions}>
-          <Button
-            onClick={viewIncident}
-            className={classes.button}
-            size='small'
-            variant='contained'
-            color='primary'
-            endIcon={<InfoOutlinedIcon />}
-          >
-            Πληροφορίες
-          </Button>
-          {!isIncidentAccpted ? (
-            <Can
-              resource='incident'
-              action='accept'
-              roles={roles}
-              yes={
-                <AcceptButton
-                  acceptIncident={acceptIncident}
-                  status={status}
-                  className={classes.button}
-                />
-              }
-              no={null}
-            />
-          ) : (
-            <Can resource='incident' action='addReport' roles={roles} />
-          )}
+          <Can
+            roles={roles}
+            action={'view'}
+            resource='incident'
+            yes={
+              <Button
+                onClick={viewIncident}
+                className={classes.button}
+                size='small'
+                variant='contained'
+                color='primary'
+                endIcon={<InfoOutlinedIcon />}
+              >
+                Πληροφορίες
+              </Button>
+            }
+            no={null}
+          />
+          <Can
+            resource='incident'
+            action='accept'
+            roles={roles}
+            yes={
+              <FeedServiceActions
+                acceptIncident={acceptIncident}
+                user={authState.context.user}
+                incident={incident}
+                className={classes.button}
+                viewIncident={viewIncident}
+              />
+            }
+            no={null}
+          />
           <Can
             resource='incident'
             roles={roles}
@@ -149,21 +159,7 @@ export default function FeedItem({ incident }) {
               </Button>
             }
             no={null}
-          >
-            {authState.context && (
-              <Button
-                style={{ marginLeft: 'auto' }}
-                onClick={editIncident}
-                className={classes.button}
-                size='small'
-                variant='text'
-                color='primary'
-                endIcon={<Edit />}
-              >
-                {' '}
-              </Button>
-            )}
-          </Can>
+          />
         </div>
       </ul>
     </motion.div>

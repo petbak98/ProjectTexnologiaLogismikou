@@ -3,4 +3,9 @@ function checkIfIncidentAccepted(incident, user) {
   return match;
 }
 
-export { checkIfIncidentAccepted };
+function isServiceUserInvolved(userId, receivers = []) {
+  const found = receivers.find((receiver) => receiver.id === userId);
+  return found;
+}
+
+export { checkIfIncidentAccepted, isServiceUserInvolved };
