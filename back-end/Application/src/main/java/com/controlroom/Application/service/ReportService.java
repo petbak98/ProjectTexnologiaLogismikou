@@ -2,6 +2,7 @@ package com.controlroom.Application.service;
 
 import com.controlroom.Application.model.dto.ReportDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReportService {

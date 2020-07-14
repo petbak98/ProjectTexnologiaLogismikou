@@ -47,8 +47,10 @@ public class SimpleUserController {
 
 
     @GetMapping("/reports")
-    public ResponseEntity<List<ReportDto>> index(){
-        return ResponseEntity.ok().body(reportService.findAll());
+    public ResponseEntity<List<ReportDto>> index(Principal principal){
+        User user = userService.findByUsername(principal.getName());
+
+        return ResponseEntity.ok().body(reportService.findByUserId(user.getId()));
     }
 
     @GetMapping("/reports/{id}")
@@ -64,17 +66,16 @@ public class SimpleUserController {
 
     @PutMapping("/reports")
     public ResponseEntity<String> updateReport(@RequestBody @Nullable ReportDto reportDto) throws JsonProcessingException {
-        if(reportDto!=null) {
+        if(reportDto!=null)
             return ResponseEntity.ok().body(convertToJson(reportService.save(reportDto)));
-        }
         else
             return ResponseEntity.badRequest().body("{\"Status\": \"Report not found\"}");
     }
 
-
-    @GetMapping("/{id}/reports")
-    public ResponseEntity<List<ReportDto>> findByUserId(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(reportService.findByUserId(id));
+    // Needs to be implemented
+    @DeleteMapping("/reports/{id}")
+    public ResponseEntity<String> DeleteReport(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body("{\"Status\": \"Not implemented\"}");
     }
 
 //    @PostMapping("/report/search")
@@ -84,35 +85,24 @@ public class SimpleUserController {
 //    }
 
 
-    @GetMapping("/incidents") /* Returns incidents by distance and authority of user. UserId will be changed to token */
-    @ResponseBody
-    public ResponseEntity<List<IncidentDto>> postResponseController(@RequestBody UserLocationIncident userLocationIncident) {
-        return ResponseEntity.ok().body(incidentService.findAllByDistance(userLocationIncident.getUserId()));
-    }
-
     @PutMapping("/update-location")
     public ResponseEntity<String> updateUserLocation(@RequestBody UserLocationIncident userLocationIncident) throws JsonProcessingException {
         UserDto userDto = userService.updateLocation(userLocationIncident);
-        if (userDto == null) {
+        if (userDto == null)
             return ResponseEntity.badRequest().body(convertToJson("{\"Status\": \"User not found\"}"));
-        }
-        else {
+        else
             return ResponseEntity.ok().body(convertToJson(userDto));
-        }
     }
 
     @GetMapping("/new-incidents")
     public  ResponseEntity<String> returnNewIncidents(Principal principal) throws JsonProcessingException {
         UserPostDto userPostDto = userService.findPostDtoByUsername(principal.getName());
-
         List<IncidentDto> incidents = incidentService.returnNewIncidents(userPostDto.getUserId(), userPostDto.getLastNewIncident());
 
         if(!incidents.isEmpty()) {
             Date currentDate = new Date(System.currentTimeMillis());
             userPostDto.setLastNewIncident(currentDate);
             userService.save(userPostDto);
-
-            System.out.println("Updated lastIncidentUpdate of User with id:" + userPostDto.getUserId());
         }
 
         return ResponseEntity.ok().body(convertToJson(incidents));

@@ -104,7 +104,10 @@ public class IncidentConverter {
         incident.setCoordinator(userServiceStatic.findById(incidentDto.getCoordinatorId()));
         incident.setId(incidentDto.getIncidentId());
         incident.setTitle(incidentDto.getTitle());
+
+        incident.setCreationTimestamp(incidentDto.getCreationTimestamp());
         incident.setLastUpdate(incidentDto.getLastUpdate());
+
         incident.setAuthority(authorityServiceStatic.findById(incidentDto.getAuthority().getId()));
         incident.setImportance(importanceServiceStatic.findById(incidentDto.getImportance().getId()));
 

@@ -51,11 +51,14 @@ public class AdminController {
     @PutMapping("/users")
     public ResponseEntity<String> updateUser(@RequestBody @Nullable UserPostDto userPostDto) throws JsonProcessingException {
         if (userPostDto != null)
-        {
             return ResponseEntity.ok().body(convertToJson(userService.save(userPostDto)));
-        }
         else
             return ResponseEntity.badRequest().body("{\"Status\": \"user not found\"}");
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<String> DeleteUser(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body("{\"Status\": \"Not implemented\"}");
     }
 
 
@@ -63,5 +66,4 @@ public class AdminController {
     public ResponseEntity<UserPostDto> findFullUserById(@PathVariable("id") Long id){
         return ResponseEntity.ok().body(userService.findFullDtoById(id));
     }
-
 }

@@ -29,6 +29,7 @@ public class ReportConverter {
         reportDto.setLastUpdate(report.getLastUpdate());
         reportDto.setContent(report.getContent());
         reportDto.setIncidentId(report.getIncident().getId());
+        reportDto.setIncidentTitle(report.getIncident().getTitle());
         reportDto.setUserId(report.getUser().getId());
         reportDto.setUserName(report.getUser().getUsername());
         return reportDto;
