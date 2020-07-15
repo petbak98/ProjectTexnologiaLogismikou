@@ -70,18 +70,8 @@ public class IncidentsController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateIncident(@PathVariable("id") Long id, @RequestBody @Nullable IncidentDto incidentDto,
                                                  Principal principal) throws Exception {
-        if(incidentDto!=null) {
-            User user = userService.findByUsername(principal.getName());
-
-            if(user.getRoles().stream().findFirst().isPresent()) {
-                if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"Status\": \"User is Unauthorised\"}");
-                else
+        if(incidentDto!=null)
                     return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
-            }
-            else
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
-        }
         else
             return ResponseEntity.ok().body("{\"Status\": \"Incident not found\"}");
     }
