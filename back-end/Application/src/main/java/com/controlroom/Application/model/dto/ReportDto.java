@@ -11,5 +11,6 @@ public class ReportDto {
     private long userId;
     private String userName;
     private long incidentId;
+    private String incidentTitle;
     private Date lastUpdate;
 }

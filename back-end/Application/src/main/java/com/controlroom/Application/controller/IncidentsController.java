@@ -7,6 +7,7 @@ import com.controlroom.Application.service.UserService;
 import com.controlroom.Application.util.Helpers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,19 +35,13 @@ public class IncidentsController {
         User user = userService.findByUsername(principal.getName());
 
         if(user.getRoles().stream().findFirst().isPresent()) {
-            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER")) {
-                System.out.println("user");
+            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
                 return ResponseEntity.ok().body(convertToJson(incidentService.findAllByDistance(user.getId())));
-            } else {
-                System.out.println("admin or moderator");
+            else
                 return ResponseEntity.ok().body(convertToJson(incidentService.findAll()));
-            }
         }
         else
-        {
-            return ResponseEntity.ok().body("{\"Status\": \"USER NOT FOUND\"}");
-
-        }
+            return ResponseEntity.ok().body("{\"Status\": \"User Not Found\"}");
     }
 
     @GetMapping("/{id}")
@@ -59,16 +54,31 @@ public class IncidentsController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createIncident(@RequestBody IncidentDto incidentDto) throws Exception {
-            return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
-    }
+    public ResponseEntity<String> createIncident(@RequestBody IncidentDto incidentDto, Principal principal) throws Exception {
+        User user = userService.findByUsername(principal.getName());
 
-    @PutMapping("/{id}") // Should be checked.
-    public ResponseEntity<String> updateIncident(@PathVariable("id") Long id, @RequestBody @Nullable IncidentDto incidentDto) throws Exception {
-        if(incidentDto!=null) {
-            return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
+        if(user.getRoles().stream().findFirst().isPresent()) {
+            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"Status\": \"User is Unauthorised\"}");
+            else
+                return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
         }
         else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateIncident(@PathVariable("id") Long id, @RequestBody @Nullable IncidentDto incidentDto,
+                                                 Principal principal) throws Exception {
+        if(incidentDto!=null)
+                    return ResponseEntity.ok().body(convertToJson(incidentService.save(incidentDto)));
+        else
             return ResponseEntity.ok().body("{\"Status\": \"Incident not found\"}");
+    }
+
+    // Needs to be implemented
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> DeleteIncident(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body("{\"Status\": \"Not implemented\"}");
     }
 }

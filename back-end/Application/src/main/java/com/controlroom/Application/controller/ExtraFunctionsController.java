@@ -55,9 +55,9 @@ public class ExtraFunctionsController {
 
     @GetMapping("/deathstats")
     public String deathstats(@RequestBody @Nullable StatisticsDto statisticsDto) throws Exception {
-        if (statisticsDto == null){
+        if (statisticsDto == null)
             return "{\"status\": \"Body not found\"}";
-        }else{
+        else {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             Date backDate = sdf.parse(statisticsDto.getStart());
             Date end = sdf.parse(statisticsDto.getEnd());
