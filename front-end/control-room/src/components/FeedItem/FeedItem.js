@@ -39,7 +39,7 @@ export default function FeedItem({ incident }) {
     incidentId,
   } = incident;
   const classes = feedItemStyles();
-  const date = new Date(lastUpdate).toLocaleDateString();
+  const parsedDate = lastUpdate.substring(0, 10);
   const history = useHistory();
   const [authState] = useAuthService();
   const { roles, firstName, id, latitude, longitude, lastName, username } = authState.context.user;
@@ -84,7 +84,7 @@ export default function FeedItem({ incident }) {
           <LocationOnIcon className={classes.locationIcon} />
         </li>
         <li className={classes.feedLi}>
-          <Typography variant='subtitle1'>{date}</Typography>
+          <Typography variant='subtitle1'>{parsedDate}</Typography>
           <TodayIcon className={classes.dateIcon} />
         </li>
         <li className={classes.feedLi}>

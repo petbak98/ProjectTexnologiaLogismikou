@@ -6,6 +6,7 @@ function useIncidents() {
   function prefetchIncidentById(incidents) {
     incidents.forEach((incident) => {
       const { incidentId } = incident;
+      console.log(incident.reports);
       queryCache.setQueryData(
         [
           'incident',

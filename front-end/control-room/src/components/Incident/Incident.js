@@ -27,6 +27,8 @@ import {
 function Incident() {
   const { id } = useParams();
   const { data, status } = useIncidentById(id);
+  const [state] = useAuthService();
+  const { user } = state.context;
   const {
     reports,
     callerFirstName,
@@ -74,7 +76,11 @@ function Incident() {
         />
       ),
     },
-    { tag: 'Αναφορές', Icon: ReportsIcon, content: <Reports reports={reports} /> },
+    {
+      tag: 'Αναφορές',
+      Icon: ReportsIcon,
+      content: <Reports userId={user.id} incidentId={incidentId} reports={reports} />,
+    },
   ];
 
   const { currentTab, changeTab, currentIndex } = useTabs(2, IncidentNavContent);
@@ -83,8 +89,6 @@ function Incident() {
     changeTab(index);
   }
 
-  const [state] = useAuthService();
-  const { user } = state.context;
   if (status === 'loading') return <Loading />;
 
   // if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;

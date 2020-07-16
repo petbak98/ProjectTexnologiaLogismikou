@@ -8,7 +8,7 @@ import AcceptButton from '../AcceptButton/AcceptButton';
 
 function FeedServiceActions({ acceptIncident, className, incident, user, viewIncident }) {
   const isIncidentAccpted = checkIfIncidentAccepted(incident, user);
-  if (!isIncidentAccpted)
+  if (isIncidentAccpted)
     return (
       <Button
         style={{ marginLeft: 'auto' }}

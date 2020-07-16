@@ -17,10 +17,9 @@ function useInterceptor(accessToken) {
         return response;
       },
       function (error) {
-        if (error?.response?.status === 400 || error?.response?.status === 401) {
-          console.log(error);
-          // localStorage.clear();
-          // window.location.href = '/';
+        if (error?.response?.status === 401) {
+          localStorage.clear();
+          window.location.href = '/';
         }
       },
     );
