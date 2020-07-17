@@ -83,7 +83,6 @@ function LocationStep({ nextStep, previousStep, updateForm, editProps }) {
       if (formState[key].length > 0 || key === 'longitude' || key === 'lattitude') return key;
       else return null;
     });
-    console.log(completedKeys, keys);
     if (completedKeys.length !== keys.length) {
       setError(true);
       return false;

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import { CallerDataStyles } from './CallerDataStep.style';
 
-function CallerDataStep({ previousStep, nextStep, updateForm, editProps, handleSubmit }) {
+function CallerDataStep({ previousStep, updateForm, editProps, handleSubmit }) {
   const classes = CallerDataStyles();
   const [formState, setFormState] = React.useState({
     callerFirstName: editProps?.callerFirstName || '',

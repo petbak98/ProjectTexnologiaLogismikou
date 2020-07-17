@@ -8,4 +8,8 @@ function isServiceUserInvolved(userId, receivers = []) {
   return found;
 }
 
+export function hasAlreadySubmitted(userId, reports) {
+  return reports.find((report) => report.userId === userId);
+}
+
 export { checkIfIncidentAccepted, isServiceUserInvolved };
