@@ -76,9 +76,18 @@ public class IncidentsController {
             return ResponseEntity.ok().body("{\"Status\": \"Incident not found\"}");
     }
 
-    // Needs to be implemented
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> DeleteIncident(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body("{\"Status\": \"Not implemented\"}");
+    public ResponseEntity<String> DeleteIncident(@PathVariable("id") Long id, Principal principal) throws JsonProcessingException {
+        User user = userService.findByUsername(principal.getName());
+
+        if(user.getRoles().stream().findFirst().isPresent()) {
+            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"Status\": \"User is Unauthorised\"}");
+            else
+                incidentService.deleteById(id);
+                return ResponseEntity.ok().body("{\"Status\": \"Successful Deletion\"}");
+        }
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
     }
 }

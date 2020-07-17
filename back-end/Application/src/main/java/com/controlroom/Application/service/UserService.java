@@ -22,4 +22,6 @@ public interface UserService {
 
     UserPostDto findPostDtoByUsername(String username);
 
+    void deleteById(Long id);
+
 }

@@ -44,7 +44,8 @@ public class UserConverter {
         user.setLatitude(userDto.getLatitude());
         user.setLongitude(userDto.getLongitude());
 
-        user.setAuthority(authorityServiceStatic.findById(userDto.getAuthority().getId()));
+        if(userDto.getAuthority()!=null)
+            user.setAuthority(authorityServiceStatic.findById(userDto.getAuthority().getId()));
         return user;
     }
 

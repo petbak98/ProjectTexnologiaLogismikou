@@ -710,5 +710,5 @@ VALUES
 NOW(),
 'Panic everywhere');
 
-INSERT INTO controlroom.incident_statistics (deaths, injuries, incident_incident_id) 
-VALUES (0,16,1);
+#INSERT INTO controlroom.incident_statistics (deaths, injuries, incident_incident_id) 
+#VALUES (0,16,1);

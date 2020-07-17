@@ -102,4 +102,9 @@ public class UserServiceImpl implements UserService {
         }
         return userConverter.convertToDto(currentUser);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
 }

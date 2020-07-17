@@ -58,6 +58,7 @@ public class AdminController {
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<String> DeleteUser(@PathVariable("id") Long id) {
+        //userService.deleteById(id);
         return ResponseEntity.ok().body("{\"Status\": \"Not implemented\"}");
     }
 

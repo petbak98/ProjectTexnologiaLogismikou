@@ -64,7 +64,7 @@ public class IncidentServiceImpl implements IncidentService{
                         .stream()
                         .map(incident -> {
                             double distanceFromEachIncident = Helpers.distance(incident.getLatitude(),incident.getLongitude(), currentUser.get().getLatitude(), currentUser.get().getLongitude(), "K");
-                            System.out.println("distance Between User Incident "+ distanceFromEachIncident);
+                            //System.out.println("distance Between User Incident "+ distanceFromEachIncident);
                             if(distanceFromEachIncident < maxDistance)
                                 return incident;
                             else
@@ -125,5 +125,10 @@ public class IncidentServiceImpl implements IncidentService{
         Incident incident;
         incident = incidentRepository.findById(id).get();
         return incident;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        incidentRepository.deleteById(id);
     }
 }

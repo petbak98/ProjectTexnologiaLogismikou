@@ -36,9 +36,6 @@ public class Incident {
 
     private String title;
 
-    //@Column(columnDefinition = "POINT")
-    //private Point location;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name ="importance_id", nullable = false)
     private Importance importance;
@@ -73,7 +70,7 @@ public class Incident {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> receivers;
 
-    @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Report> reports;
 
     @ManyToOne

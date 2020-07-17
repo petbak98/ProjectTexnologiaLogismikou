@@ -19,4 +19,6 @@ public interface IncidentService {
 
     List<IncidentDto> findAllByDistance(Long id); // UserLocationIncident userLocationIncident
     List<IncidentDto> returnNewIncidents(Long id, Date timestamp);
+
+    void deleteById(Long id);
 }

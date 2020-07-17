@@ -14,5 +14,7 @@ public interface ReportService {
     ReportDto save(ReportDto reportDto);
     List<ReportDto> findByUserId(Long id);
 
+    void deleteById(Long id);
+
 
 }
