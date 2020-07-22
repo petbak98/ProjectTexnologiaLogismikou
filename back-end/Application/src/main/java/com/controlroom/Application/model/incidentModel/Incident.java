@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.geo.Point;
-
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,9 +33,6 @@ public class Incident {
     private User coordinator;
 
     private String title;
-
-    //@Column(columnDefinition = "POINT")
-    //private Point location;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name ="importance_id", nullable = false)
@@ -70,10 +65,13 @@ public class Incident {
     @JoinTable (
             name = "incident_user",
             joinColumns = @JoinColumn(name = "incident_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)
+    )
     private List<User> receivers;
 
-    @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Report> reports;
 
     @ManyToOne

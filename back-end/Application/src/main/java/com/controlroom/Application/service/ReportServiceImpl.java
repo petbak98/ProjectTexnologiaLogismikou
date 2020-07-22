@@ -64,4 +64,9 @@ public class ReportServiceImpl implements ReportService{
                 .map(ReportConverter::convertToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteById(Long id) {
+        reportRepository.deleteById(id);
+    }
 }

@@ -30,7 +30,6 @@ public class UserPostDto {
     private String firstName;
     private String lastName;
 
-
     private int active;
 
     private Set<Role> roles;

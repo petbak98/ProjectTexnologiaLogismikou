@@ -3,16 +3,12 @@ package com.controlroom.Application.converter;
 import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.ReportDto;
 import com.controlroom.Application.model.dto.UserDto;
-import com.controlroom.Application.model.incidentModel.Authority;
-import com.controlroom.Application.model.incidentModel.Importance;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.reportModel.Report;
-import com.controlroom.Application.model.userModel.User;
-import com.controlroom.Application.repository.ReportRepository;
+import com.controlroom.Application.model.userModel.User;import com.controlroom.Application.repository.ReportRepository;
 import com.controlroom.Application.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,9 +62,6 @@ public class IncidentConverter {
 
         incidentDto.setLastUpdate(incident.getLastUpdate());
         incidentDto.setCreationTimestamp(incident.getCreationTimestamp());
-
-        /*incidentDto.setAuthorityId(incident.getAuthority().getId());
-        incidentDto.setImportanceId(incident.getImportance().getId());*/
 
         incidentDto.setAuthority(AuthorityConverter.convertToDto(incident.getAuthority()));
         incidentDto.setImportance(ImportanceConverter.convertToDto(incident.getImportance()));
@@ -127,24 +120,19 @@ public class IncidentConverter {
         incident.setLatitude(incidentDto.getLatitude());
         incident.setLongitude(incidentDto.getLongitude());
 
-        // Den ta exw dei akoma, asta etsi pros to paron
-        if(incidentDto.getReceivers() == null) {
+        if(incidentDto.getReceivers() == null)
             incident.setReceivers(new ArrayList<User>());
-        }
         else {
             List<User> userList = incidentDto.getReceivers().stream().map(UserConverter::convert).collect(Collectors.toList());
             incident.setReceivers(userList);
         }
 
-        if(incidentDto.getReports() == null) {
+        if(incidentDto.getReports() == null)
             incident.setReports(new ArrayList<Report>());
-        }
         else {
             List<Report> reportList = incidentDto.getReports().stream().map(ReportConverter::convert).collect(Collectors.toList());
             incident.setReports(reportList);
-
         }
         return incident;
     }
-
 }

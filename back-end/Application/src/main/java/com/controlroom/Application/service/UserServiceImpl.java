@@ -27,36 +27,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        User user;
-        user = userRepository.findByUsername(username).get();
-        return user;
+        return userRepository.findByUsername(username).get();
     }
 
     @Override
     public UserPostDto findPostDtoByUsername(String username) {
-        User user;
-        user = userRepository.findByUsername(username).get();
-
-        return UserPostConverter.convertToDto(user);
+        return UserPostConverter.convertToDto(userRepository.findByUsername(username).get());
     }
 
     @Override
     public User findById(Long id) {
-        User user;
-        user = userRepository.findById(id).get();
-        return user;
+        return userRepository.findById(id).get();
     }
 
     @Override
     public UserDto findDtoById(Long id){
-        User user;
-        /*try {*/
-            user = userRepository.findById(id).get();
-        /*} catch (NoSuchElementException nsee) {
-            throw new Exception("User not found", nsee.getCause());
-        }*/
-
-        return UserConverter.convertToDto(user);
+        return UserConverter.convertToDto(userRepository.findById(id).get());
     }
 
     @Override
@@ -77,14 +63,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserPostDto findFullDtoById(Long id) {
-        User user;
-        /*try {*/
-        user = userRepository.findById(id).get();
-        /*} catch (NoSuchElementException nsee) {
-            throw new Exception("User not found", nsee.getCause());
-        }*/
-
-        return UserPostConverter.convertToDto(user);
+        return UserPostConverter.convertToDto(userRepository.findById(id).get());
     }
 
     @Override
@@ -101,5 +80,10 @@ public class UserServiceImpl implements UserService {
             userRepository.saveAndFlush(currentUser);
         }
         return userConverter.convertToDto(currentUser);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
     }
 }

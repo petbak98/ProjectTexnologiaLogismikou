@@ -2,14 +2,11 @@ package com.controlroom.Application.model.reportModel;
 
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.userModel.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,9 +37,4 @@ public class Report {
     @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdate;
-
-
-
-
-
 }

@@ -72,10 +72,10 @@ public class SimpleUserController {
             return ResponseEntity.badRequest().body("{\"Status\": \"Report not found\"}");
     }
 
-    // Needs to be implemented
     @DeleteMapping("/reports/{id}")
     public ResponseEntity<String> DeleteReport(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body("{\"Status\": \"Not implemented\"}");
+        reportService.deleteById(id);
+        return ResponseEntity.ok().body("{\"Status\": \"Successful Deletion\"}");
     }
 
 //    @PostMapping("/report/search")

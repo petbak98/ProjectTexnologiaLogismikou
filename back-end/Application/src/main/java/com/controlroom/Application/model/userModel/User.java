@@ -47,7 +47,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "coordinator", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "coordinator", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Incident> myIncidents;
 
     private double latitude;
@@ -58,10 +58,17 @@ public class User {
     @JoinColumn(name ="authority_id", nullable = false)
     private Authority authority;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "receivers")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable (
+            name = "incident_user",
+            inverseJoinColumns = @JoinColumn(name = "incident_id"),
+            joinColumns = @JoinColumn(name = "user_id"),
+            foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)
+    )
     private List<Incident> incidents;
 
-    @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Report> reports;
 
     @CreationTimestamp
@@ -78,8 +85,6 @@ public class User {
         this.password = password;
         this.latitude = latitude;
         this.longitude = longitude;
-
-//        this.authority = 0;
     }
 
     public long getId() {

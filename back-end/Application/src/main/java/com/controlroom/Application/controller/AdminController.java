@@ -1,10 +1,7 @@
 package com.controlroom.Application.controller;
 
-import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.UserDto;
 import com.controlroom.Application.model.dto.UserPostDto;
-import com.controlroom.Application.model.userModel.User;
-import com.controlroom.Application.repository.UserRepository;
 import com.controlroom.Application.service.UserService;
 import com.controlroom.Application.util.Helpers;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,11 +15,11 @@ import java.util.List;
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
-
 public class AdminController {
 
     @Autowired
@@ -58,9 +55,9 @@ public class AdminController {
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<String> DeleteUser(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body("{\"Status\": \"Not implemented\"}");
+        userService.deleteById(id);
+        return ResponseEntity.ok().body("{\"Status\": \"Successful Deletion\"}");
     }
-
 
     @GetMapping("/users/{id}/full")
     public ResponseEntity<UserPostDto> findFullUserById(@PathVariable("id") Long id){

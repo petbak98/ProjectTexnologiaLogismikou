@@ -8,6 +8,5 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "statistics", path="incident-statistics")
 public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
-
     List<Statistics> findAll();
 }

@@ -5,11 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,20 +14,13 @@ import java.util.Optional;
 public interface IncidentRepository extends JpaRepository<Incident, Long> {
 
     List<Incident> findAll();
-
     Page<Incident> findAll(Pageable pageable);
-
     Optional<Incident> findById(Long id);
-
     List<Incident> findByAuthorityId(Long id);
-
     List<Incident> findByTitleContaining(String title);
+    List<Incident> findByStatusId(Long id);
 
     Incident save(Incident incident);
-
     @Query("select 1 from Incident incident")
     void healthCheck();
-
-
-
 }

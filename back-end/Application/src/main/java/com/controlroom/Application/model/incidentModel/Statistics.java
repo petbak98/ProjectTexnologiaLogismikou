@@ -27,7 +27,6 @@ public class Statistics {
     @OneToOne(fetch = FetchType.LAZY)
     private Incident incident;
 
-
     public long getDeaths() {
         return deaths;
     }
@@ -35,6 +34,4 @@ public class Statistics {
     public Incident getIncident(){
         return incident;
     }
-
 }
-

@@ -6,7 +6,6 @@ import com.controlroom.Application.model.incidentModel.Authority;
 import com.controlroom.Application.model.incidentModel.Incident;
 
 import com.controlroom.Application.model.userModel.User;
-import com.controlroom.Application.model.userModel.UserLocationIncident;
 import com.controlroom.Application.repository.AuthorityRepository;
 import com.controlroom.Application.repository.IncidentRepository;
 import com.controlroom.Application.repository.UserRepository;
@@ -64,7 +63,7 @@ public class IncidentServiceImpl implements IncidentService{
                         .stream()
                         .map(incident -> {
                             double distanceFromEachIncident = Helpers.distance(incident.getLatitude(),incident.getLongitude(), currentUser.get().getLatitude(), currentUser.get().getLongitude(), "K");
-                            System.out.println("distance Between User Incident "+ distanceFromEachIncident);
+                            //System.out.println("distance Between User Incident "+ distanceFromEachIncident);
                             if(distanceFromEachIncident < maxDistance)
                                 return incident;
                             else
@@ -125,5 +124,18 @@ public class IncidentServiceImpl implements IncidentService{
         Incident incident;
         incident = incidentRepository.findById(id).get();
         return incident;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        incidentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<IncidentDto> findAllActiveIncidents() {
+        return incidentRepository.findByStatusId((long) 1)
+                .stream()
+                .map(IncidentConverter::convertToDto)
+                .collect(Collectors.toList());
     }
 }

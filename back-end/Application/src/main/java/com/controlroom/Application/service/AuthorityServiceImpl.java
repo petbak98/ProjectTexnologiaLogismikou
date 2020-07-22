@@ -12,9 +12,6 @@ public class AuthorityServiceImpl implements AuthorityService{
 
     @Override
     public Authority findById(Long id) {
-        Authority authority;
-
-        authority = authorityRepository.findById(id).get();
-        return authority;
+        return authorityRepository.findById(id).get();
     }
 }
