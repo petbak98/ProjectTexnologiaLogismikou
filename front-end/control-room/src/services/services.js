@@ -22,6 +22,10 @@ export function createReport(params) {
   return Axios.post(API + '/user/reports', params);
 }
 
+export function editReport(params) {
+  return Axios.put(API + '/user/reports', params);
+}
+
 export async function fetchNewIncidents() {
   const result = await Axios.get(API + '/user/new-incidents');
   return result.data;

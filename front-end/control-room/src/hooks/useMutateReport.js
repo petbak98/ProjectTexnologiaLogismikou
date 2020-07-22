@@ -1,9 +1,19 @@
-import { useMutation } from 'react-query';
+import { useMutation, queryCache } from 'react-query';
 
-import { createReport } from '../services/services';
+import { createReport, editReport } from '../services/services';
 
-function useMutateReport() {
-  const [mutate, { status }] = useMutation(createReport);
+function useMutateReport(edit) {
+  const [mutate, { status }] = useMutation(edit ? editReport : createReport, {
+    onSuccess: (res) => {
+      const { incidentId } = res.data;
+      queryCache.refetchQueries([
+        'incident',
+        {
+          id: incidentId,
+        },
+      ]);
+    },
+  });
   return { mutate, status };
 }
 

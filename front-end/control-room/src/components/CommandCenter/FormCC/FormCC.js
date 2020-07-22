@@ -10,6 +10,7 @@ import { Machine } from 'xstate';
 
 import './FormCC.style.css';
 import { useAuthService } from '../../../hooks/useAuth';
+import useQuerySuccess from '../../../hooks/useQuerySuccess';
 import { createIncident, editIncident } from '../../../services/services';
 import Loading from '../../Loading/Loading';
 import StepsNav from '../../StepsNav/StepNav';
@@ -51,6 +52,7 @@ export default function FormCC() {
   function updateForm(newValues) {
     setForm({ ...form, ...newValues });
   }
+
   React.useEffect(() => {
     if (status === 'success') {
       toast.success('Επιτυχής καταχώρηση');
