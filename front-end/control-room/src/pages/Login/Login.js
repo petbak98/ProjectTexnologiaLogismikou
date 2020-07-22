@@ -44,7 +44,7 @@ export default function Login() {
           style={{ marginTop: 10 }}
           variant='outlined'
           margin='normal'
-          label='ΑΡΙΘΜΟΣ ΜΗΤΡΩΟΥ'
+          label='Ονομα Χρήστη'
         />
         <TextField
           onChange={handleChange}
