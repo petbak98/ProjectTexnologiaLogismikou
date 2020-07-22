@@ -16,10 +16,6 @@ public class UserDto {
     @NotEmpty
     private String username;
 
-   /* @NotNull
-    @NotEmpty
-    private String password;*/
-
     private String firstName;
     private String lastName;
 

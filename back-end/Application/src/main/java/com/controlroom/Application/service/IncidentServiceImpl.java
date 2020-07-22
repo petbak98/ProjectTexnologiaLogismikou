@@ -6,7 +6,6 @@ import com.controlroom.Application.model.incidentModel.Authority;
 import com.controlroom.Application.model.incidentModel.Incident;
 
 import com.controlroom.Application.model.userModel.User;
-import com.controlroom.Application.model.userModel.UserLocationIncident;
 import com.controlroom.Application.repository.AuthorityRepository;
 import com.controlroom.Application.repository.IncidentRepository;
 import com.controlroom.Application.repository.UserRepository;
@@ -130,5 +129,13 @@ public class IncidentServiceImpl implements IncidentService{
     @Override
     public void deleteById(Long id) {
         incidentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<IncidentDto> findAllActiveIncidents() {
+        return incidentRepository.findByStatusId((long) 1)
+                .stream()
+                .map(IncidentConverter::convertToDto)
+                .collect(Collectors.toList());
     }
 }

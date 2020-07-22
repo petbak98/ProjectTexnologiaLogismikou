@@ -1,6 +1,5 @@
 package com.controlroom.Application.model.incidentModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,5 +23,4 @@ public class Importance {
 
     @OneToMany(mappedBy="importance", fetch = FetchType.LAZY)
     private List<Incident> incidents;
-
 }

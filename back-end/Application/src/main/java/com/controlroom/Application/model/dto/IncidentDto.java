@@ -1,14 +1,9 @@
 package com.controlroom.Application.model.dto;
 
-import com.controlroom.Application.model.incidentModel.Status;
-import com.controlroom.Application.model.reportModel.Report;
-import com.controlroom.Application.model.userModel.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.geo.Point;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;

@@ -17,8 +17,8 @@ import java.security.Principal;
 
 import static com.controlroom.Application.util.Helpers.convertToJson;
 
+
 @CrossOrigin(origins = "*", maxAge = 3600)
-//@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/api/incidents")
 @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
@@ -37,6 +37,8 @@ public class IncidentsController {
         if(user.getRoles().stream().findFirst().isPresent()) {
             if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
                 return ResponseEntity.ok().body(convertToJson(incidentService.findAllByDistance(user.getId())));
+            else if(user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_MODERATOR"))
+                return ResponseEntity.ok().body(convertToJson(incidentService.findAllActiveIncidents()));
             else
                 return ResponseEntity.ok().body(convertToJson(incidentService.findAll()));
         }

@@ -12,9 +12,6 @@ public class ImportanceServiceImpl implements ImportanceService{
 
     @Override
     public Importance findById(Long id) {
-        Importance importance;
-
-        importance = importanceRepository.findById(id).get();
-        return importance;
+        return importanceRepository.findById(id).get();
     }
 }

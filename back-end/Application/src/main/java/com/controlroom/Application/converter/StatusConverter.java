@@ -19,5 +19,4 @@ public class StatusConverter {
         status.setCompleted(statusDto.getCompleted());
         return status;
     }
-
 }

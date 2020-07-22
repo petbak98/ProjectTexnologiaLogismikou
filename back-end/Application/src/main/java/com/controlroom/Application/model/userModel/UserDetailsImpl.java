@@ -1,7 +1,6 @@
 package com.controlroom.Application.model.userModel;
 
 import com.controlroom.Application.converter.AuthorityConverter;
-import com.controlroom.Application.converter.UserConverter;
 import com.controlroom.Application.model.dto.AuthorityDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,27 +1,20 @@
 package com.controlroom.Application.controller;
 
-import com.controlroom.Application.model.dto.IncidentDto;
 import com.controlroom.Application.model.dto.StatisticsDto;
 import com.controlroom.Application.service.HealthCheckService;
 import com.controlroom.Application.service.ResetService;
 import com.controlroom.Application.service.StatisticsService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.constraints.Null;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static com.controlroom.Application.util.Helpers.convertToJson;
-
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -64,7 +57,6 @@ public class ExtraFunctionsController {
             int deaths = statService.getDeaths(backDate,end);
             return "{\"deaths\": "+deaths+"}\n{\"status\": \"ok\"}";
         }
-
     }
 
     @GetMapping("/dpm/{year}")
