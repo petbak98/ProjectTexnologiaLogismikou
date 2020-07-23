@@ -44,7 +44,7 @@ export default function Login() {
           style={{ marginTop: 10 }}
           variant='outlined'
           margin='normal'
-          label='Ονομα Χρήστη'
+          label='Ονομα Χρηστη'
         />
         <TextField
           onChange={handleChange}
