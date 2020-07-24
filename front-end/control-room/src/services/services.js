@@ -14,6 +14,10 @@ export function editIncident(requestParams) {
   return Axios.put(`${API}/incidents/${requestParams.incidentId}`, requestParams);
 }
 
+export function deleteIncident(requestParams) {
+  return Axios.delete(`${API}/incidents/${requestParams.incidentId}`);
+}
+
 export function updateLocation(key, params) {
   return Axios.put(API + '/user/update-location', params);
 }

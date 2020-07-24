@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-import { useParams, Redirect, useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { InformationIcon, ReportsIcon, UserIcon } from '../../assets/icons';
 import { useAuthService } from '../../hooks/useAuth';
@@ -9,6 +10,7 @@ import useEditIncident from '../../hooks/useEditIncident';
 import useIncidentById from '../../hooks/useIncidentById';
 import useQuerySuccess from '../../hooks/useQuerySuccess';
 import useTabs from '../../hooks/useTabs';
+import { deleteIncident } from '../../services/services';
 import { Avatar } from '../../shared';
 import { ableToClose } from '../../utils';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
@@ -34,6 +36,8 @@ function Incident() {
   const [activeModals, setActiveModals] = React.useState({ close: false, delete: false });
   const { id } = useParams();
   const { mutate, status: closeStatus } = useEditIncident();
+  const [deleteMutate, { status: deleteStatus }] = useMutation(deleteIncident);
+
   const { data, status } = useIncidentById(id);
   const [state] = useAuthService();
   const { user } = state.context;
@@ -56,13 +60,11 @@ function Incident() {
     region,
   } = data || {};
 
-  console.log(activeModals);
   function closeModal(type) {
     setActiveModals({ ...activeModals, [type]: false });
   }
 
   function openModal(type) {
-    console.log(type);
     setActiveModals({ ...activeModals, [type]: true });
   }
 
@@ -71,12 +73,21 @@ function Incident() {
   }
 
   useQuerySuccess(closeStatus, redirectToHomepage);
-  const isLoading = closeStatus === 'loading';
+  useQuerySuccess(deleteStatus, redirectToHomepage);
 
-  async function closeIncident() {
+  const isCloseLoading = closeStatus === 'loading';
+  const isDeleteLoading = deleteStatus === 'loading';
+
+  async function closeIncidentAction() {
     const params = { ...data, status: { id: 2, completed: 1 } };
     await mutate(params);
   }
+
+  async function deleteIncidentAction() {
+    const params = { ...data };
+    await deleteMutate(params);
+  }
+
   const canBeClosed = ableToClose(reports);
   const IncidentNavContent = [
     {
@@ -155,7 +166,7 @@ function Incident() {
               color='primary'
               variant='text'
               style={{ marginLeft: 'auto' }}
-              disabled={isLoading}
+              disabled={isDeleteLoading}
             >
               Διαγραφη
             </Button>
@@ -175,7 +186,7 @@ function Incident() {
                 color='primary'
                 variant='contained'
                 style={{ marginLeft: '10px' }}
-                disabled={isLoading}
+                disabled={isCloseLoading}
               >
                 Κλεισιμο
               </Button>
@@ -193,7 +204,7 @@ function Incident() {
         close={() => {
           closeModal('close');
         }}
-        callback={closeIncident}
+        callback={closeIncidentAction}
       />
       <ConfirmationDialog
         message='Είσαι σίγουρος ότι θέλεις να διαγράψεις το συμβάν;'
@@ -201,7 +212,7 @@ function Incident() {
         close={() => {
           closeModal('delete');
         }}
-        callback={closeIncident}
+        callback={deleteIncidentAction}
       />
     </Container>
   );
