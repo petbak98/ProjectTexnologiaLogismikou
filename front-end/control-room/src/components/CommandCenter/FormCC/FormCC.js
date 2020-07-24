@@ -10,6 +10,7 @@ import { Machine } from 'xstate';
 
 import './FormCC.style.css';
 import { useAuthService } from '../../../hooks/useAuth';
+import useQuerySuccess from '../../../hooks/useQuerySuccess';
 import { createIncident, editIncident } from '../../../services/services';
 import Loading from '../../Loading/Loading';
 import StepsNav from '../../StepsNav/StepNav';
@@ -51,12 +52,9 @@ export default function FormCC() {
     setForm({ ...form, ...newValues });
   }
 
-  React.useEffect(() => {
-    if (status === 'success') {
-      toast.success('Επιτυχής καταχώρηση');
-      history.push('/incidents');
-    }
-  }, [status, history]);
+  useQuerySuccess(status, () => {
+    history.push('/incidents');
+  });
 
   async function handleSubmit(lastStepFormState) {
     try {
