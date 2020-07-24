@@ -20,7 +20,6 @@ function IncidentInformation({
   street,
   number,
   timeStamp,
-  creationTimestamp,
   receivers = [],
   notes,
 }) {
@@ -34,7 +33,7 @@ function IncidentInformation({
       <InformationItem label='Σημειώσεις' value={notes} />
       <InformationItem label='Ημ.Δημιουργίας' value='TODO' />
       {receivers.map((receiver, index) => (
-        <InformationItem key={receiver.id} label={`Αποδέκτης ${index}`} value={receiver.username} />
+        <InformationItem key={index} label={`Αποδέκτης ${index}`} value={receiver.username} />
       ))}
     </Container>
   );

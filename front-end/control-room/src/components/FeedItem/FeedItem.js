@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useAuthService } from '../../hooks/useAuth';
 import useEditIncident from '../../hooks/useEditIncident';
+import useQuerySuccess from '../../hooks/useQuerySuccess';
 import { Avatar } from '../../shared';
 import { AvatarContainer } from '../Incident/Incident.style';
 import Can from '../Permissions/Can';
@@ -42,17 +43,15 @@ export default function FeedItem({ incident }) {
   const parsedDate = lastUpdate.substring(0, 10);
   const history = useHistory();
   const [authState] = useAuthService();
-  const { roles, firstName, id, latitude, longitude, lastName, username } = authState.context.user;
+  const { roles, id } = authState.context.user;
 
-  const { mutate } = useEditIncident();
+  const { mutate, status } = useEditIncident();
 
+  useQuerySuccess(status);
   async function acceptIncident() {
     const requestParams = {
       ...incident,
-      receivers: [
-        ...incident.receivers,
-        { firstName, lastName, longitude, latitude, username, id },
-      ],
+      receivers: [...incident.receivers, { id }],
     };
     await mutate({ incidentId, requestParams });
   }

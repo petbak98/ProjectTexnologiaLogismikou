@@ -27,7 +27,6 @@ const StepsMachine = Machine({
       on: {
         EVENT: {
           actions: (_, event) => {
-            // console.log(event);
             event.nextStep();
           },
         },
@@ -51,6 +50,7 @@ export default function FormCC() {
   function updateForm(newValues) {
     setForm({ ...form, ...newValues });
   }
+
   React.useEffect(() => {
     if (status === 'success') {
       toast.success('Επιτυχής καταχώρηση');
@@ -80,7 +80,7 @@ export default function FormCC() {
   if (error) return <div>Something wrong happened</div>;
 
   return (
-    <>
+    <div style={{ padding: '1rem' }}>
       <Typography className={classes.title} align='center' variant='h6'>
         {editStrategy ? 'Επεξεργασία Συμβάντος' : 'Προσθήκη Συμβάντος'}
       </Typography>
@@ -102,6 +102,6 @@ export default function FormCC() {
           <FinalScreen />
         </StepWizard>
       </div>
-    </>
+    </div>
   );
 }

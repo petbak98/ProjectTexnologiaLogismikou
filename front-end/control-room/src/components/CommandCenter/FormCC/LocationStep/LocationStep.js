@@ -72,7 +72,6 @@ function LocationStep({ nextStep, previousStep, updateForm, editProps }) {
   }
 
   function isValid() {
-    console.log(formState);
     if (!formState) {
       setError(true);
       return false;

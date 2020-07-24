@@ -6,18 +6,13 @@ import { toast } from 'react-toastify';
 import useMutateReport from '../../../hooks/useMutateReport';
 import useQuerySuccess from '../../../hooks/useQuerySuccess';
 
-function ReportForm({ incidentId, userId }) {
+function ReportEditForm({ report, callback }) {
   const [form, setForm] = React.useState({
-    incidentTitle: '',
-    content: '',
+    incidentTitle: report.incidentTitle,
+    content: report?.content,
   });
-  const { status, mutate } = useMutateReport();
+  const { status, mutate } = useMutateReport(report);
   useQuerySuccess(status);
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -25,9 +20,16 @@ function ReportForm({ incidentId, userId }) {
       toast.error('Συμπλήρωσε την φόρμα');
       return;
     }
-    await mutate({ incidentId, userId, ...form });
+    await mutate({ ...report, ...form });
     setForm({ incidentTitle: '', content: '' });
+    callback();
   }
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <Grid container direction='column'>
@@ -53,11 +55,11 @@ function ReportForm({ incidentId, userId }) {
           value={form.content}
         />
         <Button type='submit' style={{ marginTop: 10 }} variant='contained' color='primary'>
-          Προσθηκη
+          Αποθηκευση
         </Button>
       </Grid>
     </form>
   );
 }
 
-export default ReportForm;
+export default ReportEditForm;

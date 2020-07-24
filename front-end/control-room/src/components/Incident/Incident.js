@@ -83,7 +83,7 @@ function Incident() {
     },
   ];
 
-  const { currentTab, changeTab, currentIndex } = useTabs(2, IncidentNavContent);
+  const { currentTab, changeTab, currentIndex } = useTabs(0, IncidentNavContent);
 
   function changeActiveTab(index) {
     changeTab(index);
