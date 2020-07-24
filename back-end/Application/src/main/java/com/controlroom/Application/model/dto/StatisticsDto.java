@@ -7,15 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StatisticsDto {
-    public String getStart() {
-        return start;
-    }
-
-    String start;
-
-    public String getEnd() {
-        return end;
-    }
-
-    String end;
+    private long id;
+    private long injuries;
+    private long deaths;
+    private long incidentId;
 }

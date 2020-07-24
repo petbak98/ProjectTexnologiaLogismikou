@@ -1,8 +1,11 @@
 package com.controlroom.Application.controller;
 
 import com.controlroom.Application.model.dto.IncidentDto;
+import com.controlroom.Application.model.dto.StatisticsDto;
+import com.controlroom.Application.model.incidentModel.Statistics;
 import com.controlroom.Application.model.userModel.User;
 import com.controlroom.Application.service.IncidentService;
+import com.controlroom.Application.service.StatisticsService;
 import com.controlroom.Application.service.UserService;
 import com.controlroom.Application.util.Helpers;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,6 +31,8 @@ public class IncidentsController {
     private IncidentService incidentService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StatisticsService statisticsService;
 
     @GetMapping
     @ResponseBody
@@ -43,7 +48,7 @@ public class IncidentsController {
                 return ResponseEntity.ok().body(convertToJson(incidentService.findAll()));
         }
         else
-            return ResponseEntity.ok().body("{\"Status\": \"User Not Found\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
     }
 
     @GetMapping("/{id}")
@@ -85,9 +90,64 @@ public class IncidentsController {
         if(user.getRoles().stream().findFirst().isPresent()) {
             if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"Status\": \"User is Unauthorised\"}");
-            else
+            else {
                 incidentService.deleteById(id);
                 return ResponseEntity.ok().body("{\"Status\": \"Successful Deletion\"}");
+            }
+        }
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
+    }
+
+    // ------------- Statistics ---------------
+
+    @GetMapping("/statistics")
+    public ResponseEntity<String> getAllStatistics(Principal principal) throws JsonProcessingException {
+        User user = userService.findByUsername(principal.getName());
+
+        if(user.getRoles().stream().findFirst().isPresent()) {
+            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"Status\": \"User is Unauthorised\"}");
+            else
+                return ResponseEntity.ok().body(convertToJson(statisticsService.findAll()));
+        }
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
+    }
+
+    @GetMapping("/{id}/statistics")
+    public ResponseEntity<String> getIncidentStatistics(@PathVariable("id") Long id, Principal principal) throws Exception {
+        User user = userService.findByUsername(principal.getName());
+
+        if(user.getRoles().stream().findFirst().isPresent()) {
+            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"Status\": \"User is Unauthorised\"}");
+            else {
+                StatisticsDto statisticsDto;
+                try {
+                    statisticsDto = statisticsService.findByIncidentId(id);
+                } catch (Exception e) {
+                    return ResponseEntity.ok().body("{}");
+                }
+
+            return ResponseEntity.ok().body(convertToJson(statisticsDto));
+            }
+        }
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
+    }
+
+    @PostMapping("/{id}/statistics")
+    public ResponseEntity<String> PostIncidentStatistics(@PathVariable("id") Long id, @RequestBody StatisticsDto statisticsDto, Principal principal) throws JsonProcessingException {
+        User user = userService.findByUsername(principal.getName());
+
+        if(user.getRoles().stream().findFirst().isPresent()) {
+            if (user.getRoles().stream().findFirst().get().getName().toString().equals("ROLE_USER"))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"Status\": \"User is Unauthorised\"}");
+            else {
+                statisticsDto.setIncidentId(id);
+                return ResponseEntity.ok().body(convertToJson(statisticsService.save(statisticsDto)));
+            }
         }
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Status\": \"User Not Found\"}");
