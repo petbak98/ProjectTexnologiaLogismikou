@@ -1,0 +1,12 @@
+{
+	"username": "petros",
+	"password": "12345678",
+	"firstName": "mpampis",
+	"lastName": "kirkitsis",
+	"active": 1,
+	"roles": "USER",
+	"permissions": "",
+	"authorityId": 1,
+	"latitude": 10.5,
+	"longitude": -56.125
+}

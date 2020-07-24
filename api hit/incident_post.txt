@@ -1,0 +1,24 @@
+{
+    "coordinatorId": 1,
+    "title": "Pyrkagia",
+    "authority": {
+		"id": 1
+	},
+    "importance": {
+		"id": 1
+	},
+	"number": "6",
+	"postalCode": "15234",
+    "region": "Attiki",
+    "street": "Olumpoy 60",
+    "callerFirstName": "petros",
+    "callerLastName": "bakolas",
+    "callerNationalId": "AK123456",
+    "callerPhone": "69802314567",
+    "status": {
+		"id": 1
+	},
+    "notes": "lelelelel",
+	"latitude": 10.5,
+	"longitude": -56.125
+}

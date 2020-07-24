@@ -74,6 +74,9 @@ public class Incident {
     @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Report> reports;
 
+    @OneToOne(mappedBy = "incident",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Statistics statistics;
+
     @ManyToOne
     @JoinColumn(name ="authority_id", nullable = false)
     private Authority authority;

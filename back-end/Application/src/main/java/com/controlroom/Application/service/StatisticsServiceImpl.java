@@ -1,6 +1,9 @@
 package com.controlroom.Application.service;
 
 
+import com.controlroom.Application.converter.ReportConverter;
+import com.controlroom.Application.converter.StatisticsConverter;
+import com.controlroom.Application.model.dto.StatisticsDto;
 import com.controlroom.Application.model.incidentModel.Incident;
 import com.controlroom.Application.model.incidentModel.Statistics;
 import com.controlroom.Application.repository.StatisticsRepository;
@@ -11,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
@@ -45,5 +50,31 @@ public class StatisticsServiceImpl implements StatisticsService {
             }
         }
         return incidents;
+    }
+
+    @Override
+    public List<StatisticsDto> findAll() {
+        return statisticsRepository.findAll()
+                .stream()
+                .map(StatisticsConverter::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public StatisticsDto findByIncidentId(Long id) throws Exception {
+        Statistics statistics;
+        try{
+            statistics = statisticsRepository.findByIncidentId(id).get();
+        }catch (NoSuchElementException nsee) {
+            throw new Exception("Statistics not found", nsee.getCause());
+        }
+        return StatisticsConverter.convertToDto(statistics);
+    }
+
+    @Override
+    public StatisticsDto save(StatisticsDto statisticsDto) {
+        Statistics statistics = StatisticsConverter.convert(statisticsDto);
+        statistics = statisticsRepository.save(statistics);
+        return StatisticsConverter.convertToDto(statistics);
     }
 }

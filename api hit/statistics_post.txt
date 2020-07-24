@@ -1,0 +1,4 @@
+{
+  "injuries": 6,
+  "deaths": 15
+}

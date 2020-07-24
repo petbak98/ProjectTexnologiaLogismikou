@@ -46,7 +46,7 @@ public class ExtraFunctionsController {
         return ResponseEntity.ok().body("{\"status\": \"ok\"}");
     }
 
-    @GetMapping("/deathstats")
+    /*@GetMapping("/deathstats")
     public String deathstats(@RequestBody @Nullable StatisticsDto statisticsDto) throws Exception {
         if (statisticsDto == null)
             return "{\"status\": \"Body not found\"}";
@@ -57,7 +57,7 @@ public class ExtraFunctionsController {
             int deaths = statService.getDeaths(backDate,end);
             return "{\"deaths\": "+deaths+"}\n{\"status\": \"ok\"}";
         }
-    }
+    }*/
 
     @GetMapping("/dpm/{year}")
     public String deathspermonth(@PathVariable("year") int year) throws ParseException {
