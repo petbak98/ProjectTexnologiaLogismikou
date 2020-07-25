@@ -77,9 +77,8 @@ function LocationStep({ nextStep, previousStep, updateForm, editProps }) {
       return false;
     }
     const keys = Object.keys(formState);
-
     const completedKeys = keys.filter((key) => {
-      if (formState[key].length > 0 || key === 'longitude' || key === 'lattitude') return key;
+      if (formState[key]?.length > 0 || key === 'longitude' || key === 'lattitude') return key;
       else return null;
     });
     if (completedKeys.length !== keys.length) {
@@ -129,21 +128,22 @@ function LocationStep({ nextStep, previousStep, updateForm, editProps }) {
             />
             <div className={classes.dropdown}>
               {/* {loading && <div>Loading...</div>} */}
-              {suggestions.map((suggestion) => {
+              {suggestions.map((suggestion, index) => {
                 const className = classes.dropdownItem;
                 const style = suggestion.active
                   ? { backgroundColor: '#d9d8dd', cursor: 'pointer' }
                   : { backgroundColor: '#FAFAFA', cursor: 'pointer' };
                 return (
-                  <div
-                    key={suggestion}
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
-                    })}
-                  >
-                    <LocationIcon className={classes.locationSvg} />
-                    <span>{suggestion.description}</span>
+                  <div key={suggestion.description}>
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        className,
+                        style,
+                      })}
+                    >
+                      <LocationIcon className={classes.locationSvg} />
+                      <span>{suggestion.description}</span>
+                    </div>
                   </div>
                 );
               })}
