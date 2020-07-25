@@ -21,6 +21,10 @@ export function deleteUser(requestParams) {
   return Axios.delete(`${API}/admin/users/${requestParams.id}`);
 }
 
+export function createStats({ incidentId, params }) {
+  return Axios.post(`${API}/incidents/${incidentId}/statistics`, params);
+}
+
 export function updateLocation(key, params) {
   return Axios.put(API + '/user/update-location', params);
 }

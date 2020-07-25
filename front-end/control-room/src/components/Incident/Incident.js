@@ -10,9 +10,10 @@ import useEditIncident from '../../hooks/useEditIncident';
 import useIncidentById from '../../hooks/useIncidentById';
 import useQuerySuccess from '../../hooks/useQuerySuccess';
 import useTabs from '../../hooks/useTabs';
-import { deleteIncident } from '../../services/services';
+import { deleteIncident, createStats } from '../../services/services';
 import { Avatar } from '../../shared';
 import { ableToClose } from '../../utils';
+import CloseIncidentDialog from '../CloseIncidentDialog/CloseIncidentDialog';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
 import ConfirmationDialog from '../Dialogs/ConfirmationDialog';
 import IncidentInformation from '../IncidentInformation/IncidentInformation';
@@ -78,14 +79,21 @@ function Incident() {
   const isCloseLoading = closeStatus === 'loading';
   const isDeleteLoading = deleteStatus === 'loading';
 
-  async function closeIncidentAction() {
-    const params = { ...data, status: { id: 2, completed: 1 } };
-    await mutate(params);
-  }
+  // async function closeIncidentAction() {
+  //   const params = { ...data, status: { id: 2, completed: 1 } };
+  //   await mutate(params);
+  // }
+  const [createStatsMutate] = useMutation(createStats);
 
   async function deleteIncidentAction() {
     const params = { ...data };
     await deleteMutate(params);
+  }
+
+  async function submitStats(params) {
+    await createStatsMutate({ incidentId, params });
+    const closeIncidentParams = { ...data, status: { id: 2, completed: 1 } };
+    await mutate(closeIncidentParams);
   }
 
   const canBeClosed = ableToClose(reports);
@@ -198,14 +206,22 @@ function Incident() {
           />
         )}
       </div>
-      <ConfirmationDialog
+      <CloseIncidentDialog
+        isOpen={activeModals.close}
+        callback={submitStats}
+        handleClose={() => {
+          closeModal('close');
+        }}
+        close={activeModals.close}
+      />
+      {/* <ConfirmationDialog
         message='Είσαι σίγουρος ότι θέλεις να κλείσεις το συμβάν;'
         isOpen={activeModals.close}
         close={() => {
           closeModal('close');
         }}
         callback={closeIncidentAction}
-      />
+      /> */}
       <ConfirmationDialog
         message='Είσαι σίγουρος ότι θέλεις να διαγράψεις το συμβάν;'
         isOpen={activeModals.delete}

@@ -17,6 +17,7 @@ export function hasAlreadySubmitted(userId, reports) {
 }
 
 export function ableToClose(reports = []) {
+  return true;
   if (reports.length < REPORTS_IN_ORDER_TO_CLOSE_INCIDENT) return false;
   return true;
 }
