@@ -19,7 +19,11 @@ export default function NavbarService() {
     <Navbar>
       <NavLink to='/' activeclassname='activeLink'>
         <LinkButton
-          style={location.pathname === '/' ? { color: '#FAFAFB' } : {}}
+          style={
+            location.pathname === '/' || location.pathname.includes('/incidents')
+              ? { color: '#FAFAFB' }
+              : {}
+          }
           endIcon={<RssFeedIcon />}
           color='secondary'
         >
