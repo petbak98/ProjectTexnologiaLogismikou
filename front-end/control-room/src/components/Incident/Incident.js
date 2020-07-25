@@ -164,7 +164,7 @@ function Incident() {
                 openModal('delete');
               }}
               color='primary'
-              variant='text'
+              variant='outlined'
               style={{ marginLeft: 'auto' }}
               disabled={isDeleteLoading}
             >

@@ -22,13 +22,7 @@ function ConfirmationDialog({ message, callback, close, isOpen }) {
           <Button onClick={close} color='primary'>
             Οχι
           </Button>
-          <Button
-            color='primary'
-            variant='contained'
-            onClick={handleClose}
-            color='primary'
-            autoFocus
-          >
+          <Button color='primary' variant='contained' onClick={handleClose} autoFocus>
             Ναι
           </Button>
         </DialogActions>

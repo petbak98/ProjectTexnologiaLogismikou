@@ -1,3 +1,5 @@
+import { queryCache } from 'react-query';
+
 const REPORTS_IN_ORDER_TO_CLOSE_INCIDENT = 4;
 
 function checkIfIncidentAccepted(incident, user) {
@@ -17,6 +19,10 @@ export function hasAlreadySubmitted(userId, reports) {
 export function ableToClose(reports = []) {
   if (reports.length < REPORTS_IN_ORDER_TO_CLOSE_INCIDENT) return false;
   return true;
+}
+
+export function refetchQueries(key) {
+  queryCache.refetchQueries(key);
 }
 
 export { checkIfIncidentAccepted, isServiceUserInvolved };

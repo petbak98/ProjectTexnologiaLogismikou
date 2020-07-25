@@ -85,7 +85,7 @@ const AuthMachine = Machine(
           username: ctx.username,
           password: ctx.password,
         });
-        toast.success(`Ωρα για δράση ${ctx.username}`);
+        toast.success(`Καλωσήρθες ${ctx.username}`);
         return result.data;
       },
     },

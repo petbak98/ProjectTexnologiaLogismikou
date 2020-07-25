@@ -9,7 +9,7 @@ export default function useUpdateLocation({ id: userId }) {
   return {
     geolocation,
     ...useQuery(
-      latitude && longitude && ['update-location', { userId, latitude: 0, longitude: 0 }],
+      latitude && longitude && ['update-location', { userId, latitude, longitude }],
       updateLocation,
     ),
   };
