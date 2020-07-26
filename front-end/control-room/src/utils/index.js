@@ -1,6 +1,6 @@
 import { queryCache } from 'react-query';
 
-const REPORTS_IN_ORDER_TO_CLOSE_INCIDENT = 4;
+const REPORTS_IN_ORDER_TO_CLOSE_INCIDENT = 1;
 
 function checkIfIncidentAccepted(incident, user) {
   const match = incident.receivers.some((receiver) => receiver.id === user.id);
