@@ -1,5 +1,6 @@
 package com.controlroom.Application.controller;
 
+import com.controlroom.Application.model.dto.StartEndDate;
 import com.controlroom.Application.model.dto.StatisticsDto;
 import com.controlroom.Application.service.HealthCheckService;
 import com.controlroom.Application.service.ResetService;
@@ -46,18 +47,19 @@ public class ExtraFunctionsController {
         return ResponseEntity.ok().body("{\"status\": \"ok\"}");
     }
 
-    /*@GetMapping("/deathstats")
-    public String deathstats(@RequestBody @Nullable StatisticsDto statisticsDto) throws Exception {
-        if (statisticsDto == null)
+    @GetMapping("/stats")
+    public String stats(@RequestBody @Nullable StartEndDate startEndDate) throws Exception {
+        if (startEndDate == null)
             return "{\"status\": \"Body not found\"}";
         else {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            Date backDate = sdf.parse(statisticsDto.getStart());
-            Date end = sdf.parse(statisticsDto.getEnd());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+            Date backDate = sdf.parse(startEndDate.getStart().toString().replace("\"", ""));
+            Date end = sdf.parse(startEndDate.getEnd().toString());
             int deaths = statService.getDeaths(backDate,end);
-            return "{\"deaths\": "+deaths+"}\n{\"status\": \"ok\"}";
+            int injuries = statService.getInjuries(backDate,end);
+            return "{\"deaths\": "+deaths+"\n\"injuries\": "+injuries+"}";
         }
-    }*/
+    }
 
     @GetMapping("/dpm/{year}")
     public String deathspermonth(@PathVariable("year") int year) throws ParseException {

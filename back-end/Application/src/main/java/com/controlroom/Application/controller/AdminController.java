@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +27,8 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @GetMapping("/users")
@@ -41,12 +46,19 @@ public class AdminController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserPostDto userPostDto){
-        return ResponseEntity.ok().body(userService.save(userPostDto));
+    public ResponseEntity<String> createUser(@RequestBody UserPostDto userPostDto) throws JsonProcessingException {
+            userPostDto.setActive(0);
+            userPostDto.setLatitude(0.0);
+            userPostDto.setLongitude(0.0);
+            String password=userPostDto.getPassword();
+            String encodedPassword=passwordEncoder.encode(password);
+            System.out.println(encodedPassword);
+            userPostDto.setPassword(encodedPassword);
+            return ResponseEntity.ok().body(convertToJson(userService.save(userPostDto)));
     }
 
-    @PutMapping("/users")
-    public ResponseEntity<String> updateUser(@RequestBody @Nullable UserPostDto userPostDto) throws JsonProcessingException {
+    @PutMapping("/users/{id}")
+    public ResponseEntity<String> updateUser(@RequestBody @Nullable UserPostDto userPostDto, @PathVariable("id") Long id) throws JsonProcessingException {
         if (userPostDto != null)
             return ResponseEntity.ok().body(convertToJson(userService.save(userPostDto)));
         else
