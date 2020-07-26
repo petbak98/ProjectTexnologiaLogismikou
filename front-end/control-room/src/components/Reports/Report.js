@@ -77,7 +77,7 @@ export default function Report({ report, userId }) {
         <Typography style={{ fontWeight: 'bold' }} component='h1'>
           {incidentTitle}
         </Typography>
-        <p>{content}</p>
+        <p style={{ overflowX: 'auto', maxWidth: '400px' }}>{content}</p>
         <Grid container style={{ marginTop: 5 }}>
           <Typography color='textSecondary' style={{ fontSize: 15 }}>
             {parsedDate}

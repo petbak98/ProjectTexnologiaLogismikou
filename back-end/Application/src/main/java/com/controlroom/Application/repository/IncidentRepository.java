@@ -19,6 +19,7 @@ public interface IncidentRepository extends JpaRepository<Incident, Long> {
     List<Incident> findByAuthorityId(Long id);
     List<Incident> findByTitleContaining(String title);
     List<Incident> findByStatusId(Long id);
+    List<Incident> findByAuthorityIdAndStatusId(Long id1, Long id2);
 
     Incident save(Incident incident);
     @Query("select 1 from Incident incident")

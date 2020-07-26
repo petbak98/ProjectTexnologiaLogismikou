@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from '@material-ui/core';
 import { useMutation } from 'react-query';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 
 import { InformationIcon, ReportsIcon, UserIcon } from '../../assets/icons';
 import { useAuthService } from '../../hooks/useAuth';
@@ -12,7 +12,7 @@ import useQuerySuccess from '../../hooks/useQuerySuccess';
 import useTabs from '../../hooks/useTabs';
 import { deleteIncident, createStats } from '../../services/services';
 import { Avatar } from '../../shared';
-import { ableToClose } from '../../utils';
+import { ableToClose, isServiceUserInvolved } from '../../utils';
 import CloseIncidentDialog from '../CloseIncidentDialog/CloseIncidentDialog';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
 import ConfirmationDialog from '../Dialogs/ConfirmationDialog';
@@ -43,6 +43,7 @@ function Incident() {
   const [state] = useAuthService();
   const { user } = state.context;
   const {
+    creationTimestamp,
     reports,
     callerFirstName,
     callerLastName,
@@ -79,10 +80,6 @@ function Incident() {
   const isCloseLoading = closeStatus === 'loading';
   const isDeleteLoading = deleteStatus === 'loading';
 
-  // async function closeIncidentAction() {
-  //   const params = { ...data, status: { id: 2, completed: 1 } };
-  //   await mutate(params);
-  // }
   const [createStatsMutate] = useMutation(createStats);
 
   async function deleteIncidentAction() {
@@ -120,6 +117,7 @@ function Incident() {
           notes={notes}
           region={region}
           street={street}
+          creationTimestamp={creationTimestamp}
           number={number}
           incidentId={incidentId}
           completed={incStatus?.completed}
@@ -141,7 +139,7 @@ function Incident() {
 
   if (status === 'loading') return <Loading />;
 
-  // if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;
+  if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;
 
   return (
     <Container>
@@ -214,14 +212,6 @@ function Incident() {
         }}
         close={activeModals.close}
       />
-      {/* <ConfirmationDialog
-        message='Είσαι σίγουρος ότι θέλεις να κλείσεις το συμβάν;'
-        isOpen={activeModals.close}
-        close={() => {
-          closeModal('close');
-        }}
-        callback={closeIncidentAction}
-      /> */}
       <ConfirmationDialog
         message='Είσαι σίγουρος ότι θέλεις να διαγράψεις το συμβάν;'
         isOpen={activeModals.delete}

@@ -1,10 +1,13 @@
 import React from 'react';
 
-import { TextField, Typography } from '@material-ui/core';
+import { TextField, Typography, Button } from '@material-ui/core';
 import styled from 'styled-components/macro';
+
+import theme from '../../config/theme';
 
 export const Container = styled.div`
   display: flex;
+  border-top: 5px solid ${theme.palette.primary.main};
   flex-direction: column;
   margin: 0 auto;
   width: 550px;
@@ -31,7 +34,7 @@ function AdminForm() {
 
   return (
     <Container>
-      <Typography color='primary' align='center'>
+      <Typography variant='h5' color='primary' align='center'>
         Προσθήκη Χρήστη
       </Typography>
       <FormContainer onSubmit={handleSubmit}>
@@ -47,6 +50,9 @@ function AdminForm() {
         <div className='input-container'>
           <TextField fullWidth name='password' label='Κωδικός' type='password' />
         </div>
+        <Button style={{ marginTop: 30 }} variant='contained' color='primary' type='submit'>
+          Προσθηκη
+        </Button>
       </FormContainer>
     </Container>
   );

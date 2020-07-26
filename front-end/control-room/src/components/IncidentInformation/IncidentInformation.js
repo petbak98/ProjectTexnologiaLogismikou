@@ -19,19 +19,19 @@ function IncidentInformation({
   region,
   street,
   number,
-  timeStamp,
+  creationTimestamp,
   receivers = [],
   notes,
 }) {
+  const parsedDate = creationTimestamp.substring(0, 10);
   return (
     <Container>
       <InformationItem label='ID' value={incidentId} />
       <InformationItem label='Περιοχή' value={region} />
       <InformationItem label='Οδός' value={`${street} ${number}`} />
-      <InformationItem label='Hμ.Δημιουργίας' value={timeStamp} />
+      <InformationItem label='Hμ.Δημιουργίας' value={parsedDate} />
       <InformationItem label='Ολοκληρωμένο' value={`${completed ? 'Ναι' : 'Όχι'}`} />
       <InformationItem label='Σημειώσεις' value={notes} />
-      <InformationItem label='Ημ.Δημιουργίας' value='TODO' />
       {receivers.map((receiver, index) => (
         <InformationItem key={index} label={`Αποδέκτης ${index}`} value={receiver.username} />
       ))}

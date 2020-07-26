@@ -48,6 +48,6 @@ export async function getUsers() {
 }
 
 export async function fetchStats() {
-  const result = await Axios.get(API + '/incident/statistics');
+  const result = await Axios.get(API + '/incidents/statistics');
   return result.data;
 }

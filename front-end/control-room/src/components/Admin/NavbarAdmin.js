@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
+import RssFeedIcon from '@material-ui/icons/RssFeed';
 import { useLocation } from 'react-router-dom';
 
 import { Navbar, LinkButton, NavLink } from '../Navbar/Navbar';
@@ -25,9 +26,9 @@ function NavbarAdmin() {
           <h5>Χρήστες</h5>
         </LinkButton>
       </NavLink>
-      <NavLink to='/form' activeclassname='activeLink'>
+      <NavLink to='/create-user' activeclassname='activeLink'>
         <LinkButton
-          style={location.pathname === '/form' ? { color: '#FAFAFB' } : {}}
+          style={location.pathname === '/create-user' ? { color: '#FAFAFB' } : {}}
           endIcon={<AddIcon />}
           color='secondary'
         >
@@ -41,6 +42,19 @@ function NavbarAdmin() {
           color='secondary'
         >
           <h5>Στατιστικά</h5>
+        </LinkButton>
+      </NavLink>
+      <NavLink to='/incidents' activeclassname='activeLink'>
+        <LinkButton
+          style={
+            location.pathname === '/incidents' || location.pathname.includes('/incidents')
+              ? { color: '#FAFAFB' }
+              : {}
+          }
+          endIcon={<RssFeedIcon />}
+          color='secondary'
+        >
+          <h5>Συμβάντα</h5>
         </LinkButton>
       </NavLink>
       <LinkButton
