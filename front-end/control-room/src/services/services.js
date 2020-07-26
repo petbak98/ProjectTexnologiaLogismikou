@@ -46,3 +46,8 @@ export async function getUsers() {
   const result = await Axios.get(API + '/admin/users');
   return result.data;
 }
+
+export async function fetchStats() {
+  const result = await Axios.get(API + '/incident/statistics');
+  return result.data;
+}

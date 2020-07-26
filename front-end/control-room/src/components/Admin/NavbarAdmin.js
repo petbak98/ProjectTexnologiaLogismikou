@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AddIcon from '@material-ui/icons/Add';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListIcon from '@material-ui/icons/List';
 import { useLocation } from 'react-router-dom';
@@ -31,6 +32,15 @@ function NavbarAdmin() {
           color='secondary'
         >
           <h5>Προσθήκη</h5>
+        </LinkButton>
+      </NavLink>
+      <NavLink to='/stats' activeclassname='activeLink'>
+        <LinkButton
+          style={location.pathname === '/stats' ? { color: '#FAFAFB' } : {}}
+          endIcon={<EqualizerIcon />}
+          color='secondary'
+        >
+          <h5>Στατιστικά</h5>
         </LinkButton>
       </NavLink>
       <LinkButton

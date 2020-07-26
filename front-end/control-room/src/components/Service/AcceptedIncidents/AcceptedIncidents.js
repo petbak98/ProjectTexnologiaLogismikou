@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useAuthService } from '../../../hooks/useAuth';
 import useIncidents from '../../../hooks/useIncidents';
+import ErrorComponent from '../../Error/ErrorComponent';
 import Feed from '../../Feed/Feed';
 import Loading from '../../Loading/Loading';
 
@@ -18,7 +19,7 @@ function AcceptedIncidents() {
     });
   }, [incidents, user.id]);
   if (status === 'loading') return <Loading />;
-  if (status === 'error') return <div>Κάτι πήγε στραβά</div>;
+  if (status === 'error') return <ErrorComponent />;
   return <Feed incidents={acceptedIncidents} />;
 }
 
