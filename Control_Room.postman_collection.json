@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "0462fd84-4f9a-41cd-86a7-8b81b513fb4a",
+		"name": "Control Room",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Incidents",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnZW9yZ2UiLCJpYXQiOjE1OTA4MjM0MzAsImV4cCI6MTU5MDkwOTgzMH0.Qh4pd_eJyN8PPQGqxUmmnn_i4ICFOIrFvNcpR_h3UFBCCRwULYEHAC100ffEfnLg9bA5TXxz_f0R_M1cIRQ4NA"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:9000/control-center/api/mod/incidents"
+			},
+			"response": []
+		},
+		{
+			"name": "IncidentById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnZW9yZ2UiLCJpYXQiOjE1OTA4MjM0MzAsImV4cCI6MTU5MDkwOTgzMH0.Qh4pd_eJyN8PPQGqxUmmnn_i4ICFOIrFvNcpR_h3UFBCCRwULYEHAC100ffEfnLg9bA5TXxz_f0R_M1cIRQ4NA"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:9000/control-center/api/mod/incidents/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"george\",\"password\":\"123456\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:9000/control-center/api/auth/signin"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
