@@ -139,7 +139,7 @@ function Incident() {
 
   if (status === 'loading') return <Loading />;
 
-  if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;
+  // if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;
 
   return (
     <Container>
