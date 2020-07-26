@@ -1,21 +1,40 @@
-//package com.controlroom.Application.controller
+package com.controlroom.Application.controller
+
+import com.controlroom.Application.model.dto.IncidentDto
+import com.controlroom.Application.repository.IncidentRepository
+import com.controlroom.Application.service.HealthCheckServiceImpl
+import com.controlroom.Application.service.IncidentService
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.context.annotation.Bean
+import org.springframework.test.web.servlet.MockMvc
+import spock.lang.Specification
+import spock.lang.Shared
+import spock.lang.Unroll
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+
+//@WebMvcTest(controllers = [ExtraFunctionsController])
+//@AutoConfigureMockMvc
+//@WebMvcTest
+//class HealthCheckTest extends Specification {
 //
-//import com.controlroom.Application.model.dto.IncidentDto
-//import com.controlroom.Application.service.IncidentService
-//import com.fasterxml.jackson.databind.ObjectMapper
-//import org.springframework.beans.factory.annotation.Autowired
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-//import org.springframework.boot.test.context.TestConfiguration
-//import org.springframework.context.annotation.Bean
-//import org.springframework.test.web.servlet.MockMvc
-//import spock.lang.Specification
-//import spock.lang.Unroll
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+//    @Autowired
+//    private MockMvc mvc
 //
-//@WebMvcTest(controllers = [IncidentsController])
-//class IncidentControllerTest extends Specification {
+//    def "T01. Health check status is OK"() {
+//        expect: "Status is 200 and the response is 'Hello world!'"
+//        mvc.perform(get("/control-center/api/health-check"))
+//                .andExpect(status().isOk())
+//                .andReturn()
+//                .response
+//                .contentAsString == "Hello world!"
+//
+//    }
 //
 //    @Autowired
 //    protected MockMvc mvc

@@ -36,14 +36,18 @@ dependencies {
 	compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.1.RELEASE'
 
 	testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
-	// mandatory dependencies for using Spock
-	compile "org.codehaus.groovy:groovy-all:2.5.8"
-	// optional dependencies for using Spock
-	testRuntime "net.bytebuddy:byte-buddy:1.9.3"          // allows mocking of classes (in addition to interfaces)
-	testRuntime "org.objenesis:objenesis:2.6"    // allows mocking of classes without default constructor (together with CGLIB)
+//	// mandatory dependencies for using Spock
+//	compile "org.codehaus.groovy:groovy-all:2.5.8"
+//	// optional dependencies for using Spock
+//	testRuntime "net.bytebuddy:byte-buddy:1.9.3"          // allows mocking of classes (in addition to interfaces)
+//	testRuntime "org.objenesis:objenesis:2.6"    // allows mocking of classes without default constructor (together with CGLIB)
+//
+//	implementation "com.google.code.gson:gson:2.8.2",
+//			"org.codehaus.groovy:groovy-all:2.5.8"
+//
+	testImplementation 'com.github.tomakehurst:wiremock-jre8:2.25.1'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
 
