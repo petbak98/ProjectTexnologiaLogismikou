@@ -5,7 +5,6 @@ import { useMachine } from '@xstate/react';
 import { useMutation } from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
 import StepWizard from 'react-step-wizard';
-import { Machine } from 'xstate';
 
 import './FormCC.style.css';
 import { useAuthService } from '../../../hooks/useAuth';
