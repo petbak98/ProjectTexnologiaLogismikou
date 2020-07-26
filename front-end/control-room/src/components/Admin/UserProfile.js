@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import styled from 'styled-components/macro';
 
 import useQuerySuccess from '../../hooks/useQuerySuccess';
