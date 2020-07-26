@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 import { ReactComponent as Ambulance } from '../assets/icons/ambulance.svg';
+import { ReactComponent as ControlCenter } from '../assets/icons/cc.svg';
 import { ReactComponent as Firetrack } from '../assets/icons/firetruck.svg';
 import { ReactComponent as Policeman } from '../assets/icons/patrol.svg';
 import { ReactComponent as PortAuthority } from '../assets/icons/ship.svg';
@@ -29,6 +30,7 @@ function Avatar({ id }) {
     if (id === 2) return <Firetrack className='avatar' />;
     if (id === 3) return <Ambulance className='avatar' />;
     if (id === 4) return <PortAuthority className='avatar' />;
+    if (id === 5) return <ControlCenter className='avatar' />;
     return null;
   };
   return <AvatarWrapper>{renderAvatar()}</AvatarWrapper>;

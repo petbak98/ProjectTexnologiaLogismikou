@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Edit from '@material-ui/icons/Edit';
 
 import ReportEditForm from '../Service/ReportForm/ReportEditForm';
-import ReportForm from '../Service/ReportForm/ReportForm';
 
 const reportStyles = makeStyles((theme) => {
   return {

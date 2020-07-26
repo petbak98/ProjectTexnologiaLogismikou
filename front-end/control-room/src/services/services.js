@@ -14,6 +14,17 @@ export function editIncident(requestParams) {
   return Axios.put(`${API}/incidents/${requestParams.incidentId}`, requestParams);
 }
 
+export function deleteIncident(requestParams) {
+  return Axios.delete(`${API}/incidents/${requestParams.incidentId}`);
+}
+export function deleteUser(requestParams) {
+  return Axios.delete(`${API}/admin/users/${requestParams.id}`);
+}
+
+export function createStats({ incidentId, params }) {
+  return Axios.post(`${API}/incidents/${incidentId}/statistics`, params);
+}
+
 export function updateLocation(key, params) {
   return Axios.put(API + '/user/update-location', params);
 }
@@ -28,5 +39,15 @@ export function editReport(params) {
 
 export async function fetchNewIncidents() {
   const result = await Axios.get(API + '/user/new-incidents');
+  return result.data;
+}
+
+export async function getUsers() {
+  const result = await Axios.get(API + '/admin/users');
+  return result.data;
+}
+
+export async function fetchStats() {
+  const result = await Axios.get(API + '/incident/statistics');
   return result.data;
 }

@@ -5,12 +5,13 @@ import { useMachine } from '@xstate/react';
 import { useMutation } from 'react-query';
 import { useHistory, useLocation } from 'react-router-dom';
 import StepWizard from 'react-step-wizard';
-import { toast } from 'react-toastify';
 import { Machine } from 'xstate';
 
 import './FormCC.style.css';
 import { useAuthService } from '../../../hooks/useAuth';
+import useQuerySuccess from '../../../hooks/useQuerySuccess';
 import { createIncident, editIncident } from '../../../services/services';
+import ErrorComponent from '../../Error/ErrorComponent';
 import Loading from '../../Loading/Loading';
 import StepsNav from '../../StepsNav/StepNav';
 import CallerDataStep from './CallerDataStep/CallerDataStep';
@@ -18,22 +19,7 @@ import FinalScreen from './FinalScreen/FinalScreen';
 import { FormStyles } from './FormCC.style';
 import IncidentStep from './IncidentStep/IncidentStep';
 import LocationStep from './LocationStep/LocationStep';
-
-const StepsMachine = Machine({
-  id: 'stepsMachine',
-  initial: 'idle',
-  states: {
-    idle: {
-      on: {
-        EVENT: {
-          actions: (_, event) => {
-            event.nextStep();
-          },
-        },
-      },
-    },
-  },
-});
+import { StepsMachine } from './StepsMachine';
 
 export default function FormCC() {
   const [, send] = useMachine(StepsMachine);
@@ -51,33 +37,26 @@ export default function FormCC() {
     setForm({ ...form, ...newValues });
   }
 
-  React.useEffect(() => {
-    if (status === 'success') {
-      toast.success('Επιτυχής καταχώρηση');
-      history.push('/incidents');
-    }
-  }, [status, history]);
+  useQuerySuccess(status, () => {
+    history.push('/incidents');
+  });
 
   async function handleSubmit(lastStepFormState) {
-    try {
-      const requestParams = {
-        ...form,
-        status: {
-          id: 1,
-        },
-        coordinatorId,
-        ...lastStepFormState,
-      };
-      updateForm(lastStepFormState);
-      await mutate(requestParams);
-    } catch (error) {
-      console.log('error');
-    }
+    const requestParams = {
+      ...form,
+      status: {
+        id: 1,
+      },
+      coordinatorId,
+      ...lastStepFormState,
+    };
+    updateForm(lastStepFormState);
+    await mutate(requestParams);
   }
   const classes = FormStyles();
 
   if (status === 'loading') return <Loading />;
-  if (error) return <div>Something wrong happened</div>;
+  if (error) return <ErrorComponent />;
 
   return (
     <div style={{ padding: '1rem' }}>
