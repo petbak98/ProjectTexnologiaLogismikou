@@ -37,6 +37,19 @@ public class StatisticsServiceImpl implements StatisticsService {
         return deaths;
     }
 
+    @Override
+    public int getInjuries(Date back,Date end){
+        int injuries = 0;
+        List<Statistics> statistics =  statisticsRepository.findAll();
+        for (Statistics statistic : statistics) {
+            Incident incident = statistic.getIncident();
+            if (incident.getLastUpdate().compareTo(back) >= 0 && incident.getLastUpdate().compareTo(end) <= 0) {
+                injuries += statistic.getInjuries();
+            }
+        }
+        return injuries;
+    }
+
     public int getIncidentsForMonth(int month,int  year) throws ParseException {
         int incidents = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

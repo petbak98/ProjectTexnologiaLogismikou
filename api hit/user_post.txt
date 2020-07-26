@@ -3,10 +3,7 @@
 	"password": "12345678",
 	"firstName": "mpampis",
 	"lastName": "kirkitsis",
-	"active": 1,
-	"roles": "USER",
-	"permissions": "",
+	"roles": "ROLE_USER",
 	"authorityId": 1,
-	"latitude": 10.5,
-	"longitude": -56.125
+	"email": "petbaudhucb@gmail.com"
 }

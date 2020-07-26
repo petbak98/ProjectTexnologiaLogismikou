@@ -59,7 +59,7 @@ public class IncidentServiceImpl implements IncidentService{
         }
         else {
             Authority currentAuthority = currentUser.get().getAuthority();
-                List<Incident> filteredIncidents =  incidentRepository.findByAuthorityId(currentAuthority.getId())
+                List<Incident> filteredIncidents =  incidentRepository.findByAuthorityIdAndStatusId(currentAuthority.getId(), (long) 1)//incidentRepository.findByAuthorityId(currentAuthority.getId())
                         .stream()
                         .map(incident -> {
                             double distanceFromEachIncident = Helpers.distance(incident.getLatitude(),incident.getLongitude(), currentUser.get().getLatitude(), currentUser.get().getLongitude(), "K");

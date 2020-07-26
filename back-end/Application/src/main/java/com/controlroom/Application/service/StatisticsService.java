@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface StatisticsService {
     int getDeaths(Date back,Date end);
+    int getInjuries(Date back,Date end);
     int getIncidentsForMonth(int month,int  year) throws ParseException;
 
     List<StatisticsDto> findAll();
