@@ -53,7 +53,7 @@ export default function FeedItem({ incident }) {
       ...incident,
       receivers: [...incident.receivers, { id }],
     };
-    await mutate({ incidentId, requestParams });
+    await mutate({ incidentId, ...requestParams });
   }
 
   function viewIncident() {

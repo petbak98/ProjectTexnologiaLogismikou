@@ -43,6 +43,7 @@ function Incident() {
   const [state] = useAuthService();
   const { user } = state.context;
   const {
+    creationTimestamp,
     reports,
     callerFirstName,
     callerLastName,
@@ -120,6 +121,7 @@ function Incident() {
           notes={notes}
           region={region}
           street={street}
+          creationTimestamp={creationTimestamp}
           number={number}
           incidentId={incidentId}
           completed={incStatus?.completed}
