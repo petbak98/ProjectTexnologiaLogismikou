@@ -1,6 +1,6 @@
 import { queryCache } from 'react-query';
 
-const REPORTS_IN_ORDER_TO_CLOSE_INCIDENT = 1;
+// const REPORTS_IN_ORDER_TO_CLOSE_INCIDENT = 1;
 
 function checkIfIncidentAccepted(incident, user) {
   const match = incident.receivers.some((receiver) => receiver.id === user.id);
@@ -17,7 +17,7 @@ export function hasAlreadySubmitted(userId, reports) {
 }
 
 export function ableToClose(reports = []) {
-  if (reports.length < REPORTS_IN_ORDER_TO_CLOSE_INCIDENT) return false;
+  if (reports.length === 0) return false;
   return true;
 }
 
