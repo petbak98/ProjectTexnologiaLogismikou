@@ -1,4 +1,4 @@
-package com.controlroom.Application;
+/*package com.controlroom.Application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,4 +11,4 @@ class ApplicationTests {
     void contextLoads() {
     }
 
-}
+}*/
