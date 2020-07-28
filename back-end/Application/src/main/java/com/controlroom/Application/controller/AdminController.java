@@ -52,15 +52,20 @@ public class AdminController {
             userPostDto.setLongitude(0.0);
             String password=userPostDto.getPassword();
             String encodedPassword=passwordEncoder.encode(password);
-            System.out.println(encodedPassword);
+            //System.out.println(encodedPassword);
             userPostDto.setPassword(encodedPassword);
             return ResponseEntity.ok().body(convertToJson(userService.save(userPostDto)));
     }
 
     @PutMapping("/users/{id}")
     public ResponseEntity<String> updateUser(@RequestBody @Nullable UserPostDto userPostDto, @PathVariable("id") Long id) throws JsonProcessingException {
-        if (userPostDto != null)
+        if (userPostDto != null) {
+            String password = userPostDto.getPassword();
+            String encodedPassword = passwordEncoder.encode(password);
+            //System.out.println(encodedPassword);
+            userPostDto.setPassword(encodedPassword);
             return ResponseEntity.ok().body(convertToJson(userService.save(userPostDto)));
+        }
         else
             return ResponseEntity.badRequest().body("{\"Status\": \"user not found\"}");
     }
