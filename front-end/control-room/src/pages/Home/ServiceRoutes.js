@@ -27,7 +27,7 @@ export default function ServiceRoutes() {
   return (
     <>
       <NavbarService />
-      {!geolocation.error ? (
+      {geolocation.latitude !== (null || undefined) ? (
         <Layout>
           <AnimatedRoutes exitBeforeEnter initial={false}>
             <Route exact path='/accepted'>

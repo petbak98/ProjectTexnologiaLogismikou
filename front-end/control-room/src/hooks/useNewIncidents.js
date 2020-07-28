@@ -28,7 +28,7 @@ function reducer(state, action) {
 function useNewIncidents() {
   const { data, error, status } = useQuery('new-incidents', fetchNewIncidents, {
     //interval 1 minute
-    refetchInterval: 60 * 1000,
+    refetchInterval: 15 * 1000,
   });
   const [state, dispatch] = React.useReducer(reducer, initialState);
 

@@ -17,7 +17,7 @@ function NewIncidentsDialog({ open, handleClose, newIncidents }) {
         </Toolbar>
       </AppBar>
       <div style={{ padding: '20px' }}>
-        {newIncidents.count === 0 ? (
+        {newIncidents.incidents.length === 0 ? (
           <Typography variant='h6' align='center'>
             Δεν υπάρχουν καινούρια incidents
           </Typography>
