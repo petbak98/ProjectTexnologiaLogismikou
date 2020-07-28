@@ -1,4 +1,4 @@
-package com.controlroom.Application.controller
+/*package com.controlroom.Application.controller
 
 import com.controlroom.Application.model.dto.IncidentDto
 import com.controlroom.Application.repository.IncidentRepository
@@ -39,7 +39,7 @@ class HealthCheckTest extends Specification {
                 .contentAsString == "{\"status\": \"ok\"}"
 
     }
-}
+}*/
 //
 //    @Autowired
 //    protected MockMvc mvc
