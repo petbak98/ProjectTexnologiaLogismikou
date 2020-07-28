@@ -79,7 +79,7 @@ export default function FeedItem({ incident }) {
           </Typography>
         </li>
         <li className={classes.feedLi}>
-          <Typography variant='subtitle1'>{`${region} ${street} ${number}`}</Typography>
+          <Typography noWrap variant='subtitle1'>{`${region} ${street} ${number} `}</Typography>
           <LocationOnIcon className={classes.locationIcon} />
         </li>
         <li className={classes.feedLi}>

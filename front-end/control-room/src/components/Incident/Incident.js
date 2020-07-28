@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from '@material-ui/core';
 import { useMutation } from 'react-query';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { InformationIcon, ReportsIcon, UserIcon } from '../../assets/icons';
 import { useAuthService } from '../../hooks/useAuth';
@@ -12,7 +12,7 @@ import useQuerySuccess from '../../hooks/useQuerySuccess';
 import useTabs from '../../hooks/useTabs';
 import { deleteIncident, createStats } from '../../services/services';
 import { Avatar } from '../../shared';
-import { ableToClose, isServiceUserInvolved } from '../../utils';
+import { ableToClose } from '../../utils';
 import CloseIncidentDialog from '../CloseIncidentDialog/CloseIncidentDialog';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
 import ConfirmationDialog from '../Dialogs/ConfirmationDialog';
@@ -139,7 +139,7 @@ function Incident() {
 
   if (status === 'loading') return <Loading />;
 
-  if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;
+  // if (!isServiceUserInvolved(user.id, receivers)) return <Redirect to='/' />;
 
   return (
     <Container>

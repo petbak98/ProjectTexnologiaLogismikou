@@ -1,25 +1,3 @@
-# -- Stathera pedia -- #
-INSERT INTO controlroom.roles(name) VALUES('ROLE_USER');
-INSERT INTO controlroom.roles(name) VALUES('ROLE_MODERATOR');
-INSERT INTO controlroom.roles(name) VALUES('ROLE_ADMIN');
-
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΚΑΜΙΑ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΙΚΡΗ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΤΡΙΑ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΜΕΓΑΛΗ');
-INSERT INTO controlroom.incident_importance (importance_name) VALUES ('ΕΚΤΑΚΤΗ');
-
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΑΣΤΥΝΟΜΙΑ');
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΠΥΡΟΣΒΕΣΤΙΚΗ');
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΕΚΑΒ');
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΛΗΜΕΝΙΚΟ');
-INSERT INTO controlroom.incident_authority (authority_name) VALUES ('ΚΕΝΤΡΟ ΕΛΕΓΧΟΥ');
-
-INSERT INTO controlroom.incident_status (status_name) VALUES (0);
-INSERT INTO controlroom.incident_status (status_name) VALUES (1);
-
-
-#-------------------------#
 # -- Users for testing -- #
 INSERT INTO `controlroom`.`user`
 (
@@ -191,12 +169,12 @@ INSERT INTO `controlroom`.`user`
 VALUES
 (6,
 "mpampinos@controlroom.test",
-"Mpampinos",
-"Mpampinatou",
+"Mpampis",
+"Rampinatou",
 0.0,
 0.0,
 "$2a$10$QdFAfMU9KO1L6UKsjs3SpO2F.8zVyQ90lzg5Hd6VJfYXIsImstsIu",
-"mpampinos",
+"mpampis",
 4,
 NOW());
 
@@ -238,6 +216,37 @@ VALUES
 (7,
 2);
 
+INSERT INTO `controlroom`.`user`
+(
+`user_id`,
+`email`,
+`first_name`,
+`last_name`,
+`latitude`,
+`longitude`,
+`password`,
+`username`,
+`authority_id`,
+`last_new_incident`)
+VALUES
+(8,
+"sonia@controlroom.test",
+"Sonia",
+"Tzouvara",
+0.0,
+0.0,
+"$2a$10$Nd3aIiIwdzSMDbDNenKaJu8LdFrNiVQ4s/xnTkoJSm8lH7lS0A67m",
+"sonia",
+1,
+NOW());
+
+INSERT INTO `controlroom`.`user_roles`
+(`user_id`,
+`role_id`)
+VALUES
+(8,
+1);
+
 
 #-----------------------------#
 # -- Incidents for Testing -- #
@@ -261,27 +270,30 @@ INSERT INTO `controlroom`.`incidents`
 `longitude`,
 `created_timestamp`)
 VALUES
-('ΝΙΚΟΣ',
-'pap',
-'greek',
-'2100000000',
-'5',
+('Νίκος',
+'Παπαδόπουλος',
+'ΑΚ876523',
+'6985647387',
+'20',
 7,
 NOW(),
-"Simeiosh",
-"Attiki",
+"Μίση ώρα πριν ξεκίνησε",
+"Χαλάνδρι",
 '15234',
 1,
-"Sapfous",
-'Listeia',
+"Καμάρι",
+'Ληστεία σε κατάστημα',
 1,
 1,
-0.0,
-0.0,
+38.023274,
+23.823120,
 NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (1,1);
+VALUES (1,3);
+INSERT INTO controlroom.incident_user (incident_id, user_id) 
+VALUES (1,8);
+
 
 INSERT INTO `controlroom`.`incidents`
 (`caller_first_name`,
@@ -303,27 +315,27 @@ INSERT INTO `controlroom`.`incidents`
 `longitude`,
 `created_timestamp`)
 VALUES
-('kostas',
-'mix',
-'greek',
-'2100000000',
-'6',
+('Κώστας',
+'Μιχαλόπουλος',
+'ΑΚ765849',
+'6875463729',
+'4',
 7,
 NOW(),
-"nope note",
-"Attiki",
-'15234',
+"",
+"Φιλοθέη",
+'15237',
 2,
-"Sapfous",
-'FWTIA',
+"Βαλαωρίτου",
+'Φωτιά σε κολόνα της ΔΕΗ',
 1,
 2,
-0.0,
-0.0,
+38.021582,
+23.788294,
 NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (2,1);
+VALUES (2,4);
 
 INSERT INTO `controlroom`.`incidents`
 (`caller_first_name`,
@@ -345,27 +357,25 @@ INSERT INTO `controlroom`.`incidents`
 `longitude`,
 `created_timestamp`)
 VALUES
-('mpampis',
-'paipp',
-'AK 123456',
+('Χάρης',
+'Παπαιώαννου',
+'AK123456',
 '2101234567',
-'50',
+'72',
 7,
 NOW(),
-"Simeiosh 1234",
-"Attiki",
+"",
+"Χαιδάρη",
 '15238',
 1,
-"Olympou",
-'Ksilo kai via sta sxoleia',
+"Μάνης",
+'Διάρρηξη σε διαμέρισμα',
 3,
 1,
-0.0,
-0.0,
+38.020801,
+23.648489,
 NOW());
 
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (3,1);
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (3,3);
 
@@ -389,29 +399,25 @@ INSERT INTO `controlroom`.`incidents`
 `longitude`,
 `created_timestamp`)
 VALUES
-('mpampifefes',
-'pbtbtbaipp',
-'AK tbtb123456',
+('Γιώργος',
+'Παττακός',
+'AΙ234356',
 '2101235467',
-'456',
+'296',
 7,
 NOW(),
 "Sihello 1234",
-"Attiki465",
-'15789',
+"Ασπρόπυργος",
+'19300',
 1,
-"htrhtd",
-'deugedyuvecva',
+"Αγίου Γεωργίου",
+'Διάσωση',
 4,
 4,
-0.0,
-0.0,
+38.078865,
+23.567624,
 NOW());
 
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (4,1);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (4,5);
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (4,6);
 
@@ -435,27 +441,25 @@ INSERT INTO `controlroom`.`incidents`
 `longitude`,
 `created_timestamp`)
 VALUES
-('mbfdbdbfes',
-'pbxeepp',
-'Ai3454566',
-'2695132458',
-'98',
+('Σοφία',
+'Μπεκάτου',
+'AΗ345456',
+'6951324578',
+'28',
 7,
 NOW(),
 "",
-"Peloponisos",
-'48756',
+"Τρίπολη",
+'22100',
 1,
-"cuihigeyvce",
-'OMG',
+"Χατζηχρήστου",
+'Μεθυσμένος κάνει φασαρία',
 5,
 1,
-0.0,
-0.0,
+37.511206,
+22.376736,
 NOW());
 
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (5,1);
 
 INSERT INTO `controlroom`.`incidents`
 (`caller_first_name`,
@@ -477,29 +481,25 @@ INSERT INTO `controlroom`.`incidents`
 `longitude`,
 `created_timestamp`)
 VALUES
-('φεφεφγσs',
-'cvsrvsrvsvv',
-'ay789421',
+('Αγγελική',
+'Καρπά',
+'ΑΗ789421',
 '6987451296',
-'102',
+'27',
 7,
 NOW(),
 "Kalispera sas",
-"korinthos",
-'56987',
+"Κόρινθος",
+'20100',
 1,
-"katitetoio",
-'OMG kai tria lol',
+"Κολοκοτρώνη",
+'Πυρκαγιά',
 2,
 2,
-0.0,
-0.0,
+37.938556,
+22.930802,
 NOW());
 
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (6,1);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (6,3);
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
 VALUES (6,4);
 
@@ -523,167 +523,150 @@ INSERT INTO `controlroom`.`incidents`
 `longitude`,
 `created_timestamp`)
 VALUES
-('nuimnuim',
-'cvzaasdvsdv',
-'bh456784',
+('Ιορδάνης',
+'Σούβουλος',
+'ΑΚ586319',
 '694523695',
-'155',
-7,
-NOW(),
-"ti leei",
-"thesaloniki",
-'69874',
-1,
-"mpampinou",
-'ai ai ai',
-3,
-3,
-0.0,
-0.0,
-NOW());
-
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (7,1);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (7,2);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (7,3);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (7,6);
-
-INSERT INTO `controlroom`.`incidents`
-(`caller_first_name`,
-`caller_last_name`,
-`caller_national_id`,
-`caller_phone`,
-`number`,
-`user_id`,
-`last_updated`,
-`notes`,
-`region`,
-`postal_code`,
-`status_id`,
-`street`,
-`title`,
-`importance_id`,
-`authority_id`,
-`latitude`,
-`longitude`,
-`created_timestamp`)
-VALUES
-('mopsmkocejkscbh',
-'husbhuksvbsv',
-'AK457125',
-'699+874451',
-'52',
-7,
-NOW(),
-"giei giei giei",
-"thraki",
-'98745',
-1,
-"lolitoy",
-'sous',
-1,
-4,
-0.0,
-0.0,
-NOW());
-
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (8,1);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (8,6);
-
-INSERT INTO `controlroom`.`incidents`
-(`caller_first_name`,
-`caller_last_name`,
-`caller_national_id`,
-`caller_phone`,
-`number`,
-`user_id`,
-`last_updated`,
-`notes`,
-`region`,
-`postal_code`,
-`status_id`,
-`street`,
-`title`,
-`importance_id`,
-`authority_id`,
-`latitude`,
-`longitude`,
-`created_timestamp`)
-VALUES
-('miimntrbeb',
-'qwsdqwedwedfwr',
-'AK598741',
-'695871548',
-'15',
-7,
-NOW(),
-"lell",
-"Ναχος",
-'16248',
-1,
-"νψθψενθεψ",
-'κχιξαθοχιξν',
-1,
-1,
-0.0,
-0.0,
-NOW());
-
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (9,1);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (9,5);
-
-INSERT INTO `controlroom`.`incidents`
-(`caller_first_name`,
-`caller_last_name`,
-`caller_national_id`,
-`caller_phone`,
-`number`,
-`user_id`,
-`last_updated`,
-`notes`,
-`region`,
-`postal_code`,
-`status_id`,
-`street`,
-`title`,
-`importance_id`,
-`authority_id`,
-`latitude`,
-`longitude`,
-`created_timestamp`)
-VALUES
-('ββςψεβςψρβυθςψ',
-'μπαμπηρης',
-'AK599856',
-'695225984',
-'10',
+'13',
 7,
 NOW(),
 "",
-"σαντορινη",
-'16985',
+"Σταυρούπολη",
+'56430',
 1,
-"δεν ξερω",
-'Θα μας σφαξουν ολους',
-2,
-2,
-0.0,
-0.0,
+"Σπετσών",
+'Έμφραγμα',
+3,
+3,
+40.669569,
+22.933516,
 NOW());
 
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (10,1);
+VALUES (7,5);
+
+INSERT INTO `controlroom`.`incidents`
+(`caller_first_name`,
+`caller_last_name`,
+`caller_national_id`,
+`caller_phone`,
+`number`,
+`user_id`,
+`last_updated`,
+`notes`,
+`region`,
+`postal_code`,
+`status_id`,
+`street`,
+`title`,
+`importance_id`,
+`authority_id`,
+`latitude`,
+`longitude`,
+`created_timestamp`)
+VALUES
+('Μαρία',
+'Παπαδοπούλου',
+'AK457125',
+'6998744581',
+'2',
+7,
+NOW(),
+"",
+'Αλεξανδρούπολη',
+'68100',
+1,
+'Κροβίλων',
+'Εξαφάνιση κοντά σε ακτή',
+1,
+4,
+40.852439,
+25.875244,
+NOW());
+
+
+INSERT INTO `controlroom`.`incidents`
+(`caller_first_name`,
+`caller_last_name`,
+`caller_national_id`,
+`caller_phone`,
+`number`,
+`user_id`,
+`last_updated`,
+`notes`,
+`region`,
+`postal_code`,
+`status_id`,
+`street`,
+`title`,
+`importance_id`,
+`authority_id`,
+`latitude`,
+`longitude`,
+`created_timestamp`)
+VALUES
+('Γιάννης',
+'Αναστασίου',
+'AK598741',
+'695871548',
+'',
+7,
+NOW(),
+"",
+"Νάξος",
+'843000',
+1,
+"Φιλοτίου",
+'Παρενόχληση',
+1,
+1,
+37.101102,
+25.377860,
+NOW());
+
 INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (10,3);
-INSERT INTO controlroom.incident_user (incident_id, user_id) 
-VALUES (10,4);
+VALUES (9,8);
+
+
+INSERT INTO `controlroom`.`incidents`
+(`caller_first_name`,
+`caller_last_name`,
+`caller_national_id`,
+`caller_phone`,
+`number`,
+`user_id`,
+`last_updated`,
+`notes`,
+`region`,
+`postal_code`,
+`status_id`,
+`street`,
+`title`,
+`importance_id`,
+`authority_id`,
+`latitude`,
+`longitude`,
+`created_timestamp`)
+VALUES
+('Elisabeth',
+'Parker',
+'OI599856',
+'9455225984',
+'',
+7,
+NOW(),
+"",
+"Σαντορινη",
+'84700',
+1,
+"Θήρα",
+'Κατάρρευση κτηρίου',
+2,
+2,
+36.419487,
+25.432747,
+NOW());
+
 
 
 #---------------------------#
@@ -694,7 +677,7 @@ INSERT INTO `controlroom`.`reports`
 `last_updated`,
 `content`)
 VALUES
-(1,
+(3,
 1,
 NOW(),
 'Nothing happened');
@@ -705,8 +688,19 @@ INSERT INTO `controlroom`.`reports`
 `last_updated`,
 `content`)
 VALUES
-(1,
+(8,
 1,
+NOW(),
+'Τίποτα ιδιαίτερο');
+
+INSERT INTO `controlroom`.`reports`
+(`user_id`,
+`incident_id`,
+`last_updated`,
+`content`)
+VALUES
+(4,
+2,
 NOW(),
 'Panic everywhere');
 
